@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1058058545707",
+    "firebase_url": "https://blog-a1a24.firebaseio.com",
+    "project_id": "blog-a1a24",
+    "storage_bucket": "blog-a1a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058058545707:android:f40708e39f3d1a17",
+        "android_client_info": {
+          "package_name": "org.example.blog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058058545707-g7uetuk2m9i2fr4amgp85j5kja6n953c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIayAbYfYOAwdxHtIq_4zIvQXbF6sU6So"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Blog</string>
+    <string name="submit_post">Submit Post</string>
+    <string name="additional_details">Additional Details</string>
+    <string name="date">Date</string>
+    <string name="destination">Destination</string>
+    <string name="price">Price</string>
+    <string name="start">Start</string>
+    <string name="price_optional">Price (Optional)</string>
+</resources>
