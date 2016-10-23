@@ -58,11 +58,11 @@ git flow feature publish <feature_name>
 ```
 So that it can publish what you just modified with that branch to our remote repository.
 
-Next, login your GitHub and link to our repository, and then make a pull request. choose the base as "develop", and choose compare as the branch you just publish, and then click "create pull request" button. Then you're done with your work for now.
+Next, login your GitHub and link to our repository, and then [make a pull request](http://imgur.com/HaKYlHG). choose the base as "develop", and choose compare as the branch you just publish, and then click "[create pull request](http://imgur.com/FsAl2qv)" button. Then you're done with your work for now.
 
-Now, others should check the feature is workable and meets our needs. Once someone thinks it's great, he/she can click the "merge" button from the "pull request" area. Our remote "develop" will automatically be merged with the branch which was published by others.
+Now, others should check the feature is workable and meets our needs. Once someone thinks it's great, he/she can click the "[Confirm the merge](http://imgur.com/fxMSXk9)" button from the "pull request" area. Our remote "develop" will automatically be merged with the branch which was published by others.
 
-Once your pull request has already been merged with our remote develop branch, you can delete the remote feature branch by using the command in order to keep our remote repository clean:
+Once your pull request has already been merged with our remote develop branch, you can delete the remote feature branch by [this button](http://imgur.com/1C7A7rn) or using the command in order to keep our remote repository clean:
 ```
 git push origin :<branch_name>
 ```
