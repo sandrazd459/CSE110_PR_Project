@@ -1,21 +1,16 @@
 # UCSD RideShare
 
-## Tools for Cooperation
+## Useful Information
 
-#### 1. Oh-my-zsh (zsh)
+1. [Android Studio Environment Setup](https://github.com/sandrazd459/CSE110_PR_Project/wiki/Android-Environment-Setting)
 
-For MacOS and Linux users, I personally recommend [Oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) in order to check which
-branch you are at and the repository status quickly. There are also plenty of [feature](http://code.joejag.com/2014/why-zsh.html) here.
-
-If you're Windows users, you can try to install this one: [Babun](http://babun.github.io/), which also helps you when you're working with git.
-
-#### 2. [git-flow](https://github.com/nvie/gitflow)
-
-Git-flow is a extension tool of git that helps us work with git more efficiently and decrease the probability of making conflicts. It's based on this [model](http://nvie.com/posts/a-successful-git-branching-model/) by Vincent Driessen. Please, please at least install this tool.
+2. [Tools for Cooperation with Git](https://github.com/sandrazd459/CSE110_PR_Project/wiki/Tools-for-Cooperation-with-Git)
 
 ## Work Flow
+
 After installing the git-flow and clone our repository to your computer, the first thing to do is
 ```
+cd CSE110_PR_Project
 git flow init
 ```
 to create some branches to separate our outcome product and product which is still under developing. We just need the default setting branches so just click "enter" to the end of the messages.
@@ -26,7 +21,7 @@ Then, we usually work under the "develop" branch, so first we need to switch to 
 git checkout develop
 ```
 
-Every time you are going to modify your local repository, you should use this command:
+"Every time" you are going to modify your local repository, you should use this command:
 
 ```
 git pull
@@ -70,8 +65,9 @@ git push origin :<branch_name>
 Then, you can go back to your "local" develop branch by:
 ```
 git checkout develop
+git pull
 ```
-and do the `git pull` to keep your local develop branch with the latest version.
+to keep your local develop branch with the latest version.
 
 Next, you don't need the <feature_name> branch anymore, so you can type:
 ```
