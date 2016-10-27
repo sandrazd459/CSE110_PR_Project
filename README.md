@@ -43,7 +43,7 @@ git commit -m "<One line to show what you've done>"
 
 After you finish your work for the feature, you have to type
 ```
-git rebase
+git rebase develop
 ```
 that let git compares your code on your local computer to the remote repository and makes you update to the latest version in order to avoid of conflicts.
 
