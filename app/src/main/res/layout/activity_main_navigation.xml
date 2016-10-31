@@ -33,7 +33,6 @@
             android:layout_below="@+id/sellingList"
             android:layout_centerHorizontal="true"
             tools:ignore="ButtonStyle,ObsoleteLayoutParam" />
-
     </RelativeLayout>
 
 </FrameLayout>

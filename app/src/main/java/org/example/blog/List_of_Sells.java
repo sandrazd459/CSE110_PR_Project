@@ -28,8 +28,6 @@ public class List_of_Sells extends AppCompatActivity {
     BottomBar mBottomBar;
 
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -69,7 +67,6 @@ public class List_of_Sells extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
