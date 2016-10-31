@@ -8,7 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
     tools:context="org.example.blog.List_of_Sells">
+=======
+    tools:context="org.example.blog.MainActivity">
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
 
     <EditText
         android:layout_width="match_parent"
@@ -16,7 +20,11 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/startText"
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
         android:hint="Start*"
+=======
+        android:hint="@string/start"
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
         android:background="@drawable/roundbar"
         android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
@@ -30,7 +38,11 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/destText"
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
         android:hint="Destination*"
+=======
+        android:hint="@string/destination"
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
         android:background="@drawable/roundbar"
         android:layout_below="@+id/startText"
         android:layout_alignParentLeft="true"
@@ -45,7 +57,11 @@
         android:ems="10"
         android:layout_marginTop="23dp"
         android:id="@+id/dateText"
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
         android:hint="Date*"
+=======
+        android:hint="@string/date"
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
         android:background="@drawable/roundbar"
         android:layout_below="@+id/destText"
         android:layout_alignParentLeft="true"
@@ -62,7 +78,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:id="@+id/priceText"
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
         android:hint="Price"
+=======
+        android:hint="@string/price_optional"
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
         android:padding="5dp" />
 
     <EditText
@@ -88,6 +108,7 @@
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
+<<<<<<< 93729587a26264615d03a0f0dcab7add2415df19:app/src/main/res/layout/sell_post_activity.xml
     <TextView
         android:text="* Fields Required"
         android:layout_width="match_parent"
@@ -98,4 +119,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />
 
+=======
+>>>>>>> file tracking - changed:app/src/main/res/layout/activity_settings_.xml
 </RelativeLayout>

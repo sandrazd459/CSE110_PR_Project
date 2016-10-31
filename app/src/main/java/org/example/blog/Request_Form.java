@@ -69,6 +69,5 @@ public class Request_Form extends AppCompatActivity {
 
             startActivity(new Intent(Request_Form.this, List_of_Requests.class));
         }
-
     }
 }
