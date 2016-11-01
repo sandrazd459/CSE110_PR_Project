@@ -6,7 +6,43 @@
 
 2. [Tools for Cooperation with Git](https://github.com/sandrazd459/CSE110_PR_Project/wiki/Tools-for-Cooperation-with-Git)
 
-## Work Flow
+## Work Process without git-flow
+
+If you think installing git-flow is a pain, you still can work without it.
+
+After cloning our repository to your computer, the first thing to do is
+```
+cd CSE110_PR_Project
+git checkout develop
+git pull
+git checkout -b <your name>/<the feature you wanna do>
+```
+
+Then use `git branch` to make sure you're in the branch you just created. That branch belongs to you, no one will affect you code until you're going to merge back to the develop branch. But someone else will do the review and merge stuff, so the only commands you need is:
+
+1. Check which files you modified before you commit: `git status`
+2. Add new or modified files: `git add .`
+3. Commit to your local repository: `git commit -m "<one line message tells what you did>"`
+
+After finishing the feature, you can now push your branch to the remote repository with
+
+```
+git push --set-upstream origin <the branch name>
+```
+Next, login your GitHub and link to our repository, and then [make a pull request](http://imgur.com/HaKYlHG). choose the base as "develop", and choose compare as the branch you just publish, and then click "[create pull request](http://imgur.com/FsAl2qv)" button. Then you're done with your work for now.
+
+After you've been told you code is merged into the main branch, you need to do:
+
+```
+git checkout develop
+git pull
+git branch -D <the branch you made>
+git remote prune origin
+```
+
+Then you can create another branch to work on the next feature.
+
+## Work Flow with git-flow
 
 After installing the git-flow and clone our repository to your computer, the first thing to do is
 ```
@@ -36,17 +72,6 @@ For example, if we want to develop login system, we can type `git flow feature s
 
 When you finish some works, you can commit it into your local repository by
 
-```
-git add .
-git commit -m "<One line to show what you've done>"
-```
-
-After you finish your work for the feature, you have to type
-```
-git rebase develop
-```
-that let git compares your code on your local computer to the remote repository and makes you update to the latest version in order to avoid of conflicts.
-
 Next, type
 ```
 git flow feature publish <feature_name>
@@ -55,14 +80,8 @@ So that it can publish what you just modified with that branch to our remote rep
 
 Next, login your GitHub and link to our repository, and then [make a pull request](http://imgur.com/HaKYlHG). choose the base as "develop", and choose compare as the branch you just publish, and then click "[create pull request](http://imgur.com/FsAl2qv)" button. Then you're done with your work for now.
 
-Now, others should check the feature is workable and meets our needs. Once someone thinks it's great, he/she can click the "[Confirm the merge](http://imgur.com/fxMSXk9)" button from the "pull request" area. Our remote "develop" will automatically be merged with the branch which was published by others.
 
-Once your pull request has already been merged with our remote develop branch, you can delete the remote feature branch by [this button](http://imgur.com/1C7A7rn) or using the command in order to keep our remote repository clean:
-```
-git push origin :<branch_name>
-```
-
-Then, you can go back to your "local" develop branch by:
+After you work has been merged into the main branch, you can go back to your "local" develop branch by:
 ```
 git checkout develop
 git pull
