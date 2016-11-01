@@ -10,14 +10,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Main_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Setttings_Activity"></activity>
+        <activity
+            android:name=".Request_Form"
+            android:label="Ride Request Form" />
+        <activity
+            android:name=".Selling_Form"
+            android:label="Ride Sell Form" />
+        <activity
+            android:name=".List_of_Sells"
+            android:label="Ride Offers List" />
+        <activity
+            android:name=".List_of_Requests"
+            android:label="Ride Requests List" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

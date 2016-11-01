@@ -4,7 +4,7 @@
     android:id="@+id/activity_setttings_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.example.blog.Setttings_Activity">
+    tools:context="org.example.blog.Selling_Form">
     
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

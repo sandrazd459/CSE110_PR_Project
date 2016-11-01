@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/lists"
+        android:icon="@mipmap/ic_list_black_24dp"
+        android:title="Lists"></item>
+    <item android:id="@+id/home"
+        android:icon="@mipmap/ic_home_black_24dp"
+        android:title="Home"></item>
+    <item android:id="@+id/account"
+        android:icon="@mipmap/ic_account_circle_black_24dp"
+        android:title="Account"></item>
+</menu>
