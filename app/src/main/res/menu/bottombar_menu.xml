@@ -9,8 +9,4 @@
     <item android:id="@+id/account"
         android:icon="@mipmap/ic_account_circle_black_24dp"
         android:title="Account"/>
-<<<<<<< a4d102d38bc7a592bc55b73b27008c0f63774a2c
 </menu>
-=======
-</menu>
->>>>>>> Added popup menu, and listeners for navbar
