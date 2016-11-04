@@ -84,7 +84,7 @@ public class List_of_Requests extends AppCompatActivity {
             protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
                 viewHolder.setFrom(model.getStart());
                 viewHolder.setTo(model.getDestination());
-                viewHolder.setDate(model.getDate());
+                //viewHolder.setDate(model.getDate());
                 viewHolder.setPrice(model.getPrice());
             }
         };
@@ -108,10 +108,10 @@ public class List_of_Requests extends AppCompatActivity {
             TextView post_to = (TextView)mView.findViewById(R.id.post_to);
             post_to.setText(toText);
         }
-        public void setDate(String dateText){
+        /*public void setDate(String dateText){
             TextView post_date = (TextView)mView.findViewById(R.id.post_date);
             post_date.setText(dateText);
-        }
+        }*/
         public void setPrice(String priceText){
             TextView post_price = (TextView)mView.findViewById(R.id.post_price);
             post_price.setText(priceText);
