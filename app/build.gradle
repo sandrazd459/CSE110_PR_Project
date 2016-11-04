@@ -1,4 +1,7 @@
+<<<<<<< f8ac1943b24702b82b7c705088018d620ec3e0da
 <<<<<<< 3ee3c3ca1e5feae7f41624aeabcd7154a7a826ab
+=======
+>>>>>>> file tracking - changed
 apply plugin: 'com.android.application'
 
 android {
@@ -50,6 +53,7 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+<<<<<<< f8ac1943b24702b82b7c705088018d620ec3e0da
 =======
 apply plugin: 'com.android.application'
 
@@ -103,3 +107,5 @@ dependencies {
 
 apply plugin: 'com.google.gms.google-services'
 >>>>>>> Actual Project with new bottombar
+=======
+>>>>>>> file tracking - changed
