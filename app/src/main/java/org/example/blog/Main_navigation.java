@@ -1,12 +1,20 @@
 package org.example.blog;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.PopupMenu;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -21,6 +29,8 @@ public class Main_navigation extends AppCompatActivity {
 
     private Button requestBtn;
 
+    private Button test;
+
     BottomBar mBottomBar;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -28,10 +38,12 @@ public class Main_navigation extends AppCompatActivity {
      */
     private GoogleApiClient client;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_navigation);
+
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
@@ -42,7 +54,26 @@ public class Main_navigation extends AppCompatActivity {
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-
+                if(menuItemId == R.id.lists){
+                    View listView = findViewById(R.id.lists);
+                    PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
+                    popupMenu.inflate(R.menu.popup_menu);
+                    popupMenu.show();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch(item.getItemId()){
+                                case R.id.submenuSell:
+                                    startActivity(new Intent(Main_navigation.this, List_of_Sells.class));
+                                    return true;
+                                case R.id.submenuReq:
+                                    startActivity(new Intent(Main_navigation.this, List_of_Requests.class));
+                                    return true;
+                            }
+                            return false;
+                        }
+                    });
+                }
             }
         });
 
@@ -69,6 +100,7 @@ public class Main_navigation extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
