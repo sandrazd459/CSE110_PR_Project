@@ -25,6 +25,8 @@ public class List_of_Requests extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
+    BottomBar mBottomBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

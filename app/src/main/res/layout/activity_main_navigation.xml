@@ -10,9 +10,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.example.blog.Main_navigation">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp">
+        android:layout_height="match_parent">
         <Button
             android:text="Offer New Ride"
             android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
             android:layout_below="@+id/sellingList"
             android:layout_centerHorizontal="true"
             tools:ignore="ButtonStyle,ObsoleteLayoutParam" />
+
     </RelativeLayout>
 
 </FrameLayout>
