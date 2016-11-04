@@ -1,7 +1,3 @@
-<<<<<<< f8ac1943b24702b82b7c705088018d620ec3e0da
-<<<<<<< 3ee3c3ca1e5feae7f41624aeabcd7154a7a826ab
-=======
->>>>>>> file tracking - changed
 apply plugin: 'com.android.application'
 
 android {
@@ -53,59 +49,3 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-<<<<<<< f8ac1943b24702b82b7c705088018d620ec3e0da
-=======
-apply plugin: 'com.android.application'
-
-android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
-    defaultConfig {
-        applicationId "org.example.blog"
-        minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE-FIREBASE.txt'
-        exclude 'META-INF/NOTICE'
-    }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.roughike:bottom-bar:1.3.3'
-
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:cardview-v7:24.2.1'
-
-
-    compile 'com.google.firebase:firebase-core:9.6.1'
-    compile 'com.google.firebase:firebase-storage:9.6.1'
-    compile 'com.google.firebase:firebase-database:9.6.1'
-    compile 'com.firebaseui:firebase-ui-database:0.6.1'
-    compile 'com.firebase:firebase-client-android:2.5.2'
-
-    compile 'com.google.android.gms:play-services-appindexing:9.6.1'
-}
-
-apply plugin: 'com.google.gms.google-services'
->>>>>>> Actual Project with new bottombar
-=======
->>>>>>> file tracking - changed
