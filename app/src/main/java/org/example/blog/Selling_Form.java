@@ -66,8 +66,6 @@ public class Selling_Form extends AppCompatActivity {
             newPost.child("Price").setValue(_price);
             newPost.child("Additional").setValue(text_addit);
 
-
-<<<<<<< 0056b8e49d0328219b2560b1f276fb9b23cae023:app/src/main/java/org/example/blog/Selling_Form.java
             startActivity(new Intent(Selling_Form.this, List_of_Sells.class));
         }
     }
