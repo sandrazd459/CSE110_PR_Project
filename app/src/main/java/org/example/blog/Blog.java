@@ -6,15 +6,14 @@ package org.example.blog;
 
 public class Blog {
 
-    private String Start, Destination, Date, Price;
+    private String Start, Destination, Price;
 
     public Blog(){
 
     }
 
-    public Blog(String price, String date, String destination, String start) {
+    public Blog(String price, String destination, String start) {
         Price = price;
-        Date = date;
         Destination = destination;
         Start = start;
     }
@@ -35,13 +34,6 @@ public class Blog {
         Destination = destination;
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
 
     public String getPrice() {
         return Price;
