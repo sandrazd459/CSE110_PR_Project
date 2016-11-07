@@ -83,16 +83,20 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
-        //String text_date = mDate.getText().toString().trim();
+        String text_date = ((TextView)(findViewById(R.id.dateBtn))).getText().toString().trim();
         String _price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) /*&& !TextUtils.isEmpty(text_date)*/){
+        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0){
 
             DatabaseReference newPost = mDatabase.push();
             newPost.child("Start").setValue(text_start);
             newPost.child("Destination").setValue(text_dest);
-            //newPost.child("Date").setValue(text_date);
+            //Set date
+            newPost.child("Month").setValue(finMonth);
+            newPost.child("Day").setValue(finDay);
+            newPost.child("Year").setValue(finYear);
+
             newPost.child("Price").setValue(_price);
             newPost.child("Additional").setValue(text_addit);
 
