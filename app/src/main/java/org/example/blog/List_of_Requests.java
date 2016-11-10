@@ -83,7 +83,6 @@ public class List_of_Requests extends AppCompatActivity {
                                     sBundle.putParcelableArrayList("reqArr", rList);
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
-
                                     return true;
                             }
                             return false;
@@ -92,7 +91,6 @@ public class List_of_Requests extends AppCompatActivity {
                 }
             }
         });
-
 
         sv = (SearchView) findViewById(R.id.mSearchBar);
         mBlogList = (RecyclerView) findViewById(R.id.recyclerList);
@@ -114,7 +112,6 @@ public class List_of_Requests extends AppCompatActivity {
             }
         });
 
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -123,13 +120,14 @@ public class List_of_Requests extends AppCompatActivity {
     @Override
     protected void onStart() {
 
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
+        super.onStart(); // ATTENTION: This was auto-generated to implement the App Indexing API.
+                         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
 
 
 
-        /*FirebaseRecyclerAdapter<Post, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Post, BlogViewHolder>(
+        /*
+        FirebaseRecyclerAdapter<Post, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Post, BlogViewHolder>(
                 Post.class,
                 R.layout.blog_list,
                 BlogViewHolder.class,
@@ -144,7 +142,9 @@ public class List_of_Requests extends AppCompatActivity {
                 viewHolder.setPrice(model.getPrice());
             }
         };
-        mBlogList.setAdapter(fbRecyclerAdapter);*/
+        mBlogList.setAdapter(fbRecyclerAdapter);
+        */
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
@@ -175,7 +175,6 @@ public class List_of_Requests extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -234,5 +233,4 @@ public class List_of_Requests extends AppCompatActivity {
 
         return n;
     }
-
 }

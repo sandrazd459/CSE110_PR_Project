@@ -20,17 +20,13 @@ import java.util.Calendar;
 public class Selling_Form extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private DatabaseReference mDatabase;
-
     private EditText mStart;
     private EditText mDestination;
-    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
-
     private Button mPostBtn;
     Button dateBtn;
     int year, month, day, finYear, finMonth, finDay;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +37,11 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Sell Posts");
 
-
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
-        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);
-
 
         mPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override

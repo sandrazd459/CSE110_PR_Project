@@ -23,14 +23,12 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
     private EditText mStart;
     private EditText mDestination;
-    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
 
     private Button mPostBtn;
     Button dateBtn;
     int year, month, day, finYear, finMonth, finDay;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +37,13 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
         dateBtn = (Button) findViewById(R.id.dateBtn);
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Request Posts");
-
 
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
-        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);
-
 
         mPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +51,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
                 startPosting();
             }
         });
+
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,11 +75,10 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
     }
 
-    private void startPosting(){
+    private void startPosting() {
 
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
-        //String text_date = ((TextView)(findViewById(R.id.dateBtn))).getText().toString().trim();
         String _price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 

@@ -41,6 +41,7 @@ public class List_of_Sells extends AppCompatActivity {
         final ArrayList<Post> rList = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = b.getParcelableArrayList("sellArr");
 
+
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
@@ -78,7 +79,6 @@ public class List_of_Sells extends AppCompatActivity {
             }
         });
 
-
         sv = (SearchView) findViewById(R.id.mSearchBar);
         mBlogList = (RecyclerView) findViewById(R.id.recyclerList);
         mBlogList.setHasFixedSize(true);
@@ -98,19 +98,12 @@ public class List_of_Sells extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
-
-
 
     @Override
     protected void onStart() {
-
         super.onStart();
     }
-
-
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
@@ -155,5 +148,4 @@ public class List_of_Sells extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

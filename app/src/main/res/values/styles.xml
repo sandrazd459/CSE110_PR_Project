@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!--For android.support.design.widget.TextInputLayout-->
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/darkBlue</item>
+        <item name="colorControlHighlight">@color/lightBlue</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,6 +22,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--Do we need this?-->
     <style name="AppTheme.PopTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
