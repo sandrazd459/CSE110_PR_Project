@@ -46,6 +46,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.2'
 
     compile 'com.google.android.gms:play-services-appindexing:9.6.1'
+    compile 'com.android.support:gridlayout-v7:25.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
