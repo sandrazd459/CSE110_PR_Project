@@ -8,93 +8,73 @@ import android.widget.Switch;
 
 public class Blog {
 
-    private String Start, Destination, Price;
-    private int Month,Day, Year;
+    private String start, dest, pric, addit;
+    private int month, day, year;
 
     public Blog(){
-
     }
 
-    public Blog(String price, String destination, String start,int month,int day,int year) {
-        Price = price;
-        Destination = destination;
-        Start = start;
-        Month = month;
-        Day = day;
-        Year = year;
+    public Blog(String Price, String Destination, String Start, String Additional,int Month,int Day,int Year) {
+        pric = Price;
+        addit = Additional;
+        dest = Destination;
+        start = Start;
+        month = Month;
+        day = Day;
+        year = Year;
     }
 
     public String getStart() {
-        return Start;
+        return start;
     }
 
-    public void setStart(String start) {
-        Start = start;
+    public void setStart(String s) {
+        start = s;
+    }
+    public String getAdditional() {
+        return addit;
+    }
+
+    public void setAdditional(String additional) {
+        addit = additional;
     }
 
     public String getDestination() {
-        return Destination;
+        return dest;
     }
 
     public void setDestination(String destination) {
-        Destination = destination;
+        dest = destination;
     }
 
 
     public String getPrice() {
-        return Price;
+        return pric;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        pric = price;
     }
 
-    public String getMonth() {
-
-        switch (Month){
-            case 1:
-                return "Jan";
-            case 2:
-                return "Feb";
-            case 3:
-                return "Mar";
-            case 4:
-                return "Apr";
-            case 5:
-                return "May";
-            case 6:
-                return "Jun";
-            case 7:
-                return "Jul";
-            case 8:
-                return "Oct";
-            case 9:
-                return "Aug";
-            case 10:
-                return "Sep";
-            case 11:
-                return "Nov";
-            case 12:
-                return "Dec";
-        }
-        return "";
+    public int getMonth() {
+        return month;
     }
 
     public void setMonth(int dMonth) {
-        Month = dMonth;
+        month = dMonth;
     }
     public int getDay() {
-        return Day;
+        return day;
     }
 
     public void setDay(int dDay) {
-        Day = dDay;
+        day = dDay;
     }
     public int getYear() {
-        return Year;
+        return year;
     }
 
     public void setYear(int dYear) {
-        Year = dYear;
+        year = dYear;
     }
 }

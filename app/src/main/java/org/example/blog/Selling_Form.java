@@ -73,7 +73,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         finYear = year;
-        finMonth = month;
+        finMonth = month + 1;
         finDay = dayOfMonth;
 
         ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
