@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,12 +27,12 @@
         <activity
             android:name=".Welcome"
             android:label="welcome Page"/>
-        <!--activity
-            android:name=".Login"
-            android:label="Login Page" /-->
         <activity
-            android:name=".Registrer"
-            android:label="Sign in Page" />
+            android:name=".Login"
+            android:label="Login Page" />
+        <activity
+            android:name=".User_Account"
+            android:label="User Account Page"/>
         <activity
             android:name=".Main_navigation"
             android:label="Main Navigation"/>

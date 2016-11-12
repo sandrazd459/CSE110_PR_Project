@@ -30,26 +30,42 @@ public class Login extends AppCompatActivity {
 
     private EditText mEmail;
     private EditText mPassword;
+    private EditText mPassword_confirm;
     private Button mLoginBtn;
+
+    //determine which layout after welcome pg
+    private String value;
 
     /**current page of Login*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        value = getIntent().getExtras().getString("Sign");
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        if(value.equals("in")){//sign in
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.login);
+        }
+        if(value.equals("up")){//sign up
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.registrer);
+        }
 
         mAuth = FirebaseAuth.getInstance();
+        mEmail = (EditText) findViewById(R.id.email);
+        mPassword = (EditText) findViewById(R.id.password);
+        mLoginBtn = (Button) findViewById(R.id.sign_button);
 
-        mEmail = (EditText) findViewById(R.id.login_email);
-        mPassword = (EditText) findViewById(R.id.login_password);
-        mLoginBtn = (Button) findViewById(R.id.login_button);
-
-        //triggered when Login button is clicked
+        //triggered when Sign in/up button is clicked
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startLogin();
+                System.out.println("create account " +value);
+
+                if(value.equals("in"))
+                    login();
+                if(value.equals("up")){
+                    createAccount();
+                }
             }
         });
 
@@ -71,31 +87,53 @@ public class Login extends AppCompatActivity {
         };
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    private void startLogin() {
+    private void createAccount() {
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
-        System.out.println(email + " " + password );
+
+        System.out.println("Sad");
+        Log.d(TAG, "createAccount:" + email);
+        if (!valid()) {
+            return;
+        }
+        System.out.println("Sad2");
+
+
+        //showProgressDialog();
+
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                        }
+
+                        // [START_EXCLUDE]
+                        //hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END create_user_with_email]
+    }
+
+    private void login() {
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
 
         Log.d(TAG, "signIn:" + email);
 
         //check if input format is valid
-        /**if (!validateForm()) {
+        if (!valid()) {
             return;
-        }*/
+        }
 
         //use email and password to login
         mAuth.signInWithEmailAndPassword(email, password)
@@ -114,5 +152,72 @@ public class Login extends AppCompatActivity {
                     }
                 });
         //end of sign in with email
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    private boolean valid() {
+        boolean valid = true;
+
+        String email = mEmail.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            mEmail.setError("Required.");
+            mEmail.setText("");
+            valid = false;
+        } else {
+            mEmail.setError(null);
+        }
+
+        String password = mPassword.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPassword.setError("Required.");
+            mPassword.setText("");
+            valid = false;
+        } else {
+            mPassword.setError(null);
+        }
+
+        if(value == "up"){
+            String passwordC = mPassword_confirm.getText().toString();
+            if (TextUtils.isEmpty(password)) {
+                mPassword_confirm.setError("Required.");
+                mPassword.setText("");
+                valid = false;
+            } else {
+                mPassword_confirm.setError(null);
+            }
+        }
+
+        if(valid == false){
+            //dialog
+            new AlertDialog.Builder(this)
+                    //  .setIcon(R.drawable.gong1)
+                    .setTitle("Please enter valid combination")
+                    .setPositiveButton("Get it!",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    // TODO Auto-generated method stub
+
+                                }
+                            })//.setNegativeButton("Cancel", null).create()
+                    .show();
+        }
+
+        return valid;
     }
 }

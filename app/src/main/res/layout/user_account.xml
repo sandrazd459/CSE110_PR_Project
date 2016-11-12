@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/grayColor"
+    android:id="@+id/LinearLayout1"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="one"
+        android:background="#98FB98"
+        />
+
+
+    <RelativeLayout
+        android:layout_weight="3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="two"
+        android:background="#FFFF00"
+        />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:text="Log out"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:background="@drawable/button_style_white" />
+
+</LinearLayout>

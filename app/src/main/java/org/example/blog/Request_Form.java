@@ -23,6 +23,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
     private EditText mStart;
     private EditText mDestination;
+    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
 
@@ -41,6 +42,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
+        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);

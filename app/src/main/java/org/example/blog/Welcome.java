@@ -36,16 +36,18 @@ public class Welcome extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoLogin = new Intent(Welcome.this,Login.class);
-                startActivity(gotoLogin);
+                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                goToLogin.putExtra("Sign", "in");
+                startActivity(goToLogin);
             }
         });
 
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoSignin = new Intent(Welcome.this,Registrer.class);
-                startActivity(gotoSignin);
+                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                goToLogin.putExtra("Sign", "up");
+                startActivity(goToLogin);
             }
         });
 

@@ -22,6 +22,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
     private DatabaseReference mDatabase;
     private EditText mStart;
     private EditText mDestination;
+    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
     private Button mPostBtn;
@@ -39,6 +40,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
+        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);
@@ -97,7 +99,6 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
             newPost.child("Price").setValue(_price);
             newPost.child("Additional").setValue(text_addit);*/
-
 
             //TODO bug:for now send to main_page to get the firebase list again
             startActivity(new Intent(Selling_Form.this, Main_navigation.class));

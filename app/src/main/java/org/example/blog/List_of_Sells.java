@@ -41,7 +41,6 @@ public class List_of_Sells extends AppCompatActivity {
         final ArrayList<Post> rList = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = b.getParcelableArrayList("sellArr");
 
-
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
@@ -100,10 +99,14 @@ public class List_of_Sells extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
     }
+
+
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
@@ -122,10 +125,10 @@ public class List_of_Sells extends AppCompatActivity {
             TextView post_to = (TextView)mView.findViewById(R.id.post_to);
             post_to.setText(toText);
         }
-        public void setDate(String dateText){
+        /*public void setDate(String dateText){
             TextView post_date = (TextView)mView.findViewById(R.id.post_date);
             post_date.setText(dateText);
-        }
+        }*/
         public void setPrice(String priceText){
             TextView post_price = (TextView)mView.findViewById(R.id.post_price);
             post_price.setText(priceText);
@@ -148,4 +151,5 @@ public class List_of_Sells extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
