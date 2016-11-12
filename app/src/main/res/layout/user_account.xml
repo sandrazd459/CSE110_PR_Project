@@ -9,12 +9,23 @@
 
 
     <RelativeLayout
-        android:layout_weight="1"
+        android:layout_weight="0.57"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="one"
-        android:background="#98FB98"
-        />
+        android:background="@color/darkGray">
+
+        <TextView
+            android:id="@+id/user_email"
+
+            android:text="User email"
+            android:textSize="36dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 
 
     <RelativeLayout
