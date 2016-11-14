@@ -22,6 +22,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+//password has to be at least 6 bytes long
+//check valid email address
+
 public class Login extends AppCompatActivity {
     private static final String TAG = "Email and Password";
     //for login function
@@ -48,6 +52,7 @@ public class Login extends AppCompatActivity {
         if(value.equals("up")){//sign up
             super.onCreate(savedInstanceState);
             setContentView(R.layout.registrer);
+            mPassword_confirm = (EditText) findViewById(R.id.password_confirm);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -59,8 +64,6 @@ public class Login extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("create account " +value);
-
                 if(value.equals("in"))
                     login();
                 if(value.equals("up")){
@@ -92,17 +95,11 @@ public class Login extends AppCompatActivity {
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
 
-        System.out.println("Sad");
         Log.d(TAG, "createAccount:" + email);
         if (!valid()) {
             return;
         }
-        System.out.println("Sad2");
 
-
-        //showProgressDialog();
-
-        // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -114,6 +111,18 @@ public class Login extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            new AlertDialog.Builder(Login.this)
+                                    //  .setIcon(R.drawable.gong1)
+                                    .setTitle("This email is already registered.")
+                                    .setPositiveButton("OK",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog,
+                                                                    int which) {
+                                                    // TODO Auto-generated method stub
+                                                }
+                                            })//.setNegativeButton("Cancel", null).create()
+                                    .show();
                         }
 
                         // [START_EXCLUDE]
@@ -131,7 +140,7 @@ public class Login extends AppCompatActivity {
         Log.d(TAG, "signIn:" + email);
 
         //check if input format is valid
-        if (!valid()) {
+       if (!valid()) {
             return;
         }
 
@@ -148,6 +157,18 @@ public class Login extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            new AlertDialog.Builder(Login.this)
+                                    //  .setIcon(R.drawable.gong1)
+                                    .setTitle("Invalid email/password combination.")
+                                    .setPositiveButton("Get it!",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog,
+                                                                    int which) {
+                                                    // TODO Auto-generated method stub
+                                                }
+                                            })//.setNegativeButton("Cancel", null).create()
+                                    .show();
                         }
                     }
                 });
@@ -169,35 +190,62 @@ public class Login extends AppCompatActivity {
     }
 
     private boolean valid() {
+        String errMessage = "";
         boolean valid = true;
 
         String email = mEmail.getText().toString().trim();
-
         if (TextUtils.isEmpty(email)) {
             mEmail.setError("Required.");
-            mEmail.setText("");
+            errMessage = "No blank field is allowed";
             valid = false;
-        } else {
-            mEmail.setError(null);
+        }else{
+            int len = mEmail.length();
+            int at = 0;
+            int pt = 0;
+            for(int i = 0; i < len ; i++){
+                if(email.charAt(i) == '@')
+                    at = i;
+                if(email.charAt(i) =='.')
+                    pt = i;
+            }
+            if(at >= pt){
+                mEmail.setError("Required.");
+                errMessage = "Invalid email";
+                valid = false;
+            }else{
+                mPassword.setError(null);
+            }
         }
-
         String password = mPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
             mPassword.setError("Required.");
             mPassword.setText("");
+            errMessage = "No blank field is allowed";
             valid = false;
-        } else {
+        }else if(password.length() < 6){
+            mPassword.setText("");
+            errMessage = "Minimum length is 6 chars";
+            valid = false;
+        }else {
             mPassword.setError(null);
         }
-
-        if(value == "up"){
+        if(value.equals("up")){
             String passwordC = mPassword_confirm.getText().toString();
-            if (TextUtils.isEmpty(password)) {
+            if (TextUtils.isEmpty(passwordC)) {
                 mPassword_confirm.setError("Required.");
-                mPassword.setText("");
+                mPassword_confirm.setText("");
+                errMessage = "No blank field is allowed";
                 valid = false;
-            } else {
-                mPassword_confirm.setError(null);
+            }
+            else{
+                if(!password.equals(passwordC)) {
+                    mPassword_confirm.setError("Required.");
+                    mPassword.setText("");
+                    errMessage = "password and its confirmation do not match.";
+                    valid = false;
+                }else {
+                    mPassword_confirm.setError(null);
+                }
             }
         }
 
@@ -205,14 +253,13 @@ public class Login extends AppCompatActivity {
             //dialog
             new AlertDialog.Builder(this)
                     //  .setIcon(R.drawable.gong1)
-                    .setTitle("Please enter valid combination")
+                    .setTitle(errMessage)
                     .setPositiveButton("Get it!",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     // TODO Auto-generated method stub
-
                                 }
                             })//.setNegativeButton("Cancel", null).create()
                     .show();

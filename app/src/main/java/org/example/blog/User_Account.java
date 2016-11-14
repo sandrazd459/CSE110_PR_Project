@@ -57,7 +57,7 @@ public class User_Account extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_account);
-        
+
         //initialize auth
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();

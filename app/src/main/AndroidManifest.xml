@@ -26,13 +26,13 @@
             android:theme="@style/AppTheme.PopTheme"/>
         <activity
             android:name=".Welcome"
-            android:label="welcome Page"/>
+            android:label="@string/app_name"/-->
         <activity
             android:name=".Login"
-            android:label="Login Page" />
+            android:label="@string/app_name" />
         <activity
             android:name=".User_Account"
-            android:label="User Account Page"/>
+            android:label="User Accoun"/>
         <activity
             android:name=".Main_navigation"
             android:label="Main Navigation"/>

@@ -12,16 +12,15 @@ public class Blog {
     private int Month,Day, Year;
 
     public Blog(){
-
     }
 
     public Blog(String price, String destination, String start,int month,int day,int year) {
-        Price = price;
         Destination = destination;
         Start = start;
         Month = month;
         Day = day;
         Year = year;
+        Price = price;
     }
 
     public String getStart() {
@@ -39,7 +38,6 @@ public class Blog {
     public void setDestination(String destination) {
         Destination = destination;
     }
-
 
     public String getPrice() {
         return Price;
