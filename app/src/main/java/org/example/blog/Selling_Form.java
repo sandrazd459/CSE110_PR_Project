@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -73,7 +74,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         finYear = year;
-        finMonth = month;
+        finMonth = month + 1;
         finDay = dayOfMonth;
 
         ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
@@ -87,9 +88,13 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
         String _price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
+        Post tmp = new Post(_price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0){
 
             DatabaseReference newPost = mDatabase.push();
+            newPost.setValue(tmp);
+            /*
             newPost.child("Start").setValue(text_start);
             newPost.child("Destination").setValue(text_dest);
             //Set date
@@ -98,9 +103,14 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
             newPost.child("Year").setValue(finYear);
 
             newPost.child("Price").setValue(_price);
-            newPost.child("Additional").setValue(text_addit);
+            newPost.child("Additional").setValue(text_addit);*/
 
-            startActivity(new Intent(Selling_Form.this, List_of_Sells.class));
+
+            //TODO bug:for now send to main_page to get the firebase list again
+            startActivity(new Intent(Selling_Form.this, Main_navigation.class));
+        }
+        else{
+            Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
         }
     }
 }
