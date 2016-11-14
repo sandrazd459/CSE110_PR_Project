@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_margin="15dp" android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-
+        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_from"
             android:padding="10dp"
@@ -20,26 +16,29 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_to"
             android:padding="10dp"
             android:text="Destination goes here"
             android:textStyle="bold"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:layout_below="@id/post_from"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_date"
             android:padding="10dp"
-            android:text="Date goes here" />
+            android:text="Date goes here"
+            android:layout_below="@id/post_to"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_price"
             android:padding="10dp"
-            android:text="20" />
-    </LinearLayout>
+            android:text="20"
+            android:layout_below="@id/post_date"/>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

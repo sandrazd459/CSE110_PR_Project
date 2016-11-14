@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * Created by Alan Beas on 11/6/2016.
  */
 
-public class Request_CustomFilter extends Filter {
+public class List_CustomFilter extends Filter {
 
-    Requests_Adapter mAdapter;
-    ArrayList<Blog> mFilterList;
+    List_Adapter mAdapter;
+    ArrayList<Post> mFilterList;
 
-    public Request_CustomFilter(Requests_Adapter adapter, ArrayList<Blog> filterlist){
+    public List_CustomFilter(List_Adapter adapter, ArrayList<Post> filterlist){
         this.mAdapter = adapter;
         this.mFilterList = filterlist;
 
@@ -29,7 +29,7 @@ public class Request_CustomFilter extends Filter {
             constraint = constraint.toString().toUpperCase();
 
             //store the results of the filtering
-            ArrayList<Blog> filterResults = new ArrayList<>();
+            ArrayList<Post> filterResults = new ArrayList<>();
 
             for(int i=0; i<mFilterList.size();i++){
                 if(mFilterList.get(i).getDestination().toUpperCase().contains(constraint)){
@@ -50,7 +50,7 @@ public class Request_CustomFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        mAdapter.mList = (ArrayList<Blog>) results.values;
+        mAdapter.mList = (ArrayList<Post>) results.values;
 
         //refresh the page
         mAdapter.notifyDataSetChanged();
