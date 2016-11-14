@@ -1,27 +1,28 @@
 package org.example.blog;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.PopupMenu;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
+import java.util.ArrayList;
 
 public class Main_navigation extends AppCompatActivity {
 
@@ -31,7 +32,13 @@ public class Main_navigation extends AppCompatActivity {
 
     private Button test;
 
+    private DatabaseReference mDataBase;
+
     BottomBar mBottomBar;
+
+    ArrayList<Post> req = new ArrayList<>();
+    ArrayList<Post> sell = new ArrayList<>();
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -44,12 +51,87 @@ public class Main_navigation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_navigation);
 
+        mDataBase = FirebaseDatabase.getInstance().getReference();
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
+
+        //set default highlight to be the home button
+        mBottomBar.setDefaultTabPosition(1);
+
+        mDataBase.child("Request Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Post post = child.getValue(Post.class);
+                    if (post.getDestination() != null) {
+                        //call another function
+                        System.out.println("IN REQ");
+                        createBlog(req ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        mDataBase.child("Sell Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Post post = child.getValue(Post.class);
+                    if (post.getDestination() != null) {
+                        //call another function
+                        System.out.println("IN SELL");
+                        createBlog(sell ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
+                if(menuItemId == R.id.lists){
+                    View listView = findViewById(R.id.lists);
+                    PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
+                    popupMenu.inflate(R.menu.popup_menu);
+                    popupMenu.show();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch(item.getItemId()){
+                                case R.id.submenuSell:
+                                    //mDataBase = mDataBase.child("Sell Posts");
+                                    Bundle sBundle = new Bundle();
+                                    Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
+                                    sBundle.putParcelableArrayList("sellArr", sell);
+                                    sBundle.putParcelableArrayList("reqArr", req);
 
+                                    intentSell.putExtras(sBundle);
+                                    startActivity(intentSell);
+                                    return true;
+                                case R.id.submenuReq:
+                                    Bundle rBundle = new Bundle();
+                                    Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
+                                    rBundle.putParcelableArrayList("reqArr", req);
+                                    rBundle.putParcelableArrayList("sellArr", sell);
+
+                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
+                                    intentReq.putExtras(rBundle);
+                                    startActivity(intentReq);
+                                    return true;
+                            }
+                            return false;
+                        }
+                    });
+                }
             }
 
             @Override
@@ -64,10 +146,24 @@ public class Main_navigation extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()){
                                 case R.id.submenuSell:
-                                    startActivity(new Intent(Main_navigation.this, List_of_Sells.class));
+                                    //mDataBase = mDataBase.child("Sell Posts");
+                                    Bundle sBundle = new Bundle();
+                                    Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
+                                    sBundle.putParcelableArrayList("sellArr", sell);
+                                    sBundle.putParcelableArrayList("reqArr", req);
+
+                                    intentSell.putExtras(sBundle);
+                                    startActivity(intentSell);
                                     return true;
                                 case R.id.submenuReq:
-                                    startActivity(new Intent(Main_navigation.this, List_of_Requests.class));
+                                    Bundle rBundle = new Bundle();
+                                    Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
+                                    rBundle.putParcelableArrayList("reqArr", req);
+                                    rBundle.putParcelableArrayList("sellArr", sell);
+
+                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
+                                    intentReq.putExtras(rBundle);
+                                    startActivity(intentReq);
                                     return true;
                             }
                             return false;
@@ -136,5 +232,23 @@ public class Main_navigation extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+    public void createBlog(ArrayList<Post> array, String start, String dest, String pric, String add, int m, int d, int y) {
+        Post newPost = new Post();
+        newPost.setDestination(dest);
+        newPost.setStart(start);
+        newPost.setPrice(pric);
+        newPost.setAdditional(add);
+        newPost.setMonth(m);
+        newPost.setDay(d);
+        newPost.setYear(y);
+
+        System.out.println("DEST" + newPost.getDestination());
+
+        if (array == req) {
+            req.add(newPost);
+        } else {
+            sell.add(newPost);
+        }
     }
 }

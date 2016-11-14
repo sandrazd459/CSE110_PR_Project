@@ -4,54 +4,55 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
+import java.util.ArrayList;
 
 
 public class List_of_Sells extends AppCompatActivity {
 
     private RecyclerView mBlogList;
 
-    private DatabaseReference mDatabase;
+    //private DatabaseReference mDatabase;
 
     BottomBar mBottomBar;
+
+    SearchView sv;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.container);
 
+        Bundle b = this.getIntent().getExtras();
 
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Sell Posts");
-        mBlogList = (RecyclerView) findViewById(R.id.blog_list);
-        mBlogList.setHasFixedSize(true);
-        mBlogList.setLayoutManager(new LinearLayoutManager(this));
+        final ArrayList<Post> rList = b.getParcelableArrayList("reqArr");
+        final ArrayList<Post> sList = b.getParcelableArrayList("sellArr");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
-                if(menuItemId == R.id.home){
+                if (menuItemId == R.id.home) {
                     startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
                 }
             }
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-                if(menuItemId == R.id.lists){
+                if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
                     PopupMenu popupMenu = new PopupMenu(List_of_Sells.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
@@ -59,9 +60,15 @@ public class List_of_Sells extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch(item.getItemId()){
+                            switch (item.getItemId()) {
+                                //TODO: BUG HERE solution send list around all activities
                                 case R.id.submenuReq:
-                                    startActivity(new Intent(List_of_Sells.this, List_of_Requests.class));
+                                    Bundle sBundle = new Bundle();
+                                    Intent intentSell = new Intent(List_of_Sells.this, List_of_Requests.class);
+                                    sBundle.putParcelableArrayList("sellArr", sList);
+                                    sBundle.putParcelableArrayList("reqArr", rList);
+                                    intentSell.putExtras(sBundle);
+                                    startActivity(intentSell);
                                     return true;
                             }
                             return false;
@@ -70,6 +77,29 @@ public class List_of_Sells extends AppCompatActivity {
                 }
             }
         });
+
+
+        sv = (SearchView) findViewById(R.id.mSearchBar);
+        mBlogList = (RecyclerView) findViewById(R.id.recyclerList);
+        mBlogList.setHasFixedSize(true);
+        mBlogList.setLayoutManager(new LinearLayoutManager(this));
+        mBlogList.setItemAnimator(new DefaultItemAnimator());
+        final List_Adapter myAdapter = new List_Adapter(this, sList);
+        mBlogList.setAdapter(myAdapter);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
     }
 
 
@@ -78,23 +108,6 @@ public class List_of_Sells extends AppCompatActivity {
     protected void onStart() {
 
         super.onStart();
-
-        FirebaseRecyclerAdapter<Blog, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
-                Blog.class,
-                R.layout.blog_list,
-                BlogViewHolder.class,
-                mDatabase
-        ) {
-            @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
-                viewHolder.setFrom(model.getStart());
-                viewHolder.setTo(model.getDestination());
-                String s = model.getMonth()+" "+model.getDay()+", "+model.getYear();
-                viewHolder.setDate(s);
-                viewHolder.setPrice(model.getPrice());
-            }
-        };
-        mBlogList.setAdapter(fbRecyclerAdapter);
     }
 
 

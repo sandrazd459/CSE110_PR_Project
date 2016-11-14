@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp">
+
+
+    <TextView
+        android:text="Start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/popStart"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:text="Dest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/popDest"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:text="Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/popDate"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:text="Price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/popPrice"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:text="Addit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/popAddit"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:padding="10dp"/>
+
+    <Button
+        android:text="GO BACK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:onClick="goBack"
+        android:id="@+id/backbtn" />
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -87,25 +88,18 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         String _price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        Blog tmp = new Blog(_price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+        Post tmp = new Post(_price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
 
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
 
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
-            /*newPost.child("Start").setValue(text_start);
-            newPost.child("Destination").setValue(text_dest);
-            //Setting the date
-            newPost.child("Month").setValue(finMonth);
-            newPost.child("Day").setValue(finDay);
-            newPost.child("Year").setValue(finYear);
+            //TODO bug:for now send to main_page to get the firebase list again
+            startActivity(new Intent(Request_Form.this, Main_navigation.class));
+        }
+        else{
+            Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
 
-
-            newPost.child("Price").setValue(_price);
-            newPost.child("Additional").setValue(text_addit);*/
-
-
-            startActivity(new Intent(Request_Form.this, List_of_Requests.class));
         }
     }
 }
