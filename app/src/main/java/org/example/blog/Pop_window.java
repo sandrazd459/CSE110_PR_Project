@@ -16,17 +16,17 @@ public class Pop_window extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.pop_layout);
+        setContentView(R.layout.detailed_post);
 
         Bundle bun = this.getIntent().getExtras();
-        ((TextView)findViewById(R.id.popStart)).setText(bun.getString("start"));
-        ((TextView)findViewById(R.id.popDest)).setText(bun.getString("dest"));
-        ((TextView)findViewById(R.id.popPrice)).setText(bun.getString("price"));
-        ((TextView)findViewById(R.id.popAddit)).setText(bun.getString("addit"));
+        ((TextView)findViewById(R.id.post_departure)).setText(bun.getString("start"));
+        ((TextView)findViewById(R.id.post_destination)).setText(bun.getString("dest"));
+        ((TextView)findViewById(R.id.post_price)).setText(bun.getString("price"));
+        ((TextView)findViewById(R.id.post_additional)).setText(bun.getString("addit"));
 
         String temp = stringMonth(bun.getInt("month")) +" "+ bun.getInt("day")+", "+bun.getInt("year");
 
-        ((TextView)findViewById(R.id.popDate)).setText(temp);
+        ((TextView)findViewById(R.id.post_date)).setText(temp);
 
 
         /*DisplayMetrics ms = new DisplayMetrics();

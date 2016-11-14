@@ -136,7 +136,7 @@
                         android:text="Username"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
-                        android:id="@+id/textView9"
+                        android:id="@+id/post_username"
                         android:padding="10dp"
                         android:textSize="16sp" />
                 </TableRow>
@@ -146,9 +146,9 @@
                     android:layout_height="match_parent" >
 
                     <TextView
-                        android:id="@+id/post_from"
+                        android:id="@+id/post_destination"
                         android:padding="10dp"
-                        android:text="Departure"
+                        android:text="Destination"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_row="0"
@@ -162,9 +162,9 @@
                     android:layout_height="match_parent" >
 
                     <TextView
-                        android:id="@+id/post_to"
+                        android:id="@+id/post_departure"
                         android:padding="10dp"
-                        android:text="Destination goes here"
+                        android:text="Start goes here"
                         android:layout_row="1"
                         android:layout_column="0"
                         android:layout_width="287dp"
@@ -212,7 +212,7 @@
                     <TextView
                         android:text="Add additional comments here"
                         android:layout_height="45dp"
-                        android:id="@+id/post_comments"
+                        android:id="@+id/post_additional"
                         android:padding="10dp"
                         android:layout_width="wrap_content" />
                 </TableRow>
