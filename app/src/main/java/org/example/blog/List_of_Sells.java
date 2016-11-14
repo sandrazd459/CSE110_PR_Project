@@ -1,5 +1,6 @@
 package org.example.blog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -7,16 +8,22 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
+import java.util.ArrayList;
 
 
 public class List_of_Sells extends AppCompatActivity {
@@ -32,8 +39,6 @@ public class List_of_Sells extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Sell Posts");
         mBlogList = (RecyclerView) findViewById(R.id.blog_list);
@@ -89,7 +94,11 @@ public class List_of_Sells extends AppCompatActivity {
             protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
                 viewHolder.setFrom(model.getStart());
                 viewHolder.setTo(model.getDestination());
-                //viewHolder.setDate(model.getDate());
+
+                String dDate = model.getMonth()+" "+model.getDay()+", "+model.getYear();
+                Log.d("Date", dDate);
+                viewHolder.setDate(dDate);
+
                 viewHolder.setPrice(model.getPrice());
             }
         };
@@ -98,12 +107,16 @@ public class List_of_Sells extends AppCompatActivity {
 
 
 
-    public static class BlogViewHolder extends RecyclerView.ViewHolder{
+    public static class BlogViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         View mView;
+        Context mContext;
+
         public BlogViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             mView = itemView;
+            mContext = itemView.getContext();
         }
 
         public void setFrom(String fromText){
@@ -115,13 +128,47 @@ public class List_of_Sells extends AppCompatActivity {
             TextView post_to = (TextView)mView.findViewById(R.id.post_to);
             post_to.setText(toText);
         }
-        /*public void setDate(String dateText){
+
+        public void setDate(String dateText){
             TextView post_date = (TextView)mView.findViewById(R.id.post_date);
             post_date.setText(dateText);
-        }*/
+        }
+
         public void setPrice(String priceText){
             TextView post_price = (TextView)mView.findViewById(R.id.post_price);
             post_price.setText(priceText);
+        }
+
+        @Override
+        public void onClick(View v) {
+            final ArrayList<Post> posts = new ArrayList<>();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Sell Posts");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        posts.add(snapshot.getValue(Post.class));
+                    }
+
+                    int itemPosition = getLayoutPosition();
+
+                    Intent intent = new Intent(mContext, PostDetails.class);
+                    Post post = posts.get(itemPosition);
+                    intent.putExtra("position", itemPosition + "");
+                    intent.putExtra("username", post.getUsername());
+                    intent.putExtra("to", post.getDestination());
+                    intent.putExtra("from", post.getStart());
+                    intent.putExtra("date", post.getDate());
+                    intent.putExtra("price", post.getPrice());
+                    intent.putExtra("additional", post.getAdditional());
+                    mContext.startActivity(intent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
