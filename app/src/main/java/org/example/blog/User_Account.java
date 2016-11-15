@@ -37,6 +37,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Sandra on 11/10/2016.
@@ -63,8 +65,11 @@ public class User_Account extends AppCompatActivity{
         user = mAuth.getCurrentUser();
         String email = mAuth.getCurrentUser().getEmail();
         TextView userEmailView = (TextView)findViewById(R.id.user_email);
-
         userEmailView.setText(email);
+
+        Bundle b = this.getIntent().getExtras();
+        final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
+        final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
 
         //trig logout button
         mLogoutBtn = (Button) findViewById(R.id.logout_button);
@@ -87,7 +92,7 @@ public class User_Account extends AppCompatActivity{
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-                if(menuItemId == R.id.lists){
+                if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
                     PopupMenu popupMenu = new PopupMenu(User_Account.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
@@ -95,9 +100,26 @@ public class User_Account extends AppCompatActivity{
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch(item.getItemId()){
+                            switch (item.getItemId()) {
                                 case R.id.submenuSell:
-                                    startActivity(new Intent(User_Account.this, List_of_Sells.class));
+                                    //mDataBase = mDataBase.child("Sell Posts");
+                                    Bundle sBundle = new Bundle();
+                                    Intent intentSell = new Intent(User_Account.this, List_of_Sells.class);
+                                    sBundle.putParcelableArrayList("sellArr", sell);
+                                    sBundle.putParcelableArrayList("reqArr", req);
+
+                                    intentSell.putExtras(sBundle);
+                                    startActivity(intentSell);
+                                    return true;
+                                case R.id.submenuReq:
+                                    Bundle rBundle = new Bundle();
+                                    Intent intentReq = new Intent(User_Account.this, List_of_Requests.class);
+                                    rBundle.putParcelableArrayList("reqArr", req);
+                                    rBundle.putParcelableArrayList("sellArr", sell);
+
+                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
+                                    intentReq.putExtras(rBundle);
+                                    startActivity(intentReq);
                                     return true;
                             }
                             return false;

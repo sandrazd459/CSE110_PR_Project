@@ -49,7 +49,12 @@ public class List_of_Sells extends AppCompatActivity {
                     startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
                 }
                 if (menuItemId == R.id.account) {
-                    startActivity(new Intent(List_of_Sells.this, User_Account.class));
+                    Bundle bundle = new Bundle();
+                    Intent intentAccount = new Intent(List_of_Sells.this, User_Account.class);
+                    bundle.putParcelableArrayList("sellArr", sList);
+                    bundle.putParcelableArrayList("reqArr", rList);
+                    intentAccount.putExtras(bundle);
+                    startActivity(intentAccount);
                 }
             }
 
