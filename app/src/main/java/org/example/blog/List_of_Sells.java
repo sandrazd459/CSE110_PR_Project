@@ -48,6 +48,9 @@ public class List_of_Sells extends AppCompatActivity {
                 if (menuItemId == R.id.home) {
                     startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
                 }
+                if (menuItemId == R.id.account) {
+                    startActivity(new Intent(List_of_Sells.this, User_Account.class));
+                }
             }
 
             @Override

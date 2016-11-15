@@ -69,7 +69,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 bundle.putInt("month",mList.get(pos).getMonth());
                 bundle.putInt("year",mList.get(pos).getYear());
                 pop.putExtras(bundle);
-                System.out.println("I GOT HERE");
                 c.startActivity(pop);
             }
         });
@@ -83,7 +82,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 //((TextView)(v.findViewById(R.id.popStart))).setText(mList.get(pos).getStart());
                 ((TextView)(v.findViewById(R.id.popPrice))).setText(mList.get(pos).getPrice());
                 ((TextView)(v.findViewById(R.id.popAddit))).setText(mList.get(pos).getAdditional());
-                System.out.println("I GOT HERE");
                 c.startActivity(new Intent(c, Pop_window.class));*/
             }
         });

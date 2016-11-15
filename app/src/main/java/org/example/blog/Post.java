@@ -45,14 +45,13 @@ public class Post implements Parcelable{
     public String getStart() {
         return start;
     }
-
     public void setStart(String s) {
         start = s;
     }
+
     public String getAdditional() {
         return addit;
     }
-
     public void setAdditional(String additional) {
         addit = additional;
     }
@@ -60,16 +59,11 @@ public class Post implements Parcelable{
     public String getDestination() {
         return dest;
     }
-
-    public void setDestination(String destination) {
-        dest = destination;
-    }
-
+    public void setDestination(String destination) { dest = destination; }
 
     public String getPrice() {
         return pric;
     }
-
     public void setPrice(String price) {
         pric = price;
     }
@@ -77,21 +71,20 @@ public class Post implements Parcelable{
     public int getMonth() {
         return month;
     }
-
     public void setMonth(int dMonth) {
         month = dMonth;
     }
+
     public int getDay() {
         return day;
     }
-
     public void setDay(int dDay) {
         day = dDay;
     }
+
     public int getYear() {
         return year;
     }
-
     public void setYear(int dYear) {
         year = dYear;
     }
@@ -110,8 +103,6 @@ public class Post implements Parcelable{
         desti.writeString(dest);
         desti.writeString(pric);
         desti.writeString(addit);
-
-
 
         desti.writeInt(month);
         desti.writeInt(day);

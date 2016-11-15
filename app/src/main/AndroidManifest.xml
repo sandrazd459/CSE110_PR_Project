@@ -18,21 +18,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Request_Form"
-            android:label="Ride Request Form" />
-        <activity
             android:name=".Pop_window"
             android:label="Ride Preview"
             android:theme="@style/AppTheme.PopTheme"/>
-        <activity
-            android:name=".Welcome"
-            android:label="@string/app_name"/-->
         <activity
             android:name=".Login"
             android:label="@string/app_name" />
         <activity
             android:name=".User_Account"
-            android:label="User Accoun"/>
+            android:label="User Account"/>
         <activity
             android:name=".Main_navigation"
             android:label="Main Navigation"/>

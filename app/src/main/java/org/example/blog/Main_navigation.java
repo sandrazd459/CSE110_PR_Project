@@ -66,7 +66,6 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        System.out.println("IN REQ");
                         createBlog(req ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
@@ -84,7 +83,6 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        System.out.println("IN SELL");
                         createBlog(sell ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
@@ -131,6 +129,9 @@ public class Main_navigation extends AppCompatActivity {
                             return false;
                         }
                     });
+                }
+                if (menuItemId == R.id.account) {
+                    startActivity(new Intent(Main_navigation.this, User_Account.class));
                 }
             }
 
@@ -242,8 +243,6 @@ public class Main_navigation extends AppCompatActivity {
         newPost.setMonth(m);
         newPost.setDay(d);
         newPost.setYear(y);
-
-        System.out.println("DEST" + newPost.getDestination());
 
         if (array == req) {
             req.add(newPost);

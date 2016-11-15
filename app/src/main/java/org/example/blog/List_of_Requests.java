@@ -63,6 +63,9 @@ public class List_of_Requests extends AppCompatActivity {
                 if (menuItemId == R.id.home) {
                     startActivity(new Intent(List_of_Requests.this, Main_navigation.class));
                 }
+                if (menuItemId == R.id.account) {
+                    startActivity(new Intent(List_of_Requests.this, User_Account.class));
+                }
             }
 
             @Override
