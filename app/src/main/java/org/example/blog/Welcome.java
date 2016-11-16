@@ -53,4 +53,8 @@ public class Welcome extends AppCompatActivity {
 
     }
 
+    //prevent to get back after log out
+    @Override
+    public void onBackPressed() {
+    }
 }

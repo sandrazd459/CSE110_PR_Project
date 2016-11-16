@@ -194,7 +194,8 @@ public class Login extends AppCompatActivity {
         boolean valid = true;
 
         String email = mEmail.getText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(email)&& valid == true) {
+            err:
             mEmail.setError("Required.");
             errMessage = "No blank field is allowed";
             valid = false;
@@ -208,38 +209,46 @@ public class Login extends AppCompatActivity {
                 if(email.charAt(i) =='.')
                     pt = i;
             }
-            if(at >= pt){
-                mEmail.setError("Required.");
+            if(at >= pt&& valid == true){
+                //mEmail.setError("Required.");
                 errMessage = "Invalid email";
                 valid = false;
+
             }else{
                 mPassword.setError(null);
             }
         }
         String password = mPassword.getText().toString();
-        if (TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password)&& valid == true) {
             mPassword.setError("Required.");
             mPassword.setText("");
+            if(value.equals("up"))
+                mPassword_confirm.setText("");
+
             errMessage = "No blank field is allowed";
             valid = false;
-        }else if(password.length() < 6){
+        }else if(password.length() < 6 && valid == true){
             mPassword.setText("");
-            errMessage = "Minimum length is 6 chars";
+            if(value.equals("up"))
+                mPassword_confirm.setText("");
+            errMessage = "Min-length for password is 6 chars";
             valid = false;
         }else {
             mPassword.setError(null);
         }
-        if(value.equals("up")){
+        if(value.equals("up")&& valid == true){
             String passwordC = mPassword_confirm.getText().toString();
-            if (TextUtils.isEmpty(passwordC)) {
+            if (TextUtils.isEmpty(passwordC)&& valid == true) {
                 mPassword_confirm.setError("Required.");
                 mPassword_confirm.setText("");
+                mPassword.setText("");
                 errMessage = "No blank field is allowed";
                 valid = false;
             }
             else{
                 if(!password.equals(passwordC)) {
                     mPassword_confirm.setError("Required.");
+                    mPassword_confirm.setText("");
                     mPassword.setText("");
                     errMessage = "password and its confirmation do not match.";
                     valid = false;
