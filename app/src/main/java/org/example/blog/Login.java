@@ -194,8 +194,7 @@ public class Login extends AppCompatActivity {
         boolean valid = true;
 
         String email = mEmail.getText().toString().trim();
-        if (TextUtils.isEmpty(email)&& valid == true) {
-            err:
+        if (TextUtils.isEmpty(email)) {
             mEmail.setError("Required.");
             errMessage = "No blank field is allowed";
             valid = false;
@@ -210,7 +209,6 @@ public class Login extends AppCompatActivity {
                     pt = i;
             }
             if(at >= pt&& valid == true){
-                //mEmail.setError("Required.");
                 errMessage = "Invalid email";
                 valid = false;
 
@@ -219,7 +217,7 @@ public class Login extends AppCompatActivity {
             }
         }
         String password = mPassword.getText().toString();
-        if (TextUtils.isEmpty(password)&& valid == true) {
+        if (TextUtils.isEmpty(password)) {
             mPassword.setError("Required.");
             mPassword.setText("");
             if(value.equals("up"))
@@ -236,9 +234,9 @@ public class Login extends AppCompatActivity {
         }else {
             mPassword.setError(null);
         }
-        if(value.equals("up")&& valid == true){
+        if(value.equals("up")){
             String passwordC = mPassword_confirm.getText().toString();
-            if (TextUtils.isEmpty(passwordC)&& valid == true) {
+            if (TextUtils.isEmpty(passwordC)) {
                 mPassword_confirm.setError("Required.");
                 mPassword_confirm.setText("");
                 mPassword.setText("");
@@ -246,8 +244,7 @@ public class Login extends AppCompatActivity {
                 valid = false;
             }
             else{
-                if(!password.equals(passwordC)) {
-                    mPassword_confirm.setError("Required.");
+                if(!password.equals(passwordC)&& valid == true) {
                     mPassword_confirm.setText("");
                     mPassword.setText("");
                     errMessage = "password and its confirmation do not match.";
