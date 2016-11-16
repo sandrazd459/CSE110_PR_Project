@@ -208,10 +208,10 @@ public class Login extends AppCompatActivity {
                 if(email.charAt(i) =='.')
                     pt = i;
             }
-            if(at >= pt){
-                mEmail.setError("Required.");
+            if(at >= pt&& valid == true){
                 errMessage = "Invalid email";
                 valid = false;
+
             }else{
                 mPassword.setError(null);
             }
@@ -220,11 +220,16 @@ public class Login extends AppCompatActivity {
         if (TextUtils.isEmpty(password)) {
             mPassword.setError("Required.");
             mPassword.setText("");
+            if(value.equals("up"))
+                mPassword_confirm.setText("");
+
             errMessage = "No blank field is allowed";
             valid = false;
-        }else if(password.length() < 6){
+        }else if(password.length() < 6 && valid == true){
             mPassword.setText("");
-            errMessage = "Minimum length is 6 chars";
+            if(value.equals("up"))
+                mPassword_confirm.setText("");
+            errMessage = "Min-length for password is 6 chars";
             valid = false;
         }else {
             mPassword.setError(null);
@@ -234,12 +239,13 @@ public class Login extends AppCompatActivity {
             if (TextUtils.isEmpty(passwordC)) {
                 mPassword_confirm.setError("Required.");
                 mPassword_confirm.setText("");
+                mPassword.setText("");
                 errMessage = "No blank field is allowed";
                 valid = false;
             }
             else{
-                if(!password.equals(passwordC)) {
-                    mPassword_confirm.setError("Required.");
+                if(!password.equals(passwordC)&& valid == true) {
+                    mPassword_confirm.setText("");
                     mPassword.setText("");
                     errMessage = "password and its confirmation do not match.";
                     valid = false;
