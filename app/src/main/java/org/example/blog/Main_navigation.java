@@ -136,8 +136,7 @@ public class Main_navigation extends AppCompatActivity {
                     bundle.putParcelableArrayList("sellArr", sell);
                     bundle.putParcelableArrayList("reqArr", req);
                     intentAccount.putExtras(bundle);
-                    startActivity(intentAccount);
-                }
+                    startActivity(intentAccount);                }
             }
 
             @Override
@@ -175,14 +174,6 @@ public class Main_navigation extends AppCompatActivity {
                             return false;
                         }
                     });
-                }
-                if (menuItemId == R.id.account) {
-                    Bundle bundle = new Bundle();
-                    Intent intentAccount = new Intent(Main_navigation.this, User_Account.class);
-                    bundle.putParcelableArrayList("sellArr", sell);
-                    bundle.putParcelableArrayList("reqArr", req);
-                    intentAccount.putExtras(bundle);
-                    startActivity(intentAccount);
                 }
             }
         });
