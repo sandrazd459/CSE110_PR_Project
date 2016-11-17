@@ -1,5 +1,6 @@
 package org.example.blog;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,31 +10,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UserProfileSetupController extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
-    private EditText mUsername, mAdditional, frontPhoneNum, midPhoneNum, lastPhoneNum;
+    private EditText mUid, mUsername, mAdditional, frontPhoneNum, midPhoneNum, lastPhoneNum;
     private Button mUserProfileSetupBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // TODO: modify the view here.
         setContentView(R.layout.user_profile_setup);
 
+        // TODO: modify the firebase reference here.
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        mUsername = (EditText) findViewById(R.id.user_name);
-        mAdditional = (EditText) findViewById(R.id.additional_info);
-        frontPhoneNum = (EditText) findViewById(R.id.front_num);
-        midPhoneNum = (EditText) findViewById(R.id.mid_num);
-        lastPhoneNum = (EditText) findViewById(R.id.last_num);
+        // TODO: modify the item id here.
+        mUsername = (EditText) findViewById(R.id.destText);
+        mAdditional = (EditText) findViewById(R.id.additText);
+        frontPhoneNum = (EditText) findViewById();
+        midPhoneNum = (EditText) findViewById();
+        lastPhoneNum = (EditText) findViewById();
 
-        mUserProfileSetupBtn = (Button) findViewById(R.id.user_create);
+        mUserProfileSetupBtn = (Button) findViewById(R.id.postBtn);
         mUserProfileSetupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +47,7 @@ public class UserProfileSetupController extends AppCompatActivity {
 
     private void startPosting() {
 
-        String textUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String textUid = mUid.getText().toString().trim();
         String textUsername = mUsername.getText().toString().trim();
         String textAdditional = mAdditional.getText().toString();
         String textFrontPhoneNum = frontPhoneNum.getText().toString();

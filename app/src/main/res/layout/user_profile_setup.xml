@@ -7,9 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
+        android:text="Username"
         android:ems="10"
-        android:id="@+id/user_name"
-        android:hint="Username*" />
+        android:id="@+id/user_name" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -23,8 +23,7 @@
             android:ems="10"
             android:id="@+id/front_num"
             android:layout_weight="1"
-            android:hint="(123)"
-            android:maxLength="3"/>
+            android:text="(123)" />
 
         <EditText
             android:layout_width="129dp"
@@ -32,18 +31,16 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/mid_num"
-            android:hint="456"
-            android:maxLength="3"/>
+            android:text="456" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
-            android:id="@+id/last_num"
+            android:id="@+id/editText7"
             android:layout_weight="1"
-            android:hint="7890"
-            android:maxLength="4"/>
+            android:text="7890" />
     </LinearLayout>
 
     <EditText
@@ -52,11 +49,5 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/additional_info"
-        android:hint="Additional Information" />
-
-    <Button
-        android:text="Save Profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/user_create" />
+        android:text="Additional Information" />
 </LinearLayout>

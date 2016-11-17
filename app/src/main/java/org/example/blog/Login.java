@@ -78,14 +78,8 @@ public class Login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    if(value.equals("in")) {
-                        Intent gotoMain = new Intent(Login.this, Main_navigation.class);
-                        startActivity(gotoMain);
-                    }
-                    if(value.equals("up")){
-                        Intent gotoSetupProfile = new Intent(Login.this, UserProfileSetupController.class);
-                        startActivity(gotoSetupProfile);
-                    }
+                    Intent gotoMain = new Intent(Login.this, Main_navigation.class);
+                    startActivity(gotoMain);
 
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
