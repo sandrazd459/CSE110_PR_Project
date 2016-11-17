@@ -37,6 +37,9 @@
             android:name=".Selling_Form"
             android:label="Ride Sell Form" />
         <activity
+            android:name=".UserProfileSetupController"
+            android:label="User Profile Setup" />
+        <activity
             android:name=".List_of_Sells"
             android:label="Ride Offers List" />
         <activity
