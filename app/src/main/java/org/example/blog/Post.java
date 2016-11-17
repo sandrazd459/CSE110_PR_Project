@@ -12,34 +12,31 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 public class Post implements Parcelable{
 
-    private String start, dest, pric, addit;
+    private String start, destination, price, additional;
     private int month, day, year;
 
     public Post(){
     }
 
-    public Post(String Price, String Destination, String Start, String Additional, int Month, int Day, int Year) {
-        pric = Price;
-        addit = Additional;
-        dest = Destination;
-        start = Start;
-        month = Month;
-        day = Day;
-        year = Year;
+    public Post(String price, String destination, String start, String additonal, int month, int day, int year) {
+        this.price = price;
+        this.additional = additonal;
+        this.destination = destination;
+        this.start = start;
+        this.month = month;
+        this.day = day;
+        this.year = year;
     }
 
     public Post(Parcel source){
         Log.v(TAG, "ParcelData(Parcel source): time to put back parcel data");
         start = source.readString();
-        dest = source.readString();
-        pric = source.readString();
-        addit = source.readString();
-
+        destination = source.readString();
+        price = source.readString();
+        additional = source.readString();
         month = source.readInt();
         day = source.readInt();
         year = source.readInt();
-
-
     }
 
     public String getStart() {
@@ -50,22 +47,22 @@ public class Post implements Parcelable{
     }
 
     public String getAdditional() {
-        return addit;
+        return additional;
     }
     public void setAdditional(String additional) {
-        addit = additional;
+        this.additional = additional;
     }
 
     public String getDestination() {
-        return dest;
+        return destination;
     }
-    public void setDestination(String destination) { dest = destination; }
+    public void setDestination(String destination) { this.destination = destination; }
 
     public String getPrice() {
-        return pric;
+        return price;
     }
     public void setPrice(String price) {
-        pric = price;
+        this.price = price;
     }
 
     public int getMonth() {
@@ -100,9 +97,9 @@ public class Post implements Parcelable{
 
         Log.v(TAG, "writeToParcel..."+ flags);
         desti.writeString(start);
-        desti.writeString(dest);
-        desti.writeString(pric);
-        desti.writeString(addit);
+        desti.writeString(destination);
+        desti.writeString(price);
+        desti.writeString(additional);
 
         desti.writeInt(month);
         desti.writeInt(day);
