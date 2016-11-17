@@ -45,29 +45,6 @@ public class List_of_Sells extends AppCompatActivity {
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.lists) {
-                    View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(List_of_Sells.this, listView);
-                    popupMenu.inflate(R.menu.popup_menu);
-                    popupMenu.show();
-                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                //TODO: BUG HERE solution send list around all activities
-                                case R.id.submenuReq:
-                                    Bundle sBundle = new Bundle();
-                                    Intent intentSell = new Intent(List_of_Sells.this, List_of_Requests.class);
-                                    sBundle.putParcelableArrayList("sellArr", sList);
-                                    sBundle.putParcelableArrayList("reqArr", rList);
-                                    intentSell.putExtras(sBundle);
-                                    startActivity(intentSell);
-                                    return true;
-                            }
-                            return false;
-                        }
-                    });
-                }
                 if (menuItemId == R.id.home) {
                     startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
                 }
@@ -105,17 +82,6 @@ public class List_of_Sells extends AppCompatActivity {
                             return false;
                         }
                     });
-                }
-                if (menuItemId == R.id.home) {
-                    startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
-                }
-                if (menuItemId == R.id.account) {
-                    Bundle bundle = new Bundle();
-                    Intent intentAccount = new Intent(List_of_Sells.this, User_Account.class);
-                    bundle.putParcelableArrayList("sellArr", sList);
-                    bundle.putParcelableArrayList("reqArr", rList);
-                    intentAccount.putExtras(bundle);
-                    startActivity(intentAccount);
                 }
             }
         });

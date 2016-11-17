@@ -30,11 +30,9 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            Intent gotoMain = new Intent(Welcome.this, Main_navigation.class);
-            startActivity(gotoMain);
-        }
+        Intent gotoMain = new Intent(Welcome.this, Main_navigation.class);
+        startActivity(gotoMain);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
