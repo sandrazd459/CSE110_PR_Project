@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserProfileSetupController extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseRef;
     private EditText mUsername, mAdditional, frontPhoneNum, midPhoneNum, lastPhoneNum;
     private Button mUserProfileSetupBtn;
 
@@ -25,7 +25,7 @@ public class UserProfileSetupController extends AppCompatActivity {
 
         setContentView(R.layout.user_profile_setup);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mUsername = (EditText) findViewById(R.id.user_name);
         mAdditional = (EditText) findViewById(R.id.additional_info);
@@ -44,19 +44,19 @@ public class UserProfileSetupController extends AppCompatActivity {
 
     private void startPosting() {
 
-        String textUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String textUsername = mUsername.getText().toString().trim();
         String textAdditional = mAdditional.getText().toString();
         String textFrontPhoneNum = frontPhoneNum.getText().toString();
         String textMidPhoneNum = midPhoneNum.getText().toString();
         String textLastPhoneNum = lastPhoneNum.getText().toString();
 
-        User user = new User(textUid, textUsername, textAdditional, textFrontPhoneNum, textMidPhoneNum, textLastPhoneNum);
+        User user = new User(textUsername, textAdditional, textFrontPhoneNum, textMidPhoneNum, textLastPhoneNum);
 
         if(!TextUtils.isEmpty(textUsername) && !TextUtils.isEmpty(textFrontPhoneNum)
                 && !TextUtils.isEmpty(textMidPhoneNum) && !TextUtils.isEmpty(textLastPhoneNum)){
-            DatabaseReference newUser = mDatabase.push();
+            DatabaseReference newUser = mDatabaseRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
             newUser.setValue(user);
+
             //TODO bug:for now send to main_page to get the firebase list again
             startActivity(new Intent(UserProfileSetupController.this, Main_navigation.class));
         }
