@@ -85,6 +85,40 @@ public class User_Account extends AppCompatActivity{
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
+                if (menuItemId == R.id.lists) {
+                    View listView = findViewById(R.id.lists);
+                    PopupMenu popupMenu = new PopupMenu(User_Account.this, listView);
+                    popupMenu.inflate(R.menu.popup_menu);
+                    popupMenu.show();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.submenuSell:
+                                    //mDataBase = mDataBase.child("Sell Posts");
+                                    Bundle sBundle = new Bundle();
+                                    Intent intentSell = new Intent(User_Account.this, List_of_Sells.class);
+                                    sBundle.putParcelableArrayList("sellArr", sell);
+                                    sBundle.putParcelableArrayList("reqArr", req);
+
+                                    intentSell.putExtras(sBundle);
+                                    startActivity(intentSell);
+                                    return true;
+                                case R.id.submenuReq:
+                                    Bundle rBundle = new Bundle();
+                                    Intent intentReq = new Intent(User_Account.this, List_of_Requests.class);
+                                    rBundle.putParcelableArrayList("reqArr", req);
+                                    rBundle.putParcelableArrayList("sellArr", sell);
+
+                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
+                                    intentReq.putExtras(rBundle);
+                                    startActivity(intentReq);
+                                    return true;
+                            }
+                            return false;
+                        }
+                    });
+                }
                 if(menuItemId == R.id.home){
                     startActivity(new Intent(User_Account.this, Main_navigation.class));
                 }
@@ -125,6 +159,9 @@ public class User_Account extends AppCompatActivity{
                             return false;
                         }
                     });
+                }
+                if(menuItemId == R.id.home){
+                    startActivity(new Intent(User_Account.this, Main_navigation.class));
                 }
             }
         });//end of bottom bar
