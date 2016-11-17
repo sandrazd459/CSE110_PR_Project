@@ -33,13 +33,15 @@ import java.util.ArrayList;
 public class User_Account extends AppCompatActivity{
     private static final String TAG = "Email and Password";
     //for login function
-    private Button mLogoutBtn;
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
     private DatabaseReference mDatabaseRef;
-    private User userProfile;
+
+    TextView userEmailView;
+    TextView userNameView;
+    TextView phoneView;
+    TextView additionalInfoView;
 
     BottomBar mBottomBar;
 
@@ -51,43 +53,18 @@ public class User_Account extends AppCompatActivity{
         //initialize auth
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        String email = mAuth.getCurrentUser().getEmail();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
-        mDatabaseRef.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    userProfile = child.getValue(User.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
         Bundle b = this.getIntent().getExtras();
         final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
 
-        TextView userEmailView = (TextView)findViewById(R.id.user_email);
-        userEmailView.setText(email);
+        userEmailView = (TextView)findViewById(R.id.user_email);
+        userNameView = (TextView)findViewById(R.id.user_name);
+        phoneView = (TextView)findViewById(R.id.user_phone);
+        additionalInfoView = (TextView)findViewById(R.id.additional_info);
 
-        TextView userNameView = (TextView)findViewById(R.id.post_username);
-        userNameView.setText(userProfile.getUsername());
-
-        TextView phoneView = (TextView)findViewById(R.id.phone_num);
-        String phone = "(" + userProfile.getFrontPhoneNumber()+ ")-" +userProfile.getMidPhoneNumber()
-                + "-" + userProfile.getLastPhoneNumber();
-        phoneView.setText(phone);
-
-        TextView additionalInfoView = (TextView)findViewById(R.id.additional_info);
-        additionalInfoView.setText(userProfile.getAdditional());
-
-        //trig logout button
-        mLogoutBtn = (Button) findViewById(R.id.logout_btn);
+        final Button mLogoutBtn = (Button) findViewById(R.id.logout_button);
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +153,31 @@ public class User_Account extends AppCompatActivity{
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                User user = dataSnapshot.getValue(User.class);
+                // [START_EXCLUDE]
+                userNameView.setText(user.getUsername());
+                userEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                String phone = "(" + user.getFrontPhoneNumber()+ ")-" +user.getMidPhoneNumber()
+                        + "-" + user.getLastPhoneNumber();
+                phoneView.setText(phone);
+                additionalInfoView.setText(user.getAdditional());
+                // [END_EXCLUDE]
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(userListener);
+
+
     }
 
     //remove listener

@@ -14,6 +14,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +53,8 @@ public class Main_navigation extends AppCompatActivity {
         setContentView(R.layout.activity_main_navigation);
 
         mDataBase = FirebaseDatabase.getInstance().getReference();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println("uid:" + uid);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
