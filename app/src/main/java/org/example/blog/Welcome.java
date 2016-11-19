@@ -20,16 +20,13 @@ import com.google.firebase.database.DatabaseReference;
 
 public class Welcome extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-
     private Button mLoginBtn;
     private Button mSignupBtn;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // log out every time when open the app since logout button disappears now.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
 

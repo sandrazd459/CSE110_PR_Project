@@ -14,6 +14,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,10 +28,9 @@ import java.util.ArrayList;
 public class Main_navigation extends AppCompatActivity {
 
     private Button offerBtn;
-
     private Button requestBtn;
-
-    private Button test;
+    private Button profileSettingBtn;
+    private Button logoutBtn;
 
     private DatabaseReference mDataBase;
 
@@ -52,6 +52,8 @@ public class Main_navigation extends AppCompatActivity {
         setContentView(R.layout.activity_main_navigation);
 
         mDataBase = FirebaseDatabase.getInstance().getReference();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println("uid:" + uid);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
@@ -66,7 +68,7 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(req ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        createBlog(req, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
             }
@@ -83,7 +85,7 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(sell ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        createBlog(sell, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
             }
@@ -198,6 +200,25 @@ public class Main_navigation extends AppCompatActivity {
                 startActivity(gotorequestList);
             }
         });
+
+        profileSettingBtn = (Button) findViewById(R.id.account_setting);
+
+        profileSettingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main_navigation.this, UserProfileSetupController.class));
+            }
+        });
+
+        logoutBtn = (Button) findViewById(R.id.logout_button);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Main_navigation.this, Welcome.class));
+            }
+        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -239,8 +260,10 @@ public class Main_navigation extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-    public void createBlog(ArrayList<Post> array, String start, String dest, String pric, String add, int m, int d, int y) {
+    public void createBlog(ArrayList<Post> array, String username, String uid, String start, String dest, String pric, String add, int m, int d, int y) {
         Post newPost = new Post();
+        newPost.setUsername(username);
+        newPost.setUid(uid);
         newPost.setDestination(dest);
         newPost.setStart(start);
         newPost.setPrice(pric);

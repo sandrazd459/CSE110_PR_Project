@@ -11,6 +11,12 @@ import android.widget.TextView;
 import android.util.Log;
 import android.widget.Button;
 import android.support.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +32,15 @@ import java.util.ArrayList;
 public class User_Account extends AppCompatActivity{
     private static final String TAG = "Email and Password";
     //for login function
-    private Button mLogoutBtn;
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private DatabaseReference mDatabaseRef;
+
+    TextView userEmailView;
+    TextView userNameView;
+    TextView phoneView;
+    TextView additionalInfoView;
 
     BottomBar mBottomBar;
 
@@ -42,16 +52,18 @@ public class User_Account extends AppCompatActivity{
         //initialize auth
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        String email = mAuth.getCurrentUser().getEmail();
-        TextView userEmailView = (TextView)findViewById(R.id.user_email);
-        userEmailView.setText(email);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
         Bundle b = this.getIntent().getExtras();
         final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
 
-        //trig logout button
-        mLogoutBtn = (Button) findViewById(R.id.logout_button);
+        userEmailView = (TextView)findViewById(R.id.user_email);
+        userNameView = (TextView)findViewById(R.id.user_name);
+        phoneView = (TextView)findViewById(R.id.user_phone);
+        additionalInfoView = (TextView)findViewById(R.id.additional_info);
+
+        final Button mLogoutBtn = (Button) findViewById(R.id.logout_button);
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +152,31 @@ public class User_Account extends AppCompatActivity{
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                User user = dataSnapshot.getValue(User.class);
+                // [START_EXCLUDE]
+                userNameView.setText(user.getUsername());
+                userEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                String phone = "(" + user.getFrontPhoneNumber()+ ")-" +user.getMidPhoneNumber()
+                        + "-" + user.getLastPhoneNumber();
+                phoneView.setText(phone);
+                additionalInfoView.setText(user.getAdditional());
+                // [END_EXCLUDE]
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        mDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(userListener);
+
+
     }
 
     //remove listener

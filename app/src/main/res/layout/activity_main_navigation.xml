@@ -9,24 +9,46 @@
 
 
         <Button
+            android:id="@+id/requestList"
+            android:text="@string/request_new_ride"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/button_style_white"
+            android:layout_below="@+id/sellingList"
+            android:layout_centerHorizontal="true" />
+
+        <Button
             android:id="@+id/sellingList"
             android:text="Offer New Ride"
             android:layout_width="200dp"
             android:layout_height="40dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/button_style_blue"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="200dp"
-            android:background="@drawable/button_style_blue" />
+            android:layout_alignLeft="@+id/requestList"
+            android:layout_alignStart="@+id/requestList" />
 
         <Button
-            android:id="@+id/requestList"
-            android:layout_below="@+id/sellingList"
-            android:text="@string/request_new_ride"
+            android:id="@+id/logout_button"
+            android:text="Log Out"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginTop="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/button_style_white" />
+            android:background="@color/grayColor"
+            android:layout_marginBottom="88dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/account_setting"
+            android:layout_alignStart="@+id/account_setting" />
 
+        <Button
+            android:id="@+id/account_setting"
+            android:text="Update Profile"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@color/grayColor"
+            android:layout_marginBottom="60dp"
+            android:layout_alignBottom="@+id/logout_button"
+            android:layout_alignLeft="@+id/requestList"
+            android:layout_alignStart="@+id/requestList" />
 
-    </RelativeLayout>
+</RelativeLayout>

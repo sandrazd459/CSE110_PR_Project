@@ -12,15 +12,17 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 public class Post implements Parcelable{
 
-    private String start, destination, price, additional;
+    private String username, uid, start, destination, price, additional;
     private int month, day, year;
 
     public Post(){
     }
 
-    public Post(String price, String destination, String start, String additonal, int month, int day, int year) {
+    public Post(String username, String uid, String price, String destination, String start, String additional, int month, int day, int year) {
+        this.username = username;
+        this.uid = uid;
         this.price = price;
-        this.additional = additonal;
+        this.additional = additional;
         this.destination = destination;
         this.start = start;
         this.month = month;
@@ -30,6 +32,8 @@ public class Post implements Parcelable{
 
     public Post(Parcel source){
         Log.v(TAG, "ParcelData(Parcel source): time to put back parcel data");
+        username = source.readString();
+        uid = source.readString();
         start = source.readString();
         destination = source.readString();
         price = source.readString();
@@ -38,6 +42,12 @@ public class Post implements Parcelable{
         day = source.readInt();
         year = source.readInt();
     }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getUid() { return uid; }
+    public void setUid(String uid) { this.uid = uid; }
 
     public String getStart() {
         return start;
@@ -96,6 +106,8 @@ public class Post implements Parcelable{
     public void writeToParcel(Parcel desti, int flags) {
 
         Log.v(TAG, "writeToParcel..."+ flags);
+        desti.writeString(username);
+        desti.writeString(uid);
         desti.writeString(start);
         desti.writeString(destination);
         desti.writeString(price);

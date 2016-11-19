@@ -1,48 +1,183 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/grayColor"
-    android:id="@+id/LinearLayout1"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_margin="15dp">
 
-
-    <RelativeLayout
-        android:layout_weight="0.57"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="one"
-        android:background="@color/darkGray">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
+            android:text="User Email"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
             android:id="@+id/user_email"
+            android:paddingLeft="100dp"
+            android:paddingTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:textColor="@android:color/holo_blue_light" />
 
-            android:text="User email"
-            android:textSize="36dip"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="363dp"
+            android:weightSum="1">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="User Name:"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/textView4"
+                        android:padding="10dp"
+                        android:textStyle="normal|bold"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="45dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:text="Phone:"
+                        android:layout_width="match_parent"
+                        android:textStyle="normal|bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:elevation="0dp"
+                        android:padding="10dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/phone_num" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.29" >
+
+                    <TextView
+                        android:text="Additional:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView1"
+                        android:padding="10dp"
+                        android:textStyle="normal|bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="164dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.89">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/user_name"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/user_phone"
+                        android:padding="10dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_width="287dp"
+                        android:layout_height="50dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" >
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="Add additional comments here"
+                        android:layout_height="45dp"
+                        android:id="@+id/additional_info"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <Button
+                android:text="Log Out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_button" />
+        </LinearLayout>
 
 
-    <RelativeLayout
-        android:layout_weight="3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="two"
-        android:background="#FFFF00"
-        />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/logout_button"
-        android:text="Log out"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:background="@drawable/button_style_white" />
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

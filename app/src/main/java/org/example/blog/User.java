@@ -13,13 +13,12 @@ import static com.google.android.gms.internal.zzs.TAG;
  */
 
 public class User {
-    private String uid, username, additional, frontPhoneNumber, midPhoneNumber, lastPhoneNumber;
-    private ArrayList<Post> ownPosts;
+    private String username, additional, frontPhoneNumber, midPhoneNumber, lastPhoneNumber;
+    private ArrayList<String> ownPostsId;
 
     public User() {};
-    public User(String uid, String username, String additional,
+    public User(String username, String additional,
                 String frontPhoneNumber, String midPhoneNumber, String lastPhoneNumber) {
-        this.uid = uid;
         this.username = username;
         this.additional = additional;
         this.frontPhoneNumber = frontPhoneNumber;
@@ -29,16 +28,12 @@ public class User {
 
     public User(Parcel source){
         Log.v(TAG, "ParcelData(Parcel source): time to put back parcel data");
-        uid = source.readString();
         username = source.readString();
         additional = source.readString();
         frontPhoneNumber = source.readString();
         midPhoneNumber = source.readString();
         lastPhoneNumber = source.readString();
     }
-
-    public String getUid() { return uid; }
-    public void setUid(String uid) { this.uid = uid; }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
@@ -55,8 +50,8 @@ public class User {
     public String getLastPhoneNumber() { return lastPhoneNumber; }
     public void setLastPhoneNumber(String lastPhoneNumber) { this.lastPhoneNumber = lastPhoneNumber; }
 
-    public ArrayList<Post> getOwnPosts() { return ownPosts; }
-    public void setOwnPosts(ArrayList<Post> ownPosts) { this.ownPosts = ownPosts; }
+    public ArrayList<String> getOwnPostsId() { return ownPostsId; }
+    public void setOwnPostsId(ArrayList<String> ownPosts) { this.ownPostsId = ownPostsId; }
 
     public int describeContents() {
         return this.hashCode();
@@ -65,7 +60,6 @@ public class User {
     public void writeToParcel(Parcel desti, int flags) {
 
         Log.v(TAG, "writeToParcel..."+ flags);
-        desti.writeString(uid);
         desti.writeString(username);
         desti.writeString(additional);
         desti.writeString(frontPhoneNumber);
