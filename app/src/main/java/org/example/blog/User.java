@@ -14,7 +14,7 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 public class User {
     private String username, additional, frontPhoneNumber, midPhoneNumber, lastPhoneNumber;
-    private ArrayList<Post> ownPosts;
+    private ArrayList<String> ownPostsId;
 
     public User() {};
     public User(String username, String additional,
@@ -50,8 +50,8 @@ public class User {
     public String getLastPhoneNumber() { return lastPhoneNumber; }
     public void setLastPhoneNumber(String lastPhoneNumber) { this.lastPhoneNumber = lastPhoneNumber; }
 
-    public ArrayList<Post> getOwnPosts() { return ownPosts; }
-    public void setOwnPosts(ArrayList<Post> ownPosts) { this.ownPosts = ownPosts; }
+    public ArrayList<String> getOwnPostsId() { return ownPostsId; }
+    public void setOwnPostsId(ArrayList<String> ownPosts) { this.ownPostsId = ownPostsId; }
 
     public int describeContents() {
         return this.hashCode();

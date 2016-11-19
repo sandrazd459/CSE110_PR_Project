@@ -19,6 +19,7 @@ public class Pop_window extends Activity {
         setContentView(R.layout.detailed_post);
 
         Bundle bun = this.getIntent().getExtras();
+        ((TextView)findViewById(R.id.post_username)).setText(bun.getString("username"));
         ((TextView)findViewById(R.id.post_departure)).setText(bun.getString("start"));
         ((TextView)findViewById(R.id.post_destination)).setText(bun.getString("dest"));
         ((TextView)findViewById(R.id.post_price)).setText(bun.getString("price"));

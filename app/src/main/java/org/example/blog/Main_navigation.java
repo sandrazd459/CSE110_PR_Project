@@ -69,7 +69,7 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(req ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        createBlog(req, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
             }
@@ -86,7 +86,7 @@ public class Main_navigation extends AppCompatActivity {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(sell ,post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        createBlog(sell, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
                     }
                 }
             }
@@ -242,8 +242,10 @@ public class Main_navigation extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-    public void createBlog(ArrayList<Post> array, String start, String dest, String pric, String add, int m, int d, int y) {
+    public void createBlog(ArrayList<Post> array, String username, String uid, String start, String dest, String pric, String add, int m, int d, int y) {
         Post newPost = new Post();
+        newPost.setUsername(username);
+        newPost.setUid(uid);
         newPost.setDestination(dest);
         newPost.setStart(start);
         newPost.setPrice(pric);

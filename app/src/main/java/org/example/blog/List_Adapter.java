@@ -46,7 +46,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
 
         final int pos = position;
 
-
         //binding data
         holder.setFrom(mList.get(position).getStart());
         holder.setTo(mList.get(position).getDestination());
@@ -61,6 +60,7 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 //Snackbar.make(v,mList.get(pos).getDestination(),Snackbar.LENGTH_LONG).show();
                 Bundle bundle = new Bundle();
                 Intent pop = new Intent(c, Pop_window.class);
+                bundle.putString("username", mList.get(pos).getUsername());
                 bundle.putString("start",mList.get(pos).getStart());
                 bundle.putString("dest",mList.get(pos).getDestination());
                 bundle.putString("price",mList.get(pos).getPrice());

@@ -12,7 +12,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.support.annotation.NonNull;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +47,7 @@ public class User_Account extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_account_ver2);
+        setContentView(R.layout.user_account);
 
         //initialize auth
         mAuth = FirebaseAuth.getInstance();

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -77,13 +79,16 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
     private void startPosting(){
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String username = user.getDisplayName();
+        String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
         String text_date = ((TextView)(findViewById(R.id.dateBtn))).getText().toString().trim();
-        String _price = mPrice.getText().toString();
+        String price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        Post tmp = new Post(_price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+        Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
 
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0){
 
