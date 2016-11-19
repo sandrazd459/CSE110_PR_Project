@@ -28,10 +28,9 @@ import java.util.ArrayList;
 public class Main_navigation extends AppCompatActivity {
 
     private Button offerBtn;
-
     private Button requestBtn;
-
-    private Button test;
+    private Button profileSettingBtn;
+    private Button logoutBtn;
 
     private DatabaseReference mDataBase;
 
@@ -199,6 +198,25 @@ public class Main_navigation extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gotorequestList = new Intent(Main_navigation.this, Request_Form.class);
                 startActivity(gotorequestList);
+            }
+        });
+
+        profileSettingBtn = (Button) findViewById(R.id.account_setting);
+
+        profileSettingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Main_navigation.this, UserProfileSetupController.class));
+            }
+        });
+
+        logoutBtn = (Button) findViewById(R.id.logout_button);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Main_navigation.this, Welcome.class));
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
