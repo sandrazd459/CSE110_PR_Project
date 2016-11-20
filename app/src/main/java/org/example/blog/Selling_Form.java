@@ -93,9 +93,6 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
 
             Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
             DatabaseReference newPost = mDatabase.push();
-            String newPostKey = newPost.getKey();
-            DatabaseReference postToUser = FirebaseDatabase.getInstance().getReference().child("posts_to_users").child(newPostKey);
-            postToUser.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
             newPost.setValue(tmp);
             /*
             newPost.child("Start").setValue(text_start);

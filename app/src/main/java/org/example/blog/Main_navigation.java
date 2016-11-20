@@ -38,6 +38,8 @@ public class Main_navigation extends AppCompatActivity {
 
     ArrayList<Post> req = new ArrayList<>();
     ArrayList<Post> sell = new ArrayList<>();
+    ArrayList<Post> myReq = new ArrayList<>();
+    ArrayList<Post> mySell = new ArrayList<>();
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -52,8 +54,6 @@ public class Main_navigation extends AppCompatActivity {
         setContentView(R.layout.activity_main_navigation);
 
         mDataBase = FirebaseDatabase.getInstance().getReference();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        System.out.println("uid:" + uid);
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
@@ -113,6 +113,8 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
                                     sBundle.putParcelableArrayList("reqArr", req);
+                                    sBundle.putParcelableArrayList("mySellArr", mySell);
+                                    sBundle.putParcelableArrayList("myReqArr", myReq);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
@@ -122,8 +124,9 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
+                                    rBundle.putParcelableArrayList("mySellArr", mySell);
+                                    rBundle.putParcelableArrayList("myReqArr", myReq);
 
-                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
                                     return true;
@@ -137,6 +140,8 @@ public class Main_navigation extends AppCompatActivity {
                     Intent intentAccount = new Intent(Main_navigation.this, User_Account.class);
                     bundle.putParcelableArrayList("sellArr", sell);
                     bundle.putParcelableArrayList("reqArr", req);
+                    bundle.putParcelableArrayList("mySellArr", mySell);
+                    bundle.putParcelableArrayList("myReqArr", myReq);
                     intentAccount.putExtras(bundle);
                     startActivity(intentAccount);
                 }
@@ -159,6 +164,8 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
                                     sBundle.putParcelableArrayList("reqArr", req);
+                                    sBundle.putParcelableArrayList("mySellArr", mySell);
+                                    sBundle.putParcelableArrayList("myReqArr", myReq);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
@@ -168,8 +175,9 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
+                                    rBundle.putParcelableArrayList("mySellArr", mySell);
+                                    rBundle.putParcelableArrayList("myReqArr", myReq);
 
-                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
                                     return true;
@@ -274,8 +282,14 @@ public class Main_navigation extends AppCompatActivity {
 
         if (array == req) {
             req.add(newPost);
+            if (uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                myReq.add(newPost);
+            }
         } else {
             sell.add(newPost);
+            if (uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                mySell.add(newPost);
+            }
         }
     }
 }

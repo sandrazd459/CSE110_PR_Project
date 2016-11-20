@@ -93,9 +93,6 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
 
             DatabaseReference newPost = mDatabase.push();
-            String newPostKey = newPost.getKey();
-            DatabaseReference postToUser = FirebaseDatabase.getInstance().getReference().child("posts_to_users").child(newPostKey);
-            postToUser.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
             newPost.setValue(tmp);
             //TODO bug:for now send to main_page to get the firebase list again
             startActivity(new Intent(Request_Form.this, Main_navigation.class));
