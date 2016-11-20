@@ -47,6 +47,21 @@
 
                 <TableRow
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:text="Phone:"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/textView1"
+                        android:padding="10dp"
+                        android:textStyle="normal|bold"
+                        android:textSize="17sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="45dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:baselineAligned="false">
 
@@ -137,6 +152,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:id="@+id/post_username"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" >
+
+                    <TextView
+                        android:text="phone Number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/post_phone_num"
                         android:padding="10dp"
                         android:textSize="16sp" />
                 </TableRow>
