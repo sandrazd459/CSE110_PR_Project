@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Main_navigation extends AppCompatActivity {
 
@@ -95,10 +97,14 @@ public class Main_navigation extends AppCompatActivity {
             }
         });
 
+
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
+
                 if(menuItemId == R.id.lists){
+                    //sort the list by date
+
                     View listView = findViewById(R.id.lists);
                     PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
@@ -108,22 +114,25 @@ public class Main_navigation extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()){
                                 case R.id.submenuSell:
-                                    //mDataBase = mDataBase.child("Sell Posts");
+                                    //sort the list by date
+                                    ArrayList<Post> sortedReq = sortByDate(req);
+                                    ArrayList<Post> sortedSell = sortByDate(sell);
                                     Bundle sBundle = new Bundle();
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
-                                    sBundle.putParcelableArrayList("sellArr", sell);
-                                    sBundle.putParcelableArrayList("reqArr", req);
+                                    sBundle.putParcelableArrayList("sellArr", sortedReq);
+                                    sBundle.putParcelableArrayList("reqArr", sortedSell);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
                                     return true;
                                 case R.id.submenuReq:
+                                    ArrayList<Post> sortedRequ = sortByDate(req);
+                                    ArrayList<Post> sortedSelli = sortByDate(sell);
                                     Bundle rBundle = new Bundle();
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
-                                    rBundle.putParcelableArrayList("reqArr", req);
-                                    rBundle.putParcelableArrayList("sellArr", sell);
+                                    rBundle.putParcelableArrayList("reqArr", sortedRequ);
+                                    rBundle.putParcelableArrayList("sellArr",sortedSelli);
 
-                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
                                     return true;
@@ -154,7 +163,6 @@ public class Main_navigation extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()){
                                 case R.id.submenuSell:
-                                    //mDataBase = mDataBase.child("Sell Posts");
                                     Bundle sBundle = new Bundle();
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
@@ -168,8 +176,6 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
-
-                                    //intentReq.putParcelableArrayListExtra("custom_data_list", req);
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
                                     return true;
@@ -277,5 +283,50 @@ public class Main_navigation extends AppCompatActivity {
         } else {
             sell.add(newPost);
         }
+    }
+
+    public ArrayList<Post> sortByDate(ArrayList<Post> arr){
+        ArrayList<Post> copy = new ArrayList<>(arr);
+        ArrayList<Post> sorted = new ArrayList<>();
+
+        int currMinIndex = 0;
+        int currMinDate = 0;
+        int changingSize = copy.size();
+        int max = copy.size();
+
+        for(int i=0; i < max; i++){
+            for(int j=0; j < changingSize; j++) {
+
+                //find min
+                Post tmp = copy.get(j);
+                String tempDay = "" + tmp.getDay();
+                String tempMonth = "" + tmp.getMonth();
+                String tempYear = "" + tmp.getYear();
+
+                //if its a single digit
+                if (tmp.getDay() < 10) {
+                    tempDay = "0" + tmp.getDay();
+                }
+
+                int tempDate = Integer.parseInt(tempYear + tempMonth + tempDay);
+                System.out.println("ParseInt "+ tempDate);
+
+
+                //at the first iteration
+                if (j == 0) {
+                    currMinDate = tempDate;
+                    currMinIndex = 0;
+                } else if (tempDate < currMinDate) {
+                    currMinDate = tempDate;
+                    currMinIndex = j;
+                }
+
+            }
+            changingSize--;
+            sorted.add(copy.get(currMinIndex));
+            copy.remove(currMinIndex);
+
+        }
+        return sorted;
     }
 }

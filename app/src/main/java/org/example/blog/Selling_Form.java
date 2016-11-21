@@ -97,17 +97,6 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
             DatabaseReference postToUser = FirebaseDatabase.getInstance().getReference().child("posts_to_users").child(newPostKey);
             postToUser.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
             newPost.setValue(tmp);
-            /*
-            newPost.child("Start").setValue(text_start);
-            newPost.child("Destination").setValue(text_dest);
-            //Set date
-            newPost.child("Month").setValue(finMonth);
-            newPost.child("Day").setValue(finDay);
-            newPost.child("Year").setValue(finYear);
-
-            newPost.child("Price").setValue(_price);
-            newPost.child("Additional").setValue(text_addit);*/
-
             //TODO bug:for now send to main_page to get the firebase list again
             startActivity(new Intent(Selling_Form.this, Main_navigation.class));
         }
