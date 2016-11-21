@@ -90,6 +90,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
         Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
 
+
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
 
             DatabaseReference newPost = mDatabase.push();
