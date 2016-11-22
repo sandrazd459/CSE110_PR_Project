@@ -39,6 +39,18 @@ public class User {
 
     public String getAdditional() { return additional; }
 
+    public String getFrontPhoneNumber() {
+        return frontPhoneNumber;
+    }
+
+    public String getMidPhoneNumber() {
+        return midPhoneNumber;
+    }
+
+    public String getLastPhoneNumber() {
+        return lastPhoneNumber;
+    }
+
     public String getStringPhoneNumber() {
         return "(" + frontPhoneNumber + ")-" + midPhoneNumber + "-" + lastPhoneNumber;
     }
