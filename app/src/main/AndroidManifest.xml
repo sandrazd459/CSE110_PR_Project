@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main_navigation">
+        <activity android:name=".Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,15 +18,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Request_Form"
-            android:label="Ride Request Form" />
-        <activity
             android:name=".Pop_window"
             android:label="Ride Preview"
             android:theme="@style/AppTheme.PopTheme"/>
         <activity
+            android:name=".Login"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".User_Account"
+            android:label="User Account"/>
+        <activity
+            android:name=".Main_navigation"
+            android:label="Main Navigation"/>
+        <activity
+            android:name=".Request_Form"
+            android:label="Ride Request Form" />
+        <activity
             android:name=".Selling_Form"
             android:label="Ride Sell Form" />
+        <activity
+            android:name=".UserProfileSetupController"
+            android:label="User Profile Setup" />
         <activity
             android:name=".List_of_Sells"
             android:label="Ride Offers List" />

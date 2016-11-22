@@ -46,7 +46,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
 
         final int pos = position;
 
-
         //binding data
         holder.setFrom(mList.get(position).getStart());
         holder.setTo(mList.get(position).getDestination());
@@ -61,6 +60,8 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 //Snackbar.make(v,mList.get(pos).getDestination(),Snackbar.LENGTH_LONG).show();
                 Bundle bundle = new Bundle();
                 Intent pop = new Intent(c, Pop_window.class);
+                bundle.putString("username", mList.get(pos).getUsername());
+                bundle.putString("uid", mList.get(pos).getUid());
                 bundle.putString("start",mList.get(pos).getStart());
                 bundle.putString("dest",mList.get(pos).getDestination());
                 bundle.putString("price",mList.get(pos).getPrice());
@@ -69,7 +70,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 bundle.putInt("month",mList.get(pos).getMonth());
                 bundle.putInt("year",mList.get(pos).getYear());
                 pop.putExtras(bundle);
-                System.out.println("I GOT HERE");
                 c.startActivity(pop);
             }
         });
@@ -83,7 +83,6 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
                 //((TextView)(v.findViewById(R.id.popStart))).setText(mList.get(pos).getStart());
                 ((TextView)(v.findViewById(R.id.popPrice))).setText(mList.get(pos).getPrice());
                 ((TextView)(v.findViewById(R.id.popAddit))).setText(mList.get(pos).getAdditional());
-                System.out.println("I GOT HERE");
                 c.startActivity(new Intent(c, Pop_window.class));*/
             }
         });

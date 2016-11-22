@@ -64,7 +64,6 @@
                 android:layout_marginTop="20dp"
                 />
 
-
         </LinearLayout>
 
         <EditText
@@ -103,7 +102,6 @@
             android:layout_marginTop="25dp" />
     </LinearLayout>
 
-
     <Button
         android:text="@string/submit_post"
         android:layout_width="match_parent"
@@ -113,6 +111,5 @@
         android:id="@+id/postBtn"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
-
 
 </RelativeLayout>

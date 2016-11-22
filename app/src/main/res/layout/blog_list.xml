@@ -83,9 +83,9 @@
 
                 <TextView
                     android:layout_height="40dp"
-                    android:id="@+id/post_from"
+                    android:id="@+id/post_to"
                     android:padding="10dp"
-                    android:text="Departure"
+                    android:text="Destination goes here"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:layout_row="0"
@@ -99,9 +99,9 @@
                 android:layout_height="match_parent" >
 
                 <TextView
-                    android:id="@+id/post_to"
+                    android:id="@+id/post_from"
                     android:padding="10dp"
-                    android:text="Destination goes here"
+                    android:text="Departure goes here"
                     android:layout_row="1"
                     android:layout_column="1"
                     android:layout_width="287dp"

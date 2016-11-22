@@ -55,6 +55,8 @@ public class List_of_Requests extends AppCompatActivity {
         Bundle bun = this.getIntent().getExtras();
         final ArrayList<Post> rList = bun.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = bun.getParcelableArrayList("sellArr");
+        final ArrayList<Post> mySellList = bun.getParcelableArrayList("mySellArr");
+        final ArrayList<Post> myReqList = bun.getParcelableArrayList("myReqArr");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
@@ -62,6 +64,16 @@ public class List_of_Requests extends AppCompatActivity {
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.home) {
                     startActivity(new Intent(List_of_Requests.this, Main_navigation.class));
+                }
+                if (menuItemId == R.id.account) {
+                    Bundle bundle = new Bundle();
+                    Intent intentAccount = new Intent(List_of_Requests.this, User_Account.class);
+                    bundle.putParcelableArrayList("sellArr", sList);
+                    bundle.putParcelableArrayList("reqArr", rList);
+                    bundle.putParcelableArrayList("mySellArr", mySellList);
+                    bundle.putParcelableArrayList("myReqArr", myReqList);
+                    intentAccount.putExtras(bundle);
+                    startActivity(intentAccount);
                 }
             }
 
@@ -77,13 +89,14 @@ public class List_of_Requests extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.submenuSell:
-                                    Bundle sBundle = new Bundle();
+                                    Bundle bundle = new Bundle();
                                     Intent intentSell = new Intent(List_of_Requests.this, List_of_Sells.class);
-                                    sBundle.putParcelableArrayList("sellArr", sList);
-                                    sBundle.putParcelableArrayList("reqArr", rList);
-                                    intentSell.putExtras(sBundle);
+                                    bundle.putParcelableArrayList("sellArr", sList);
+                                    bundle.putParcelableArrayList("reqArr", rList);
+                                    bundle.putParcelableArrayList("mySellArr", mySellList);
+                                    bundle.putParcelableArrayList("myReqArr", myReqList);
+                                    intentSell.putExtras(bundle);
                                     startActivity(intentSell);
-
                                     return true;
                             }
                             return false;
@@ -92,7 +105,6 @@ public class List_of_Requests extends AppCompatActivity {
                 }
             }
         });
-
 
         sv = (SearchView) findViewById(R.id.mSearchBar);
         mBlogList = (RecyclerView) findViewById(R.id.recyclerList);
@@ -114,7 +126,6 @@ public class List_of_Requests extends AppCompatActivity {
             }
         });
 
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -123,13 +134,14 @@ public class List_of_Requests extends AppCompatActivity {
     @Override
     protected void onStart() {
 
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
+        super.onStart(); // ATTENTION: This was auto-generated to implement the App Indexing API.
+                         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
 
 
 
-        /*FirebaseRecyclerAdapter<Post, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Post, BlogViewHolder>(
+        /*
+        FirebaseRecyclerAdapter<Post, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Post, BlogViewHolder>(
                 Post.class,
                 R.layout.blog_list,
                 BlogViewHolder.class,
@@ -144,7 +156,9 @@ public class List_of_Requests extends AppCompatActivity {
                 viewHolder.setPrice(model.getPrice());
             }
         };
-        mBlogList.setAdapter(fbRecyclerAdapter);*/
+        mBlogList.setAdapter(fbRecyclerAdapter);
+        */
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
@@ -175,7 +189,6 @@ public class List_of_Requests extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -234,5 +247,4 @@ public class List_of_Requests extends AppCompatActivity {
 
         return n;
     }
-
 }

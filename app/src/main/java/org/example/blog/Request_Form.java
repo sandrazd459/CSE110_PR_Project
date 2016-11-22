@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +33,6 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
     Button dateBtn;
     int year, month, day, finYear, finMonth, finDay;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,17 +40,13 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
         dateBtn = (Button) findViewById(R.id.dateBtn);
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Request Posts");
-
 
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
-        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);
-
 
         mPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +54,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
                 startPosting();
             }
         });
+
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,15 +78,18 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
     }
 
-    private void startPosting(){
+    private void startPosting() {
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String username = user.getDisplayName();
+        String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
-        //String text_date = ((TextView)(findViewById(R.id.dateBtn))).getText().toString().trim();
-        String _price = mPrice.getText().toString();
+        String price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        Post tmp = new Post(_price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+        Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+
 
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
 

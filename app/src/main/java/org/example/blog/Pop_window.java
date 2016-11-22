@@ -3,14 +3,23 @@ package org.example.blog;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.firebase.client.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Alan Beas on 11/13/2016.
  */
 
 public class Pop_window extends Activity {
+    final String TAG = "User Profile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +28,29 @@ public class Pop_window extends Activity {
         setContentView(R.layout.detailed_post);
 
         Bundle bun = this.getIntent().getExtras();
+        String uid = bun.getString("uid");
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                User user = dataSnapshot.getValue(User.class);
+                String phone_num = "(" + user.getFrontPhoneNumber() + ")-" + user.getMidPhoneNumber() + "-" + user.getLastPhoneNumber();
+                ((TextView)findViewById(R.id.post_phone_num)).setText(phone_num);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+
+        userRef.addValueEventListener(postListener);
+
+        ((TextView)findViewById(R.id.post_username)).setText(bun.getString("username"));
         ((TextView)findViewById(R.id.post_departure)).setText(bun.getString("start"));
         ((TextView)findViewById(R.id.post_destination)).setText(bun.getString("dest"));
         ((TextView)findViewById(R.id.post_price)).setText(bun.getString("price"));
