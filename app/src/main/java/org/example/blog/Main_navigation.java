@@ -34,10 +34,10 @@ public class Main_navigation extends AppCompatActivity {
     private Button profileSettingBtn;
     private Button logoutBtn;
 
-    private DatabaseReference mDataBase;
 
     BottomBar mBottomBar;
 
+    PostsLoader postsLoader;
     ArrayList<Post> req = new ArrayList<>();
     ArrayList<Post> sell = new ArrayList<>();
     ArrayList<Post> myReq = new ArrayList<>();
@@ -57,61 +57,25 @@ public class Main_navigation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_navigation);
 
-        mDataBase = FirebaseDatabase.getInstance().getReference();
-
         mBottomBar = BottomBar.attach(this, savedInstanceState);
 
         //set default highlight to be the home button
         mBottomBar.setDefaultTabPosition(1);
 
-        mDataBase.child("Request Posts").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Post post = child.getValue(Post.class);
-                    if (post.getDestination() != null) {
-                        //call another function
-                        createBlog(req, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
-                    }
-                }
-            }
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-        mDataBase.child("Sell Posts").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Post post = child.getValue(Post.class);
-                    if (post.getDestination() != null) {
-                        //call another function
-                        createBlog(sell, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
+        postsLoader = new PostsLoader(mDatabase.child("Sell Posts"), mDatabase.child("Request Posts"));
 
 
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 // sorts list here
-                sortedReq = sortByDate(req);
-                sortedSell = sortByDate(sell);
+                sortedReq = postsLoader.getSortedReqPosts();
+                sortedSell = postsLoader.getSortedSellPosts();
 
-                if(menuItemId == R.id.lists){
+                if (menuItemId == R.id.lists) {
                     //sort the list by date
-
 
                     View listView = findViewById(R.id.lists);
                     PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
@@ -120,7 +84,7 @@ public class Main_navigation extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch(item.getItemId()){
+                            switch (item.getItemId()) {
                                 case R.id.submenuSell:
                                     //sort the list by date
 
@@ -128,8 +92,6 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sortedReq);
                                     sBundle.putParcelableArrayList("reqArr", sortedSell);
-                                    sBundle.putParcelableArrayList("mySellArr", mySell);
-                                    sBundle.putParcelableArrayList("myReqArr", myReq);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
@@ -139,9 +101,7 @@ public class Main_navigation extends AppCompatActivity {
                                     Bundle rBundle = new Bundle();
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", sortedReq);
-                                    rBundle.putParcelableArrayList("sellArr",sortedSell);
-                                    rBundle.putParcelableArrayList("mySellArr", mySell);
-                                    rBundle.putParcelableArrayList("myReqArr", myReq);
+                                    rBundle.putParcelableArrayList("sellArr", sortedSell);
 
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
@@ -156,8 +116,6 @@ public class Main_navigation extends AppCompatActivity {
                     Intent intentAccount = new Intent(Main_navigation.this, User_Account.class);
                     bundle.putParcelableArrayList("sellArr", sortedSell);
                     bundle.putParcelableArrayList("reqArr", sortedReq);
-                    bundle.putParcelableArrayList("mySellArr", mySell);
-                    bundle.putParcelableArrayList("myReqArr", myReq);
                     intentAccount.putExtras(bundle);
                     startActivity(intentAccount);
                 }
@@ -166,9 +124,9 @@ public class Main_navigation extends AppCompatActivity {
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
                 // sorts list here
-                sortedReq = sortByDate(req);
-                sortedSell = sortByDate(sell);
-                if(menuItemId == R.id.lists){
+                sortedReq = postsLoader.getSortedReqPosts();
+                sortedSell = postsLoader.getSortedSellPosts();
+                if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
                     PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
@@ -176,14 +134,12 @@ public class Main_navigation extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch(item.getItemId()){
+                            switch (item.getItemId()) {
                                 case R.id.submenuSell:
                                     Bundle sBundle = new Bundle();
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sortedSell);
                                     sBundle.putParcelableArrayList("reqArr", sortedReq);
-                                    sBundle.putParcelableArrayList("mySellArr", mySell);
-                                    sBundle.putParcelableArrayList("myReqArr", myReq);
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
                                     return true;
@@ -192,8 +148,6 @@ public class Main_navigation extends AppCompatActivity {
                                     Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", sortedReq);
                                     rBundle.putParcelableArrayList("sellArr", sortedSell);
-                                    rBundle.putParcelableArrayList("mySellArr", mySell);
-                                    rBundle.putParcelableArrayList("myReqArr", myReq);
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);
                                     return true;
@@ -283,74 +237,5 @@ public class Main_navigation extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
-    }
-    public void createBlog(ArrayList<Post> array, String username, String uid, String start, String dest, String pric, String add, int m, int d, int y) {
-        Post newPost = new Post();
-        newPost.setUsername(username);
-        newPost.setUid(uid);
-        newPost.setDestination(dest);
-        newPost.setStart(start);
-        newPost.setPrice(pric);
-        newPost.setAdditional(add);
-        newPost.setMonth(m);
-        newPost.setDay(d);
-        newPost.setYear(y);
-
-        if (array == req) {
-            req.add(newPost);
-            if (uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                myReq.add(newPost);
-            }
-        } else {
-            sell.add(newPost);
-            if (uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                mySell.add(newPost);
-            }
-        }
-    }
-
-    public ArrayList<Post> sortByDate(ArrayList<Post> arr){
-        ArrayList<Post> copy = new ArrayList<>(arr);
-        ArrayList<Post> sorted = new ArrayList<>();
-
-        int currMinIndex = 0;
-        int currMinDate = 0;
-        int changingSize = copy.size();
-        int max = copy.size();
-
-        for(int i=0; i < max; i++){
-            for(int j=0; j < changingSize; j++) {
-
-                //find min
-                Post tmp = copy.get(j);
-                String tempDay = "" + tmp.getDay();
-                String tempMonth = "" + tmp.getMonth();
-                String tempYear = "" + tmp.getYear();
-
-                //if its a single digit
-                if (tmp.getDay() < 10) {
-                    tempDay = "0" + tmp.getDay();
-                }
-
-                int tempDate = Integer.parseInt(tempYear + tempMonth + tempDay);
-                System.out.println("ParseInt "+ tempDate);
-
-
-                //at the first iteration
-                if (j == 0) {
-                    currMinDate = tempDate;
-                    currMinIndex = 0;
-                } else if (tempDate < currMinDate) {
-                    currMinDate = tempDate;
-                    currMinIndex = j;
-                }
-
-            }
-            changingSize--;
-            sorted.add(copy.get(currMinIndex));
-            copy.remove(currMinIndex);
-
-        }
-        return sorted;
     }
 }

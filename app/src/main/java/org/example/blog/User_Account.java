@@ -57,15 +57,11 @@ public class User_Account extends AppCompatActivity{
         Bundle b = this.getIntent().getExtras();
         final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
-        final ArrayList<Post> mySell = b.getParcelableArrayList("mySellArr");
-        final ArrayList<Post> myReq = b.getParcelableArrayList("myReqArr");
 
         userEmailView = (TextView)findViewById(R.id.user_email);
         userNameView = (TextView)findViewById(R.id.user_name);
         phoneView = (TextView)findViewById(R.id.user_phone);
         additionalInfoView = (TextView)findViewById(R.id.additional_info);
-
-        System.out.println(mySell.get(0).getUid());
 
         final Button mLogoutBtn = (Button) findViewById(R.id.logout_button);
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +98,6 @@ public class User_Account extends AppCompatActivity{
                                     Intent intentSell = new Intent(User_Account.this, List_of_Sells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
                                     sBundle.putParcelableArrayList("reqArr", req);
-                                    sBundle.putParcelableArrayList("mySellArr", mySell);
-                                    sBundle.putParcelableArrayList("myReqArr", myReq);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
@@ -113,8 +107,6 @@ public class User_Account extends AppCompatActivity{
                                     Intent intentReq = new Intent(User_Account.this, List_of_Requests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
-                                    rBundle.putParcelableArrayList("mySellArr", mySell);
-                                    rBundle.putParcelableArrayList("myReqArr", myReq);
 
                                     intentReq.putExtras(rBundle);
                                     startActivity(intentReq);

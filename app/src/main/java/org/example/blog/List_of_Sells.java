@@ -40,8 +40,6 @@ public class List_of_Sells extends AppCompatActivity {
 
         final ArrayList<Post> rList = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = b.getParcelableArrayList("sellArr");
-        final ArrayList<Post> mySellList = b.getParcelableArrayList("mySellArr");
-        final ArrayList<Post> myReqList = b.getParcelableArrayList("myReqArr");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
@@ -55,8 +53,6 @@ public class List_of_Sells extends AppCompatActivity {
                     Intent intentAccount = new Intent(List_of_Sells.this, User_Account.class);
                     bundle.putParcelableArrayList("sellArr", sList);
                     bundle.putParcelableArrayList("reqArr", rList);
-                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                    bundle.putParcelableArrayList("myReqArr", myReqList);
                     intentAccount.putExtras(bundle);
                     startActivity(intentAccount);
                 }
@@ -79,8 +75,6 @@ public class List_of_Sells extends AppCompatActivity {
                                     Intent intentSell = new Intent(List_of_Sells.this, List_of_Requests.class);
                                     bundle.putParcelableArrayList("sellArr", sList);
                                     bundle.putParcelableArrayList("reqArr", rList);
-                                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                                    bundle.putParcelableArrayList("myReqArr", myReqList);
                                     intentSell.putExtras(bundle);
                                     startActivity(intentSell);
                                     return true;
