@@ -56,51 +56,26 @@ public class PostsLoader {
         return sortByDate(sellPosts);
     }
 
-    public ArrayList<Post> getSortedReqPosts() {
-        return sortByDate(reqPosts);
-    }
+    public ArrayList<Post> getSortedReqPosts() { return sortByDate(reqPosts);}
 
-    private ArrayList<Post> sortByDate(ArrayList<Post> arr){
-        ArrayList<Post> copy = new ArrayList<>(arr);
+    private ArrayList<Post> sortByDate(ArrayList<Post> arr) {
         ArrayList<Post> sorted = new ArrayList<>();
+        for (Post newPost : arr) {
+            if (sorted.size() == 0) {
+                sorted.add(newPost);
+            } else {
+                for (int i = 0; i <= sorted.size(); i++) {
+                    if (i == sorted.size()) {
+                        sorted.add(i, newPost);
+                        break;
+                    }
+                    if (newPost.getDate() <= sorted.get(i).getDate()) {
+                        sorted.add(i, newPost);
+                        break;
+                    }
 
-        int currMinIndex = 0;
-        int currMinDate = 0;
-        int changingSize = copy.size();
-        int max = copy.size();
-
-        for(int i=0; i < max; i++){
-            for(int j=0; j < changingSize; j++) {
-
-                //find min
-                Post tmp = copy.get(j);
-                String tempDay = "" + tmp.getDay();
-                String tempMonth = "" + tmp.getMonth();
-                String tempYear = "" + tmp.getYear();
-
-                //if its a single digit
-                if (tmp.getDay() < 10) {
-                    tempDay = "0" + tmp.getDay();
                 }
-
-                int tempDate = Integer.parseInt(tempYear + tempMonth + tempDay);
-                System.out.println("ParseInt "+ tempDate);
-
-
-                //at the first iteration
-                if (j == 0) {
-                    currMinDate = tempDate;
-                    currMinIndex = 0;
-                } else if (tempDate < currMinDate) {
-                    currMinDate = tempDate;
-                    currMinIndex = j;
-                }
-
             }
-            changingSize--;
-            sorted.add(copy.get(currMinIndex));
-            copy.remove(currMinIndex);
-
         }
         return sorted;
     }

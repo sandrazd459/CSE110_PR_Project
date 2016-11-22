@@ -160,9 +160,7 @@ public class User_Account extends AppCompatActivity{
                 // [START_EXCLUDE]
                 userNameView.setText(user.getUsername());
                 userEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                String phone = "(" + user.getFrontPhoneNumber()+ ")-" +user.getMidPhoneNumber()
-                        + "-" + user.getLastPhoneNumber();
-                phoneView.setText(phone);
+                phoneView.setText(user.getStringPhoneNumber());
                 additionalInfoView.setText(user.getAdditional());
                 // [END_EXCLUDE]
             }

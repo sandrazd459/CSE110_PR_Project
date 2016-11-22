@@ -16,7 +16,6 @@ public class User {
     private String username, additional, frontPhoneNumber, midPhoneNumber, lastPhoneNumber;
     private ArrayList<String> ownPostsId;
 
-    public User() {};
     public User(String username, String additional,
                 String frontPhoneNumber, String midPhoneNumber, String lastPhoneNumber) {
         this.username = username;
@@ -49,6 +48,10 @@ public class User {
 
     public String getLastPhoneNumber() { return lastPhoneNumber; }
     public void setLastPhoneNumber(String lastPhoneNumber) { this.lastPhoneNumber = lastPhoneNumber; }
+
+    public String getStringPhoneNumber() {
+        return "(" + getFrontPhoneNumber()+ ")-" + getMidPhoneNumber() + "-" + getLastPhoneNumber();
+    }
 
     public ArrayList<String> getOwnPostsId() { return ownPostsId; }
     public void setOwnPostsId(ArrayList<String> ownPosts) { this.ownPostsId = ownPostsId; }

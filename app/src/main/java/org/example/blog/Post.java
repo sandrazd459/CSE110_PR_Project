@@ -12,42 +12,35 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 public class Post implements Parcelable{
 
-    private String username, uid, start, destination, price, additional;
-    private int month, day, year;
+    private String uid, start, destination, price, additional;
+    private int date;
 
     public Post(){
     }
 
-    public Post(String username, String uid, String price, String destination, String start, String additional, int month, int day, int year) {
-        this.username = username;
+    public Post(String uid, String price, String destination, String start, String additional, int date) {
         this.uid = uid;
         this.price = price;
         this.additional = additional;
         this.destination = destination;
         this.start = start;
-        this.month = month;
-        this.day = day;
-        this.year = year;
+        this.date = date;
     }
 
     public Post(Parcel source){
         Log.v(TAG, "ParcelData(Parcel source): time to put back parcel data");
-        username = source.readString();
         uid = source.readString();
         start = source.readString();
         destination = source.readString();
         price = source.readString();
         additional = source.readString();
-        month = source.readInt();
-        day = source.readInt();
-        year = source.readInt();
+        date = source.readInt();
     }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-
     public String getUid() { return uid; }
-    public void setUid(String uid) { this.uid = uid; }
+
+    public int getDate() { return date; }
+    public void setDate(int date) { this.date = date;}
 
     public String getStart() {
         return start;
@@ -75,25 +68,11 @@ public class Post implements Parcelable{
         this.price = price;
     }
 
-    public int getMonth() {
-        return month;
-    }
-    public void setMonth(int dMonth) {
-        month = dMonth;
-    }
-
-    public int getDay() {
-        return day;
-    }
-    public void setDay(int dDay) {
-        day = dDay;
-    }
-
-    public int getYear() {
-        return year;
-    }
-    public void setYear(int dYear) {
-        year = dYear;
+    public String getStringDate() {
+        int year = date / 10000;
+        int month = (date % 10000) / 100;
+        int day = date % 100;
+        return stringMonth(month)+" "+ day + ", " + year;
     }
 
 
@@ -106,16 +85,13 @@ public class Post implements Parcelable{
     public void writeToParcel(Parcel desti, int flags) {
 
         Log.v(TAG, "writeToParcel..."+ flags);
-        desti.writeString(username);
         desti.writeString(uid);
         desti.writeString(start);
         desti.writeString(destination);
         desti.writeString(price);
         desti.writeString(additional);
 
-        desti.writeInt(month);
-        desti.writeInt(day);
-        desti.writeInt(year);
+        desti.writeInt(date);
 
     }
     public static final Parcelable.Creator CREATOR
@@ -128,4 +104,34 @@ public class Post implements Parcelable{
             return new Post[size];
         }
     };
+
+    private String stringMonth(int m){
+        switch (m){
+            case 1:
+                return "Jan";
+            case 2:
+                return "Feb";
+            case 3:
+                return "Mar";
+            case 4:
+                return "Apr";
+            case 5:
+                return "May";
+            case 6:
+                return "Jun";
+            case 7:
+                return "Jul";
+            case 8:
+                return "Oct";
+            case 9:
+                return "Aug";
+            case 10:
+                return "Sep";
+            case 11:
+                return "Nov";
+            case 12:
+                return "Dec";
+        }
+        return "";
+    }
 }
