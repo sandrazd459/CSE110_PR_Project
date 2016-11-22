@@ -25,7 +25,7 @@ public class PostsLoader {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(sellPosts, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        sellPosts.add(post);
                     }
                 }
             }
@@ -42,7 +42,7 @@ public class PostsLoader {
                     Post post = child.getValue(Post.class);
                     if (post.getDestination() != null) {
                         //call another function
-                        createBlog(reqPosts, post.getUsername(), post.getUid(), post.getStart(),post.getDestination(), post.getPrice(),post.getAdditional(), post.getMonth(), post.getDay(),post.getYear() );
+                        reqPosts.add(post);
                     }
                 }
             }
@@ -58,21 +58,6 @@ public class PostsLoader {
 
     public ArrayList<Post> getSortedReqPosts() {
         return sortByDate(reqPosts);
-    }
-
-    private void createBlog(ArrayList<Post> array, String username, String uid, String start, String dest, String price, String add, int m, int d, int y) {
-        Post newPost = new Post();
-        newPost.setUsername(username);
-        newPost.setUid(uid);
-        newPost.setDestination(dest);
-        newPost.setStart(start);
-        newPost.setPrice(price);
-        newPost.setAdditional(add);
-        newPost.setMonth(m);
-        newPost.setDay(d);
-        newPost.setYear(y);
-
-        array.add(newPost);
     }
 
     private ArrayList<Post> sortByDate(ArrayList<Post> arr){

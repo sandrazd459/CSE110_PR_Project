@@ -6,7 +6,6 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,16 +15,12 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Main_navigation extends AppCompatActivity {
 
@@ -38,10 +33,6 @@ public class Main_navigation extends AppCompatActivity {
     BottomBar mBottomBar;
 
     PostsLoader postsLoader;
-    ArrayList<Post> req = new ArrayList<>();
-    ArrayList<Post> sell = new ArrayList<>();
-    ArrayList<Post> myReq = new ArrayList<>();
-    ArrayList<Post> mySell = new ArrayList<>();
     ArrayList<Post> sortedReq = new ArrayList<>();
     ArrayList<Post> sortedSell = new ArrayList<>();
 
@@ -65,7 +56,6 @@ public class Main_navigation extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         postsLoader = new PostsLoader(mDatabase.child("Sell Posts"), mDatabase.child("Request Posts"));
-
 
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
@@ -164,8 +154,7 @@ public class Main_navigation extends AppCompatActivity {
         offerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoSellList = new Intent(Main_navigation.this, Selling_Form.class);
-                startActivity(gotoSellList);
+                startActivity(new Intent(Main_navigation.this, Selling_Form.class));
             }
         });
 
@@ -174,8 +163,7 @@ public class Main_navigation extends AppCompatActivity {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotorequestList = new Intent(Main_navigation.this, Request_Form.class);
-                startActivity(gotorequestList);
+                startActivity(new Intent(Main_navigation.this, Request_Form.class));
             }
         });
 
