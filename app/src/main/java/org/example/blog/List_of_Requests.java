@@ -55,8 +55,6 @@ public class List_of_Requests extends AppCompatActivity {
         Bundle bun = this.getIntent().getExtras();
         final ArrayList<Post> rList = bun.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = bun.getParcelableArrayList("sellArr");
-        final ArrayList<Post> mySellList = bun.getParcelableArrayList("mySellArr");
-        final ArrayList<Post> myReqList = bun.getParcelableArrayList("myReqArr");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
@@ -70,8 +68,6 @@ public class List_of_Requests extends AppCompatActivity {
                     Intent intentAccount = new Intent(List_of_Requests.this, User_Account.class);
                     bundle.putParcelableArrayList("sellArr", sList);
                     bundle.putParcelableArrayList("reqArr", rList);
-                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                    bundle.putParcelableArrayList("myReqArr", myReqList);
                     intentAccount.putExtras(bundle);
                     startActivity(intentAccount);
                 }
@@ -93,8 +89,6 @@ public class List_of_Requests extends AppCompatActivity {
                                     Intent intentSell = new Intent(List_of_Requests.this, List_of_Sells.class);
                                     bundle.putParcelableArrayList("sellArr", sList);
                                     bundle.putParcelableArrayList("reqArr", rList);
-                                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                                    bundle.putParcelableArrayList("myReqArr", myReqList);
                                     intentSell.putExtras(bundle);
                                     startActivity(intentSell);
                                     return true;
@@ -137,27 +131,6 @@ public class List_of_Requests extends AppCompatActivity {
         super.onStart(); // ATTENTION: This was auto-generated to implement the App Indexing API.
                          // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
-
-
-
-        /*
-        FirebaseRecyclerAdapter<Post, BlogViewHolder> fbRecyclerAdapter = new FirebaseRecyclerAdapter<Post, BlogViewHolder>(
-                Post.class,
-                R.layout.blog_list,
-                BlogViewHolder.class,
-                mDatabase
-        ) {
-            @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Post model, int position) {
-                viewHolder.setFrom(model.getStart());
-                viewHolder.setTo(model.getDestination());
-                String s = stringMonth(model.getMonth()) + " " + model.getDay() + ", " + model.getYear();
-                viewHolder.setDate(s);
-                viewHolder.setPrice(model.getPrice());
-            }
-        };
-        mBlogList.setAdapter(fbRecyclerAdapter);
-        */
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -210,41 +183,5 @@ public class List_of_Requests extends AppCompatActivity {
             startActivity(intentSell);
         }
         return super.onOptionsItemSelected(item);
-    }
-    public ArrayList<Post> fakeList(){
-        ArrayList<Post> n = new ArrayList<>();
-        Post newPost;
-
-        newPost=new Post();
-        newPost.setDestination("NIGGAS");
-        newPost.setStart("BYE");
-        newPost.setPrice("23");
-        newPost.setAdditional("hello");
-        newPost.setMonth(3);
-        newPost.setDay(4);
-        newPost.setYear(2017);
-        n.add(newPost);
-
-        newPost=new Post();
-        newPost.setDestination("HI");
-        newPost.setStart("BYE");
-        newPost.setPrice("23");
-        newPost.setAdditional("hello");
-        newPost.setMonth(3);
-        newPost.setDay(4);
-        newPost.setYear(2017);
-        n.add(newPost);
-
-        newPost=new Post();
-        newPost.setDestination("whites");
-        newPost.setStart("BYE");
-        newPost.setPrice("23");
-        newPost.setAdditional("hello");
-        newPost.setMonth(3);
-        newPost.setDay(4);
-        newPost.setYear(2017);
-        n.add(newPost);
-
-        return n;
     }
 }

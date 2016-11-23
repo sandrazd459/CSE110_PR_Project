@@ -25,13 +25,11 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
     private EditText mStart;
     private EditText mDestination;
-    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
-
     private Button mPostBtn;
     Button dateBtn;
-    int year, month, day, finYear, finMonth, finDay;
+    int year, month, day, finDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,29 +67,23 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         });
     }
 
-    @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        finYear = year;
-        finMonth = month + 1;
-        finDay = dayOfMonth;
-
-        ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
+        finDate = (year * 10000) + ((month + 1) * 100) + dayOfMonth;
+        ((TextView)(findViewById(R.id.dateBtn))).setText((month + 1) + "/" + dayOfMonth + "/" + year);
     }
 
     private void startPosting() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String username = user.getDisplayName();
         String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
         String price = mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+        Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
 
-
-        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
+        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finDate != 0 ){
 
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
@@ -100,7 +92,6 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         }
         else{
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
-
         }
     }
 }

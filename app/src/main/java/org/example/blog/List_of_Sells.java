@@ -24,8 +24,6 @@ public class List_of_Sells extends AppCompatActivity {
 
     private RecyclerView mBlogList;
 
-    //private DatabaseReference mDatabase;
-
     BottomBar mBottomBar;
 
     SearchView sv;
@@ -40,8 +38,6 @@ public class List_of_Sells extends AppCompatActivity {
 
         final ArrayList<Post> rList = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sList = b.getParcelableArrayList("sellArr");
-        final ArrayList<Post> mySellList = b.getParcelableArrayList("mySellArr");
-        final ArrayList<Post> myReqList = b.getParcelableArrayList("myReqArr");
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
@@ -55,8 +51,6 @@ public class List_of_Sells extends AppCompatActivity {
                     Intent intentAccount = new Intent(List_of_Sells.this, User_Account.class);
                     bundle.putParcelableArrayList("sellArr", sList);
                     bundle.putParcelableArrayList("reqArr", rList);
-                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                    bundle.putParcelableArrayList("myReqArr", myReqList);
                     intentAccount.putExtras(bundle);
                     startActivity(intentAccount);
                 }
@@ -79,8 +73,6 @@ public class List_of_Sells extends AppCompatActivity {
                                     Intent intentSell = new Intent(List_of_Sells.this, List_of_Requests.class);
                                     bundle.putParcelableArrayList("sellArr", sList);
                                     bundle.putParcelableArrayList("reqArr", rList);
-                                    bundle.putParcelableArrayList("mySellArr", mySellList);
-                                    bundle.putParcelableArrayList("myReqArr", myReqList);
                                     intentSell.putExtras(bundle);
                                     startActivity(intentSell);
                                     return true;
@@ -120,34 +112,6 @@ public class List_of_Sells extends AppCompatActivity {
         super.onStart();
     }
 
-
-
-    public static class BlogViewHolder extends RecyclerView.ViewHolder{
-
-        View mView;
-        public BlogViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setFrom(String fromText){
-            TextView post_from = (TextView)mView.findViewById(R.id.post_from);
-            post_from.setText(fromText);
-        }
-
-        public void setTo(String toText){
-            TextView post_to = (TextView)mView.findViewById(R.id.post_to);
-            post_to.setText(toText);
-        }
-        /*public void setDate(String dateText){
-            TextView post_date = (TextView)mView.findViewById(R.id.post_date);
-            post_date.setText(dateText);
-        }*/
-        public void setPrice(String priceText){
-            TextView post_price = (TextView)mView.findViewById(R.id.post_price);
-            post_price.setText(priceText);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

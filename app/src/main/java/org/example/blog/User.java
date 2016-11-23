@@ -36,37 +36,25 @@ public class User {
     }
 
     public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
 
     public String getAdditional() { return additional; }
-    public void setAdditional(String additional) { this.additional = additional; }
 
-    public String getFrontPhoneNumber() { return frontPhoneNumber; }
-    public void setFrontPhoneNumber(String frontPhoneNumber) { this.frontPhoneNumber = frontPhoneNumber; }
-
-    public String getMidPhoneNumber() { return midPhoneNumber; }
-    public void setMidPhoneNumber(String midPhoneNumber) { this.midPhoneNumber = midPhoneNumber; }
-
-    public String getLastPhoneNumber() { return lastPhoneNumber; }
-    public void setLastPhoneNumber(String lastPhoneNumber) { this.lastPhoneNumber = lastPhoneNumber; }
-
-    public ArrayList<String> getOwnPostsId() { return ownPostsId; }
-    public void setOwnPostsId(ArrayList<String> ownPosts) { this.ownPostsId = ownPostsId; }
-
-    public int describeContents() {
-        return this.hashCode();
+    public String getFrontPhoneNumber() {
+        return frontPhoneNumber;
     }
 
-    public void writeToParcel(Parcel desti, int flags) {
-
-        Log.v(TAG, "writeToParcel..."+ flags);
-        desti.writeString(username);
-        desti.writeString(additional);
-        desti.writeString(frontPhoneNumber);
-        desti.writeString(midPhoneNumber);
-        desti.writeString(lastPhoneNumber);
-
+    public String getMidPhoneNumber() {
+        return midPhoneNumber;
     }
+
+    public String getLastPhoneNumber() {
+        return lastPhoneNumber;
+    }
+
+    public String getStringPhoneNumber() {
+        return "(" + frontPhoneNumber + ")-" + midPhoneNumber + "-" + lastPhoneNumber;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public User createFromParcel(Parcel in) {
             return new User(in);
