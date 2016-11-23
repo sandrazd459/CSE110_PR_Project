@@ -73,6 +73,7 @@ public class User_Account extends AppCompatActivity{
 
         //bottom navigation bar
         mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setDefaultTabPosition(2);
         mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
@@ -183,5 +184,10 @@ public class User_Account extends AppCompatActivity{
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        mBottomBar.setDefaultTabPosition(1);
     }
 }
