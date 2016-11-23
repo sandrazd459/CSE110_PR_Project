@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="loginBlue">#198df0</color>
+
     <color name="darkBlue">#3366CC</color>
     <color name="lightBlue">#0488d1</color>
 

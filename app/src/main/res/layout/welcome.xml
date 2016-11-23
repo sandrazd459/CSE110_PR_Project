@@ -2,16 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/welcome_screen">
+    android:background="@color/loginBlue">
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_logo"/>
 
     <!-- Area of Login and Sign up-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="25dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="48dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <!-- Area for login button-->
@@ -28,6 +36,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:text="Log in"
+                android:textColor="@color/white"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
