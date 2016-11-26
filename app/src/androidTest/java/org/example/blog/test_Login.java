@@ -1,6 +1,6 @@
 package org.example.blog;
 
-// This test is to test the login feature
+//test the login feature
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
