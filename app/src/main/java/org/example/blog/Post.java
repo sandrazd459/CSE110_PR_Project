@@ -122,11 +122,11 @@ public class Post implements Parcelable{
             case 7:
                 return "Jul";
             case 8:
-                return "Oct";
-            case 9:
                 return "Aug";
-            case 10:
+            case 9:
                 return "Sep";
+            case 10:
+                return "Oct";
             case 11:
                 return "Nov";
             case 12:
