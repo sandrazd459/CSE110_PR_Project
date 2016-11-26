@@ -1,6 +1,6 @@
 package org.example.blog;
 
-//This test is to test the welcome page(The first page)
+// test welcome page
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -26,14 +26,25 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class WelcomeTest {
+public class welcome_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void welcomeTest() {
+    public void welcomeTest2() {
         ViewInteraction textView = onView(
+                allOf(withText("UCSD Rideshare"),
+                        childAtPosition(
+                                allOf(withId(R.id.action_bar),
+                                        childAtPosition(
+                                                withId(R.id.action_bar_container),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("UCSD Rideshare")));
+
+        ViewInteraction textView2 = onView(
                 allOf(withText("Ride Share   "),
                         childAtPosition(
                                 childAtPosition(
@@ -41,17 +52,7 @@ public class WelcomeTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Ride Share   ")));
-
-        ViewInteraction relativeLayout = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.content),
-                                childAtPosition(
-                                        withId(R.id.decor_content_parent),
-                                        1)),
-                        0),
-                        isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
+        textView2.check(matches(isDisplayed()));
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.welcome_login),
