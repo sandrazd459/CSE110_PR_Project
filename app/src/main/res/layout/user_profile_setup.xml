@@ -58,5 +58,8 @@
         android:text="Save Profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:background="@color/Gold"
         android:id="@+id/user_create" />
+
 </LinearLayout>
