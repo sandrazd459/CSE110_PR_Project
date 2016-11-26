@@ -37,8 +37,8 @@ public class User_Account extends AppCompatActivity{
     private FirebaseUser user;
     private DatabaseReference mDatabaseRef;
 
-    TextView userEmailView;
     TextView userNameView;
+    TextView userEmailView;
     TextView phoneView;
     TextView additionalInfoView;
 
@@ -58,8 +58,9 @@ public class User_Account extends AppCompatActivity{
         final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
 
-        userEmailView = (TextView)findViewById(R.id.user_email);
         userNameView = (TextView)findViewById(R.id.user_name);
+
+        userEmailView = (TextView)findViewById(R.id.user_email);
         phoneView = (TextView)findViewById(R.id.user_phone);
         additionalInfoView = (TextView)findViewById(R.id.additional_info);
 
