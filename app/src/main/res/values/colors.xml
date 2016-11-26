@@ -11,4 +11,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="grayColor">#c2c2c2</color>
     <color name="requiredRed">#E42217</color>
+
+    <color name="GhostWhite">#F8F8FF</color>
+
+    <color name="Gold">	#FFD700</color>
+
+    <color name="GoldenRod">#DAA520</color>
+
 </resources>
