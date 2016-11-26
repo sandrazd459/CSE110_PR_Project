@@ -1,6 +1,6 @@
 package org.example.blog;
 
-
+import java.lang.*;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -12,6 +12,7 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,22 +25,30 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
+/**
+ * Created by julianlin on 11/25/16.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainTest {
+public class request_post_activity_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void mainTest() {
+    public void rTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
         appCompatButton.perform(click());
 
+        //After several times of entering the email and password, the email/password will be remembered
+        //However, for the first time of testing, we need to enable the following code
+        //#==================================================================#
         ViewInteraction appCompatEditText = onView(
                 withId(R.id.email));
         appCompatEditText.perform(scrollTo(), replaceText("shl455@ucsd.edu"), closeSoftKeyboard());
@@ -52,60 +61,61 @@ public class MainTest {
                 allOf(withId(R.id.sign_button), withText("Login")));
         appCompatButton2.perform(scrollTo(), click());
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.sellingList),
+        try {
+            // thread to sleep for 3000 milliseconds
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //#==================================================================#
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.requestList), withText("Request New Ride"),
+                        withParent(allOf(withId(R.id.activity_main_navigation),
+                                withParent(withId(R.id.bb_user_content_container)))),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.startText),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main_navigation),
-                                        childAtPosition(
-                                                withId(R.id.bb_user_content_container),
-                                                0)),
+                                childAtPosition(
+                                        withId(R.id.activity_main),
+                                        0),
                                 0),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.destText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.activity_main),
+                                        0),
+                                1),
+                        isDisplayed()));
+        editText2.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.dateBtn),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        2),
+                                1),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.requestList),
+                allOf(withId(R.id.postBtn),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main_navigation),
+                                allOf(withId(R.id.activity_main),
                                         childAtPosition(
-                                                withId(R.id.bb_user_content_container),
+                                                withId(android.R.id.content),
                                                 0)),
                                 1),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
 
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.account_setting),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_main_navigation),
-                                        childAtPosition(
-                                                withId(R.id.bb_user_content_container),
-                                                0)),
-                                2),
-                        isDisplayed()));
-        button3.check(matches(isDisplayed()));
-
-        ViewInteraction button4 = onView(
-                allOf(withId(R.id.logout_button),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_main_navigation),
-                                        childAtPosition(
-                                                withId(R.id.bb_user_content_container),
-                                                0)),
-                                3),
-                        isDisplayed()));
-        button4.check(matches(isDisplayed()));
-
-        ViewInteraction button5 = onView(
-                allOf(withId(R.id.logout_button),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_main_navigation),
-                                        childAtPosition(
-                                                withId(R.id.bb_user_content_container),
-                                                0)),
-                                3),
-                        isDisplayed()));
-        button5.check(matches(isDisplayed()));
 
     }
 

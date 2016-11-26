@@ -28,27 +28,18 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Login_test {
+public class register_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void login_test() {
+    public void regi() {
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
+                allOf(withId(R.id.welcome_signup), withText("Sign up"), isDisplayed()));
         appCompatButton.perform(click());
 
-        ViewInteraction imageView = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-                                0),
-                        0),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
-
-        ViewInteraction editText = onView(
+        ViewInteraction editText2 = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
                                 childAtPosition(
@@ -56,19 +47,9 @@ public class Login_test {
                                         0),
                                 0),
                         isDisplayed()));
-        editText.check(matches(isDisplayed()));
+        editText2.check(matches(isDisplayed()));
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.sign_button),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-                                        0),
-                                3),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction editText2 = onView(
+        ViewInteraction editText3 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
                                 childAtPosition(
@@ -76,7 +57,27 @@ public class Login_test {
                                         0),
                                 0),
                         isDisplayed()));
-        editText2.check(matches(isDisplayed()));
+        editText3.check(matches(isDisplayed()));
+
+        ViewInteraction editText4 = onView(
+                allOf(withId(R.id.password_confirm),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        editText4.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.sign_button),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                        0),
+                                4),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
 
     }
 

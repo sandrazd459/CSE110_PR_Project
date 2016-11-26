@@ -1,6 +1,7 @@
 package org.example.blog;
 
-// test welcome page
+
+import android.support.design.widget.TextInputLayout;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -18,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -30,53 +32,46 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class welcome_Test {
+public class Login_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void welcomeTest2() {
-        ViewInteraction textView = onView(
-                allOf(withText("UCSD Rideshare"),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar),
-                                        childAtPosition(
-                                                withId(R.id.action_bar_container),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("UCSD Rideshare")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withText("Ride Share   "),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView2.check(matches(isDisplayed()));
+    public void login_Test() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
+        appCompatButton.perform(click());
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.welcome_login),
+                allOf(withId(R.id.sign_button),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
                                         0),
-                                0),
+                                3),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.welcome_signup),
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.password),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
+                                        0),
                                 0),
                         isDisplayed()));
-        button2.check(matches(isDisplayed()));
+        editText.check(matches(isDisplayed()));
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.email),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        editText2.check(matches(isDisplayed()));
 
     }
 
