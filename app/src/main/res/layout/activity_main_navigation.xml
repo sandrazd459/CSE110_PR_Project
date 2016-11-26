@@ -11,6 +11,7 @@
         <Button
             android:id="@+id/requestList"
             android:text="@string/request_new_ride"
+
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginTop="64dp"
@@ -20,6 +21,8 @@
 
         <Button
             android:id="@+id/sellingList"
+
+            android:textColor="@color/GhostWhite"
             android:text="Offer New Ride"
             android:layout_width="200dp"
             android:layout_height="40dp"
@@ -34,7 +37,7 @@
             android:text="Log Out"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:background="@color/grayColor"
+            android:background="@color/Gold"
             android:layout_marginBottom="88dp"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/account_setting"
@@ -43,9 +46,9 @@
         <Button
             android:id="@+id/account_setting"
             android:text="Update Profile"
+            android:background="@color/Gold"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:background="@color/grayColor"
             android:layout_marginBottom="60dp"
             android:layout_alignBottom="@+id/logout_button"
             android:layout_alignLeft="@+id/requestList"

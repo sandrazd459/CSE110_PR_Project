@@ -164,7 +164,10 @@
 
             <Button
                 android:text="Log Out"
-                android:layout_width="match_parent"
+
+
+                android:background="@color/Gold"
+            android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/logout_button" />
         </LinearLayout>
