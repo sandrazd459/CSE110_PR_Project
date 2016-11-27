@@ -4,12 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by Alan Beas on 10/18/2016.
  */
 
+@IgnoreExtraProperties
 public class Post implements Parcelable{
 
     private String uid, start, destination, price, additional;

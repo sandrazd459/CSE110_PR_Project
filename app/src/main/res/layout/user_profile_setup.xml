@@ -1,62 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/user_name"
-        android:hint="Username*" />
+        android:scrollbars="none">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="@color/grayColor"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/view_user"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff">
+                <ImageView
+                    android:id="@+id/head"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="80.0dip"
+                    android:layout_height="80.0dip"
+                    android:src="@mipmap/user_image" />
+                <TextView
+                    android:textSize="18.0sp"
+                    android:id="@+id/name"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username:" />
+                <EditText
+                    android:id="@+id/user_name"
+                    android:background="@color/transparent"
+                    android:textSize="14.0sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/name"
+                    android:layout_toRightOf="@+id/head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="username" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/pen" />
+            </RelativeLayout>
+            <View
+                android:background="@color/grayColor"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/front_num"
-            android:layout_weight="1"
-            android:hint="(123)"
-            android:maxLength="3"/>
 
-        <EditText
-            android:layout_width="129dp"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/mid_num"
-            android:hint="456"
-            android:maxLength="3"/>
+            <!--phone number-->
+            <TextView
+                android:id="@+id/txt_card"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:background="#ffffff"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:drawablePadding="10dp"
+                android:text="Phone Number:" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="#ffffff"
+                android:weightSum="1">
+                <EditText
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:inputType="phone"
+                    android:ems="8"
+                    android:id="@+id/front_num"
+                    android:hint="(818)"
+                    android:maxLength="3"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/last_num"
-            android:layout_weight="1"
-            android:hint="7890"
-            android:maxLength="4"/>
-    </LinearLayout>
+                <EditText
+                    android:layout_width="84dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="8"
+                    android:id="@+id/mid_num"
+                    android:hint="123"
+                    android:maxLength="3"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/additional_info"
-        android:hint="Additional Information" />
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="8"
+                    android:id="@+id/last_num"
+                    android:hint="4567"
+                    android:maxLength="4"
+                    android:layout_weight="0.03" />
 
-    <Button
-        android:text="Save Profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/user_create" />
+                <ImageView
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/pen"
+                    android:id="@+id/imageView" />
+            </LinearLayout>
+            <View
+                android:background="@color/grayColor"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip" />
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="180dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff">
+
+                <TextView
+                    android:textSize="18.0sp"
+                    android:id="@+id/info"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:text="Additional Info:" />
+
+                <EditText
+                    android:id="@+id/additional_info"
+                    android:hint="Write a description about yourself"
+                    android:background="@color/transparent"
+                    android:textSize="16.0sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_below="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="280dp"
+                    android:height="100dp"
+                    android:paddingLeft="20dp"
+                    android:maxLength="50"/>
+
+                <ImageView
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/pen" />
+            </RelativeLayout>
+            <View
+                android:background="@color/grayColor"
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip" />
+
+            <Button
+                android:id="@+id/account_update"
+                android:text="Update Profile"
+                android:textColor="@color/textWhite"
+                android:layout_margin="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/button_style_blue"
+                android:layout_marginBottom="60dp"
+                android:layout_centerHorizontal="true" />
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

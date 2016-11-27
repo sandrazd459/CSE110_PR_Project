@@ -167,6 +167,7 @@ public class Main_navigation extends AppCompatActivity {
             }
         });
 
+        /*
         profileSettingBtn = (Button) findViewById(R.id.account_setting);
 
         profileSettingBtn.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +185,9 @@ public class Main_navigation extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(Main_navigation.this, Welcome.class));
             }
-        });
+        });*/
+
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();

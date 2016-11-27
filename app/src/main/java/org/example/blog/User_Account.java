@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.Button;
@@ -37,6 +38,9 @@ public class User_Account extends AppCompatActivity{
     private FirebaseUser user;
     private DatabaseReference mDatabaseRef;
 
+    RelativeLayout userAccountSetting;
+    TextView offerHistory;
+
     TextView userEmailView;
     TextView userNameView;
     TextView phoneView;
@@ -58,11 +62,62 @@ public class User_Account extends AppCompatActivity{
         final ArrayList<Post> req = b.getParcelableArrayList("reqArr");
         final ArrayList<Post> sell = b.getParcelableArrayList("sellArr");
 
+
         userEmailView = (TextView)findViewById(R.id.user_email);
         userNameView = (TextView)findViewById(R.id.user_name);
         phoneView = (TextView)findViewById(R.id.user_phone);
         additionalInfoView = (TextView)findViewById(R.id.additional_info);
 
+        //go to update profile
+        userAccountSetting = (RelativeLayout) findViewById(R.id.account_setting);
+        userAccountSetting.setClickable(true);
+        userAccountSetting.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent();
+                intent.setClass(User_Account.this, UserProfileSetupController.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//这段代码意思，如果这个activity已经启动了，就不产生新的activity，而只是把这个activity实例加到栈顶来就可以了。
+                intent.putExtra("account","update");
+                startActivity(intent);
+            }
+        });
+
+        //offer history
+        offerHistory= (TextView) findViewById(R.id.sell_history);
+        offerHistory.setClickable(true);
+        offerHistory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Bundle rBundle = new Bundle();
+                Intent intentReq = new Intent(User_Account.this, User_Posts.class);
+                rBundle.putParcelableArrayList("sellArr", sell);
+                rBundle.putParcelableArrayList("reqArr", req);
+                rBundle.putString("option","sell");
+
+                intentReq.putExtras(rBundle);
+                startActivity(intentReq);
+            }
+        });
+
+        //request history
+        offerHistory= (TextView) findViewById(R.id.req_history);
+        offerHistory.setClickable(true);
+        offerHistory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Bundle rBundle = new Bundle();
+                Intent intentReq = new Intent(User_Account.this, User_Posts.class);
+                rBundle.putParcelableArrayList("sellArr", sell);
+                rBundle.putParcelableArrayList("reqArr", req);
+                rBundle.putString("option","req");
+
+
+                intentReq.putExtras(rBundle);
+                startActivity(intentReq);
+            }
+        });
+
+        //logout
         final Button mLogoutBtn = (Button) findViewById(R.id.logout_button);
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,13 +223,17 @@ public class User_Account extends AppCompatActivity{
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+
             }
         };
         mDatabaseRef.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(userListener);
 
 
     }
+   /* @Override
+    public void onResume(){
+
+    }*/
 
     //remove listener
     @Override
