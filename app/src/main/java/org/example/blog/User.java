@@ -6,12 +6,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by hankliu on 11/16/16.
  */
 
+@IgnoreExtraProperties
 public class User {
     private String username, additional, frontPhoneNumber, midPhoneNumber, lastPhoneNumber;
     private ArrayList<String> ownPostsId;
@@ -53,6 +56,15 @@ public class User {
 
     public String getStringPhoneNumber() {
         return "(" + frontPhoneNumber + ")-" + midPhoneNumber + "-" + lastPhoneNumber;
+    }
+
+    public void updateUser(String username, String additional,
+                String frontPhoneNumber, String midPhoneNumber, String lastPhoneNumber) {
+        this.username = username;
+        this.additional = additional;
+        this.frontPhoneNumber = frontPhoneNumber;
+        this.midPhoneNumber = midPhoneNumber;
+        this.lastPhoneNumber = lastPhoneNumber;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
