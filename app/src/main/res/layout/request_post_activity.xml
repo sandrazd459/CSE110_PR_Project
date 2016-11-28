@@ -76,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="21dp"
             android:id="@+id/priceText"
-            android:hint="Price"
+            android:hint="($) Price"
             android:padding="5dp" />
 
         <EditText

@@ -65,7 +65,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1.0dip" />
 
-
             <!--phone number-->
             <TextView
                 android:id="@+id/txt_card"
@@ -185,7 +184,6 @@
                 android:background="@drawable/button_style_blue"
                 android:layout_marginBottom="60dp"
                 android:layout_centerHorizontal="true" />
-
 
         </LinearLayout>
     </ScrollView>
