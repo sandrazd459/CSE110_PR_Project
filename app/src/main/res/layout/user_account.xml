@@ -14,11 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:id="@+id/user_email"
-            android:paddingLeft="100dp"
             android:paddingTop="15dp"
             android:textSize="18sp"
             android:textStyle="normal|bold"
-            android:textColor="@android:color/holo_blue_light" />
+            android:textColor="@android:color/holo_blue_light"
+            android:textAlignment="center" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -174,7 +174,10 @@
                 android:text="Log Out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/logout_button" />
+                android:id="@+id/logout_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" />
         </LinearLayout>
 
 
