@@ -25,8 +25,9 @@ public class Welcome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        // log out every time when open the app since logout button disappears now.
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(Welcome.this, Main_navigation.class));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
 
