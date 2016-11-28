@@ -54,9 +54,7 @@ public class User_Posts extends AppCompatActivity {
             list = rList;
 
         //filter to only posts with connected uid
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        String uid = user.getUid();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         for(int i = 0; i<list.size();i++){
             if(!list.get(i).getUid().equals(uid)) {
@@ -80,8 +78,6 @@ public class User_Posts extends AppCompatActivity {
             }
         });
     }
-
-
 
     @Override
     protected void onStart() {
