@@ -62,6 +62,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog datePicker = new DatePickerDialog(Selling_Form.this, Selling_Form.this, year, month, day);
+                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePicker.show();
             }
         });
@@ -88,8 +89,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
             Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
-            //TODO bug:for now send to main_page to get the firebase list again
-            startActivity(new Intent(Selling_Form.this, Main_navigation.class));
+            startActivity(new Intent(Selling_Form.this, Loading_Sell_Posts.class));
         }
         else {
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
