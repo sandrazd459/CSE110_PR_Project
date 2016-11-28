@@ -67,6 +67,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Loading_Req_Posts" />
+        <activity android:name=".Loading_Sell_Posts"/>
     </application>
 
 </manifest>

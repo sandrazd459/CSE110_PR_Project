@@ -103,7 +103,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
             //TODO bug:for now send to main_page to get the firebase list again
-            startActivity(new Intent(Request_Form.this, Main_navigation.class));
+            startActivity(new Intent(Request_Form.this, Loading_Req_Posts.class));
         }
         else{
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();

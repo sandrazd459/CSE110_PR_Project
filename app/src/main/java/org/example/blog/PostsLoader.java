@@ -73,7 +73,6 @@ public class PostsLoader {
                         sorted.add(i, newPost);
                         break;
                     }
-
                 }
             }
         }
