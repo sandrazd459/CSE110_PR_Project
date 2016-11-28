@@ -1,6 +1,7 @@
 package org.example.blog;
 
-//This test is to test the welcome page(The first page)
+
+import android.support.design.widget.TextInputLayout;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -18,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -26,52 +28,56 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class WelcomeTest {
+public class register_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void welcomeTest() {
-        ViewInteraction textView = onView(
-                allOf(withText("Ride Share   "),
+    public void regi() {
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.welcome_signup), withText("Sign up"), isDisplayed()));
+        appCompatButton.perform(click());
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.email),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Ride Share   ")));
+        editText2.check(matches(isDisplayed()));
 
-        ViewInteraction relativeLayout = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.content),
+        ViewInteraction editText3 = onView(
+                allOf(withId(R.id.password),
+                        childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.decor_content_parent),
-                                        1)),
-                        0),
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
+                                        0),
+                                0),
                         isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
+        editText3.check(matches(isDisplayed()));
+
+        ViewInteraction editText4 = onView(
+                allOf(withId(R.id.password_confirm),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(TextInputLayout.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        editText4.check(matches(isDisplayed()));
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.welcome_login),
+                allOf(withId(R.id.sign_button),
                         childAtPosition(
                                 childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
                                         0),
-                                0),
+                                4),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.welcome_signup),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
 
     }
 

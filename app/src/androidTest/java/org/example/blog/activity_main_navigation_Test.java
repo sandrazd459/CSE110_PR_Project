@@ -1,7 +1,8 @@
- package org.example.blog;
+package org.example.blog;
 
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -12,7 +13,6 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,15 +28,19 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
+/**
+ * Created by julianlin on 11/25/16.
+ */
+
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class activity_main_navigation_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void mainActivityTest() {
+    public void mainTest() {
+        //login to the main page with email and password
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
         appCompatButton.perform(click());
@@ -52,29 +56,10 @@ public class MainActivityTest {
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.sign_button), withText("Login")));
         appCompatButton2.perform(scrollTo(), click());
+    }
 
-        ViewInteraction viewGroup = onView(
-                allOf(withId(R.id.action_bar),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar_container),
-                                        childAtPosition(
-                                                withId(R.id.decor_content_parent),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
-
-        ViewInteraction textView = onView(
-                allOf(withText("Main Navigation"),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar),
-                                        childAtPosition(
-                                                withId(R.id.action_bar_container),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("Main Navigation")));
-
+    public void testTheSellingListButton() {
+        //check if it exists
         ViewInteraction button = onView(
                 allOf(withId(R.id.sellingList),
                         childAtPosition(
@@ -85,7 +70,9 @@ public class MainActivityTest {
                                 0),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
+    }
 
+    public void testTheRequestListButton() {
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.requestList),
                         childAtPosition(
@@ -96,7 +83,9 @@ public class MainActivityTest {
                                 1),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
+    }
 
+    public void testTheSettingButton() {
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.account_setting),
                         childAtPosition(
@@ -107,7 +96,9 @@ public class MainActivityTest {
                                 2),
                         isDisplayed()));
         button3.check(matches(isDisplayed()));
+    }
 
+    public void testTheLogoutButton(){
         ViewInteraction button4 = onView(
                 allOf(withId(R.id.logout_button),
                         childAtPosition(
@@ -118,51 +109,6 @@ public class MainActivityTest {
                                 3),
                         isDisplayed()));
         button4.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.lists),
-                        childAtPosition(
-                                allOf(withId(R.id.bb_bottom_bar_item_container),
-                                        childAtPosition(
-                                                withId(R.id.bb_bottom_bar_outer_container),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.home),
-                        childAtPosition(
-                                allOf(withId(R.id.bb_bottom_bar_item_container),
-                                        childAtPosition(
-                                                withId(R.id.bb_bottom_bar_outer_container),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout3 = onView(
-                allOf(withId(R.id.account),
-                        childAtPosition(
-                                allOf(withId(R.id.bb_bottom_bar_item_container),
-                                        childAtPosition(
-                                                withId(R.id.bb_bottom_bar_outer_container),
-                                                0)),
-                                2),
-                        isDisplayed()));
-        linearLayout3.check(matches(isDisplayed()));
-
-        ViewInteraction relativeLayout = onView(
-                allOf(withId(R.id.activity_main_navigation),
-                        childAtPosition(
-                                allOf(withId(R.id.bb_user_content_container),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
-
     }
 
     private static Matcher<View> childAtPosition(

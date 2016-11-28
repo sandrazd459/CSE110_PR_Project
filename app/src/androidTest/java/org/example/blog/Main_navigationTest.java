@@ -53,8 +53,7 @@ public class Main_navigationTest {
     public void testRequestNewRideButton() {
         //Attempt to press the request new ride button
         //See if it brings us to Ride Sell Form activity
-        onView(withId(R.id.requestList))
-                .perform(click());
+
     }
 //
 
