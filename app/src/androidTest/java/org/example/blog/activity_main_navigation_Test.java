@@ -40,6 +40,7 @@ public class activity_main_navigation_Test {
 
     @Test
     public void mainTest() {
+        //This test is to be run when loggout
         //login to the main page with email and password
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
