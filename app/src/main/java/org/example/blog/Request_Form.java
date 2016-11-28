@@ -62,6 +62,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog datePicker = new DatePickerDialog(Request_Form.this, Request_Form.this, year, month, day);
+                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePicker.show();
             }
         });
@@ -82,6 +83,20 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         String text_addit = mAdditional.getText().toString();
 
         Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
+
+        //get today date
+        Calendar cal = Calendar.getInstance();
+        int tyear = cal.get(Calendar.YEAR);
+        int tmonth = cal.get(Calendar.MONTH);
+        int tday = cal.get(Calendar.DAY_OF_MONTH);
+
+        int today = (tyear * 10000) + ((tmonth + 1) * 100) + tday;
+
+        //if you choose an date in the past
+
+        System.out.println("choosen date:" +finDate);
+        System.out.println("today:" +today);
+
 
         if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finDate != 0 ){
 

@@ -62,6 +62,7 @@ public class Selling_Form extends AppCompatActivity implements DatePickerDialog.
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog datePicker = new DatePickerDialog(Selling_Form.this, Selling_Form.this, year, month, day);
+                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePicker.show();
             }
         });

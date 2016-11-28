@@ -34,7 +34,7 @@
             android:label="History"/>
         <activity
             android:name=".Main_navigation"
-            android:label="Main Navigation" />
+            android:label="UCSD Rideshare" />
         <activity
             android:name=".Request_Form"
             android:label="Ride Request Form" />
