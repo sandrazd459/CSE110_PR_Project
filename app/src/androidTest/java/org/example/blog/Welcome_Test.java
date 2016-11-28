@@ -1,6 +1,6 @@
 package org.example.blog;
 
-// test welcome page
+
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -21,43 +21,18 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-
-/**
- * Created by julianlin on 11/25/16.
- */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class welcome_Test {
+public class Welcome_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void welcomeTest2() {
-        ViewInteraction textView = onView(
-                allOf(withText("UCSD Rideshare"),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar),
-                                        childAtPosition(
-                                                withId(R.id.action_bar_container),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("UCSD Rideshare")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withText("Ride Share   "),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView2.check(matches(isDisplayed()));
-
+    public void welcomeTest() {
+        //testing the login button on the main page
         ViewInteraction button = onView(
                 allOf(withId(R.id.welcome_login),
                         childAtPosition(
@@ -68,6 +43,7 @@ public class welcome_Test {
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
+        //testing the sign up button on the main page
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.welcome_signup),
                         childAtPosition(
@@ -77,6 +53,16 @@ public class welcome_Test {
                                 0),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
+
+        //testing the layout of buttons on the main page
+        ViewInteraction linearLayout = onView(
+                allOf(childAtPosition(
+                        childAtPosition(
+                                withId(android.R.id.content),
+                                0),
+                        0),
+                        isDisplayed()));
+        linearLayout.check(matches(isDisplayed()));
 
     }
 

@@ -45,9 +45,10 @@ public class sell_post_activity_Test {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
         appCompatButton.perform(click());
-        //The following code will be needed for the first time log in
+        //Because the firebase will remember your session, this test may fail if the user is currently log in
+        //So run Logout_Test or disable the following code to solve the problem
+        //The following code is to loggLin
         //#==================================================================#
-
         ViewInteraction appCompatEditText = onView(
                 withId(R.id.email));
         appCompatEditText.perform(scrollTo(), replaceText("shl455@ucsd.edu"), closeSoftKeyboard());
@@ -67,54 +68,54 @@ public class sell_post_activity_Test {
             System.out.println(e);
         }
         //#==================================================================#
-//
-//        ViewInteraction appCompatButton3 = onView(
-//                allOf(withId(R.id.sellingList), withText("Offer New Ride"),
-//                        withParent(allOf(withId(R.id.activity_main_navigation),
-//                                withParent(withId(R.id.bb_user_content_container)))),
-//                        isDisplayed()));
-//        appCompatButton3.perform(click());
-//
-//        ViewInteraction editText = onView(
-//                allOf(withId(R.id.startText),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.activity_main),
-//                                        0),
-//                                0),
-//                        isDisplayed()));
-//        editText.check(matches(isDisplayed()));
-//
-//        ViewInteraction editText2 = onView(
-//                allOf(withId(R.id.destText),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        withId(R.id.activity_main),
-//                                        0),
-//                                1),
-//                        isDisplayed()));
-//        editText2.check(matches(isDisplayed()));
-//
-//        ViewInteraction button = onView(
-//                allOf(withId(R.id.dateBtn),
-//                        childAtPosition(
-//                                childAtPosition(
-//                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-//                                        2),
-//                                1),
-//                        isDisplayed()));
-//        button.check(matches(isDisplayed()));
-//
-//        ViewInteraction button2 = onView(
-//                allOf(withId(R.id.postBtn),
-//                        childAtPosition(
-//                                allOf(withId(R.id.activity_main),
-//                                        childAtPosition(
-//                                                withId(android.R.id.content),
-//                                                0)),
-//                                1),
-//                        isDisplayed()));
-//        button2.check(matches(isDisplayed()));
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.sellingList), withText("Offer New Ride"),
+                        withParent(allOf(withId(R.id.activity_main_navigation),
+                                withParent(withId(R.id.bb_user_content_container)))),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.startText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.activity_main),
+                                        0),
+                                0),
+                        isDisplayed()));
+        editText.check(matches(isDisplayed()));
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.destText),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.activity_main),
+                                        0),
+                                1),
+                        isDisplayed()));
+        editText2.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.dateBtn),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        2),
+                                1),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.postBtn),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_main),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        button2.check(matches(isDisplayed()));
 
     }
 

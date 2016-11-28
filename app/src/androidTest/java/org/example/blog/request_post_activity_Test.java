@@ -46,8 +46,8 @@ public class request_post_activity_Test {
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
         appCompatButton.perform(click());
 
-        //After several times of entering the email and password, the email/password will be remembered
-        //However, for the first time of testing, we need to enable the following code
+        //Because the firebase will remember your session, this test may fail if the user is currently log in
+        //So run logout or disable the following code to solve the problem
         //#==================================================================#
         ViewInteraction appCompatEditText = onView(
                 withId(R.id.email));

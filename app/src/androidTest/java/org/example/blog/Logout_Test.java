@@ -21,19 +21,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-/**
- * Created by julianlin on 11/25/16.
- */
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Logout {
+public class Logout_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
     @Test
-    public void logout() {
+    public void logout1() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
         appCompatButton.perform(click());
@@ -50,11 +46,15 @@ public class Logout {
 //                allOf(withId(R.id.sign_button), withText("Login")));
 //        appCompatButton2.perform(scrollTo(), click());
 
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.logout_button), withText("Log Out"),
-                        withParent(allOf(withId(R.id.activity_main_navigation),
-                                withParent(withId(R.id.bb_user_content_container)))),
+        ViewInteraction linearLayout = onView(
+                allOf(withId(R.id.account),
+                        withParent(allOf(withId(R.id.bb_bottom_bar_item_container),
+                                withParent(withId(R.id.bb_bottom_bar_outer_container)))),
                         isDisplayed()));
+        linearLayout.perform(click());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.logout_button), withText("Log Out"), isDisplayed()));
         appCompatButton3.perform(click());
 
     }
