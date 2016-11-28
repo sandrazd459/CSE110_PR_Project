@@ -78,7 +78,7 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
         String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
-        String price = "$"+ mPrice.getText().toString();
+        String price = "$" + mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
         Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);

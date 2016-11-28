@@ -80,8 +80,8 @@ public class Main_navigation extends AppCompatActivity {
 
                                     Bundle sBundle = new Bundle();
                                     Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
-                                    sBundle.putParcelableArrayList("sellArr", sortedReq);
-                                    sBundle.putParcelableArrayList("reqArr", sortedSell);
+                                    sBundle.putParcelableArrayList("sellArr", sortedSell);
+                                    sBundle.putParcelableArrayList("reqArr", sortedReq);
 
                                     intentSell.putExtras(sBundle);
                                     startActivity(intentSell);
