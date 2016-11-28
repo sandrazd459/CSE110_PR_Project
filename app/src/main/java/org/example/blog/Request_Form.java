@@ -25,13 +25,11 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
 
     private EditText mStart;
     private EditText mDestination;
-    //private EditText mDate;
     private EditText mPrice;
     private EditText mAdditional;
-
     private Button mPostBtn;
     Button dateBtn;
-    int year, month, day, finYear, finMonth, finDay;
+    int year, month, day, finDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,43 +62,51 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog datePicker = new DatePickerDialog(Request_Form.this, Request_Form.this, year, month, day);
+                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePicker.show();
             }
         });
     }
 
-    @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        finYear = year;
-        finMonth = month + 1;
-        finDay = dayOfMonth;
-
-        ((TextView)(findViewById(R.id.dateBtn))).setText(finMonth + "/" + finDay + "/" + finYear);
+        finDate = (year * 10000) + ((month + 1) * 100) + dayOfMonth;
+        ((TextView)(findViewById(R.id.dateBtn))).setText((month + 1) + "/" + dayOfMonth + "/" + year);
     }
 
     private void startPosting() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String username = user.getDisplayName();
         String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
-        String price = mPrice.getText().toString();
+        String price = "$" + mPrice.getText().toString();
         String text_addit = mAdditional.getText().toString();
 
-        Post tmp = new Post(username, uid, price, text_dest, text_start, text_addit,finMonth, finDay, finYear);
+        Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
+
+        //get today date
+        Calendar cal = Calendar.getInstance();
+        int tyear = cal.get(Calendar.YEAR);
+        int tmonth = cal.get(Calendar.MONTH);
+        int tday = cal.get(Calendar.DAY_OF_MONTH);
+
+        int today = (tyear * 10000) + ((tmonth + 1) * 100) + tday;
+
+        //if you choose an date in the past
+
+        System.out.println("choosen date:" +finDate);
+        System.out.println("today:" +today);
 
 
-        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finYear != 0 ){
+        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finDate != 0 ){
 
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
             //TODO bug:for now send to main_page to get the firebase list again
-            startActivity(new Intent(Request_Form.this, Main_navigation.class));
+            startActivity(new Intent(Request_Form.this, Loading_Req_Posts.class));
         }
         else{
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
-
         }
     }
 }

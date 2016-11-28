@@ -42,48 +42,28 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
     }
 
     @Override
-    public void onBindViewHolder(List_Holder holder, int position) {
-
-        final int pos = position;
+    public void onBindViewHolder(List_Holder holder, final int pos) {
 
         //binding data
-        holder.setFrom(mList.get(position).getStart());
-        holder.setTo(mList.get(position).getDestination());
-        String s = stringMonth(mList.get(position).getMonth())+" "+mList.get(position).getDay()+", "+mList.get(position).getYear();
-        holder.setDate(s);
-        holder.setPrice(mList.get(position).getPrice());
+        holder.setFrom(mList.get(pos).getStart());
+        holder.setTo(mList.get(pos).getDestination());
+        holder.setDate(mList.get(pos).getStringDate());
+        holder.setPrice(mList.get(pos).getPrice());
 
         //on item click
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Snackbar.make(v,mList.get(pos).getDestination(),Snackbar.LENGTH_LONG).show();
                 Bundle bundle = new Bundle();
                 Intent pop = new Intent(c, Pop_window.class);
-                bundle.putString("username", mList.get(pos).getUsername());
                 bundle.putString("uid", mList.get(pos).getUid());
                 bundle.putString("start",mList.get(pos).getStart());
                 bundle.putString("dest",mList.get(pos).getDestination());
                 bundle.putString("price",mList.get(pos).getPrice());
                 bundle.putString("addit",mList.get(pos).getAdditional());
-                bundle.putInt("day",mList.get(pos).getDay());
-                bundle.putInt("month",mList.get(pos).getMonth());
-                bundle.putInt("year",mList.get(pos).getYear());
+                bundle.putString("date", mList.get(pos).getStringDate());
                 pop.putExtras(bundle);
                 c.startActivity(pop);
-            }
-        });
-        holder.setList_clickListener(new List_ClickListener() {
-            @Override
-            public void OnItemClick(View v, int pos) {
-
-                /*Snackbar.make(v,mList.get(pos).getAdditional(),Snackbar.LENGTH_SHORT).show();
-                ((TextView)(v.findViewById(R.id.popStart))).setText(mList.get(pos).getStart());
-                ((TextView)(v.findViewById(R.id.popDest))).setText(mList.get(pos).getDestination());
-                //((TextView)(v.findViewById(R.id.popStart))).setText(mList.get(pos).getStart());
-                ((TextView)(v.findViewById(R.id.popPrice))).setText(mList.get(pos).getPrice());
-                ((TextView)(v.findViewById(R.id.popAddit))).setText(mList.get(pos).getAdditional());
-                c.startActivity(new Intent(c, Pop_window.class));*/
             }
         });
     }

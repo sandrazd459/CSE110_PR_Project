@@ -84,6 +84,7 @@ public class Login extends AppCompatActivity {
                     }
                     if(value.equals("up")){
                         Intent gotoSetupProfile = new Intent(Login.this, UserProfileSetupController.class);
+                        gotoSetupProfile.putExtra("account","create");
                         startActivity(gotoSetupProfile);
                     }
 
