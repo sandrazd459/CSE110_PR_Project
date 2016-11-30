@@ -35,39 +35,51 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class request_post_activity_Test {
+public class request_new_ride_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
-    @Test
-    public void rTest() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
-        appCompatButton.perform(click());
+    public void login(){
+        try{
+            ViewInteraction appCompatButton = onView(
+                    allOf(withId(R.id.welcome_login), withText("Log in"), isDisplayed()));
+            appCompatButton.perform(click());
 
-        //Because the firebase will remember your session, this test may fail if the user is currently log in
-        //So run logout or disable the following code to solve the problem
-        //#==================================================================#
-        ViewInteraction appCompatEditText = onView(
-                withId(R.id.email));
-        appCompatEditText.perform(scrollTo(), replaceText("shl455@ucsd.edu"), closeSoftKeyboard());
+            ViewInteraction appCompatEditText = onView(
+                    withId(R.id.email));
+            appCompatEditText.perform(scrollTo(), replaceText("shl455@ucsd.edu"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText2 = onView(
-                withId(R.id.password));
-        appCompatEditText2.perform(scrollTo(), replaceText("c20070124"), closeSoftKeyboard());
+            ViewInteraction appCompatEditText2 = onView(
+                    withId(R.id.password));
+            appCompatEditText2.perform(scrollTo(), replaceText("c20070124"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.sign_button), withText("Login")));
-        appCompatButton2.perform(scrollTo(), click());
+            ViewInteraction appCompatButton2 = onView(
+                    allOf(withId(R.id.sign_button), withText("Login")));
+            appCompatButton2.perform(scrollTo(), click());
+        }
+        catch (Exception e){}
 
         try {
-            // thread to sleep for 3000 milliseconds
-            Thread.sleep(3000);
+            // thread to sleep for 5000 milliseconds
+            Thread.sleep(5000);
         } catch (Exception e) {
             System.out.println(e);
         }
-        //#==================================================================#
+    }
+
+    @Test
+    public void request_new_ride_Test() {
+//        try {
+//            // thread to sleep for 5000 milliseconds
+//            Thread.sleep(5000);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+        //given the user is logged in and on the main navigation page
+        login();
+
+        //when the user hit Request New Ride button
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.requestList), withText("Request New Ride"),
                         withParent(allOf(withId(R.id.activity_main_navigation),
@@ -75,6 +87,7 @@ public class request_post_activity_Test {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
+        //Then the user will be able to request a new ride
         ViewInteraction editText = onView(
                 allOf(withId(R.id.startText),
                         childAtPosition(
@@ -116,7 +129,30 @@ public class request_post_activity_Test {
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
 
+//        logout();
+//        try {
+//            // thread to sleep for 5000 milliseconds
+//            Thread.sleep(5000);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
+    }
+
+    public void logout(){
+        try {
+            ViewInteraction linearLayout = onView(
+                    allOf(withId(R.id.account),
+                            withParent(allOf(withId(R.id.bb_bottom_bar_item_container),
+                                    withParent(withId(R.id.bb_bottom_bar_outer_container)))),
+                            isDisplayed()));
+            linearLayout.perform(click());
+
+            ViewInteraction appCompatButton3 = onView(
+                    allOf(withId(R.id.logout_button), withText("Log Out"), isDisplayed()));
+            appCompatButton3.perform(click());
+        }
+        catch (Exception e){}
     }
 
     private static Matcher<View> childAtPosition(

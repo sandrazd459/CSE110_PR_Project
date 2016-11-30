@@ -23,6 +23,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
@@ -33,12 +34,39 @@ public class register_Test {
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
+    public void logout(){
+        try {
+            ViewInteraction linearLayout = onView(
+                    allOf(withId(R.id.account),
+                            withParent(allOf(withId(R.id.bb_bottom_bar_item_container),
+                                    withParent(withId(R.id.bb_bottom_bar_outer_container)))),
+                            isDisplayed()));
+            linearLayout.perform(click());
+
+            ViewInteraction appCompatButton3 = onView(
+                    allOf(withId(R.id.logout_button), withText("Log Out"), isDisplayed()));
+            appCompatButton3.perform(click());
+        }
+        catch (Exception e){}
+    }
+
     @Test
-    public void regi() {
+    public void register_test() {
+//        try {
+//            // thread to sleep for 5000 milliseconds
+//            Thread.sleep(5000);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+        //given the user is logout and on the welcome page
+        logout();
+
+        //when the user click sign up button
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.welcome_signup), withText("Sign up"), isDisplayed()));
         appCompatButton.perform(click());
 
+        //then user will go to sign up page and be able to sign up for an account
         ViewInteraction editText2 = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -78,6 +106,13 @@ public class register_Test {
                                 4),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
+
+        try {
+            // thread to sleep for 5000 milliseconds
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
