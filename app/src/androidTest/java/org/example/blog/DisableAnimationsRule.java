@@ -9,10 +9,6 @@ import org.junit.runners.model.Statement;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-/**
- * Created by julianlin on 11/25/16.
- */
-
 public class DisableAnimationsRule implements TestRule {
     private Method mSetAnimationScalesMethod;
     private Method mGetAnimationScalesMethod;

@@ -6,8 +6,12 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
-import org.hamcrest.core.IsInstanceOf;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,17 +28,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Logout_Test {
+public class view_sell_list_Test {
 
     @Rule
     public ActivityTestRule<Welcome> mActivityTestRule = new ActivityTestRule<>(Welcome.class);
 
-    //given the user is loged in and on main navigation page
+    //given the user is loged in
     public void login(){
         try{
             ViewInteraction appCompatButton = onView(
@@ -52,7 +53,6 @@ public class Logout_Test {
             ViewInteraction appCompatButton2 = onView(
                     allOf(withId(R.id.sign_button), withText("Login")));
             appCompatButton2.perform(scrollTo(), click());
-
         }
         catch (Exception e){}
         //after log in button is pressed, it takes some times to load the main_navigation_Test navigation page
@@ -67,34 +67,64 @@ public class Logout_Test {
     }
 
     @Test
-    public void logout() {
+    public void sellpostactivity() {
 //        try {
 //            // thread to sleep for 5000 milliseconds
 //            Thread.sleep(5000);
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
-        //Given that the "shl455@ucsd.edu" account exists and is logged in
+        //given the user is loged in and on the main page
         login();
 
-        //When the user goes to the account page
+        //when he/she click the list button on the bottombar
         ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.account),
+                allOf(withId(R.id.lists),
                         withParent(allOf(withId(R.id.bb_bottom_bar_item_container),
                                 withParent(withId(R.id.bb_bottom_bar_outer_container)))),
                         isDisplayed()));
         linearLayout.perform(click());
+        //and click sell List
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Sell List"), isDisplayed()));
+        appCompatTextView.perform(click());
 
-        //and hit log out
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.logout_button), withText("Log Out"), isDisplayed()));
-        appCompatButton3.perform(click());
-
-        //Then the welcome page is presented and shows the user to be logged out.
-        ViewInteraction button = onView(
-                allOf(withId(R.id.welcome_login),
+        //then he will be able to view the sell list
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.recyclerList),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.activity_setttings_),
+                                        0),
+                                1),
                         isDisplayed()));
-        button.check(matches(isDisplayed()));
+        recyclerView.check(matches(isDisplayed()));
+
+        ViewInteraction linearLayout2 = onView(
+                allOf(withId(R.id.home),
+                        withParent(allOf(withId(R.id.bb_bottom_bar_item_container),
+                                withParent(withId(R.id.bb_bottom_bar_outer_container)))),
+                        isDisplayed()));
+        linearLayout2.perform(click());
+
     }
 
+    private static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher, final int position) {
+
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent)
+                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
 }
