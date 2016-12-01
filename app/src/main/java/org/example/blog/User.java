@@ -58,15 +58,6 @@ public class User {
         return "(" + frontPhoneNumber + ")-" + midPhoneNumber + "-" + lastPhoneNumber;
     }
 
-    public void updateUser(String username, String additional,
-                String frontPhoneNumber, String midPhoneNumber, String lastPhoneNumber) {
-        this.username = username;
-        this.additional = additional;
-        this.frontPhoneNumber = frontPhoneNumber;
-        this.midPhoneNumber = midPhoneNumber;
-        this.lastPhoneNumber = lastPhoneNumber;
-    }
-
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public User createFromParcel(Parcel in) {
             return new User(in);

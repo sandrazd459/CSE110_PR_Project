@@ -2,8 +2,8 @@ package org.example.blog;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -19,10 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-public class Request_Form extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class SellingForm extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private DatabaseReference mDatabase;
-
     private EditText mStart;
     private EditText mDestination;
     private EditText mPrice;
@@ -34,14 +33,15 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.request_post_activity);
+        setContentView(R.layout.sell_post_activity);
 
         dateBtn = (Button) findViewById(R.id.dateBtn);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Request Posts");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Sell Posts");
 
         mStart = (EditText) findViewById(R.id.startText);
         mDestination = (EditText) findViewById(R.id.destText);
+        //mDate = (EditText) findViewById(R.id.dateText);
         mPrice = (EditText) findViewById(R.id.priceText);
         mAdditional = (EditText) findViewById(R.id.additText);
         mPostBtn = (Button) findViewById(R.id.postBtn);
@@ -61,51 +61,37 @@ public class Request_Form extends AppCompatActivity implements DatePickerDialog.
                 month = cal.get(Calendar.MONTH);
                 day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePicker = new DatePickerDialog(Request_Form.this, Request_Form.this, year, month, day);
+                DatePickerDialog datePicker = new DatePickerDialog(SellingForm.this, SellingForm.this, year, month, day);
                 datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePicker.show();
             }
         });
     }
 
+    @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         finDate = (year * 10000) + ((month + 1) * 100) + dayOfMonth;
         ((TextView)(findViewById(R.id.dateBtn))).setText((month + 1) + "/" + dayOfMonth + "/" + year);
     }
 
-    private void startPosting() {
+    private void startPosting(){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         String text_start = mStart.getText().toString().trim();
         String text_dest = mDestination.getText().toString().trim();
         String price = "$" + mPrice.getText().toString();
+
         String text_addit = mAdditional.getText().toString();
 
-        Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
+        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finDate != 0){
 
-        //get today date
-        Calendar cal = Calendar.getInstance();
-        int tyear = cal.get(Calendar.YEAR);
-        int tmonth = cal.get(Calendar.MONTH);
-        int tday = cal.get(Calendar.DAY_OF_MONTH);
-
-        int today = (tyear * 10000) + ((tmonth + 1) * 100) + tday;
-
-        //if you choose an date in the past
-
-        System.out.println("choosen date:" +finDate);
-        System.out.println("today:" +today);
-
-
-        if(!TextUtils.isEmpty(text_start) && !TextUtils.isEmpty(text_dest) && finDate != 0 ){
-
+            Post tmp = new Post(uid, price, text_dest, text_start, text_addit, finDate);
             DatabaseReference newPost = mDatabase.push();
             newPost.setValue(tmp);
-            //TODO bug:for now send to main_page to get the firebase list again
-            startActivity(new Intent(Request_Form.this, Loading_Req_Posts.class));
+            startActivity(new Intent(SellingForm.this, LoadingSellPosts.class));
         }
-        else{
+        else {
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();
         }
     }

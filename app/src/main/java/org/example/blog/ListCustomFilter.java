@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * Created by Alan Beas on 11/6/2016.
  */
 
-public class List_CustomFilter extends Filter {
+public class ListCustomFilter extends Filter {
 
-    List_Adapter mAdapter;
+    ListAdapter mAdapter;
     ArrayList<Post> mFilterList;
 
-    public List_CustomFilter(List_Adapter adapter, ArrayList<Post> filterlist){
+    public ListCustomFilter(ListAdapter adapter, ArrayList<Post> filterlist){
         this.mAdapter = adapter;
         this.mFilterList = filterlist;
 

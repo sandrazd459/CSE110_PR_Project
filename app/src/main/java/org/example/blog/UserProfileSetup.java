@@ -1,7 +1,6 @@
 package org.example.blog;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
-import com.firebase.client.core.Tag;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.*;
 
-public class UserProfileSetupController extends AppCompatActivity {
+public class UserProfileSetup extends AppCompatActivity {
 
-    //private FirebaseUser mUser;
     PostsLoader postsLoader;
     ArrayList<Post> sortedReq = new ArrayList<>();
     ArrayList<Post> sortedSell = new ArrayList<>();
@@ -72,7 +67,7 @@ public class UserProfileSetupController extends AppCompatActivity {
         });
     }
 
-    /**changed from onStart from User_Account class*/
+    /**changed from onStart from UserAccount class*/
     @Override
     public void onStart() {
         super.onStart();
@@ -180,7 +175,7 @@ public class UserProfileSetupController extends AppCompatActivity {
                     });
 
             //TODO bug:for now send to main_page to get the firebase list again
-            startActivity(new Intent(UserProfileSetupController.this, Main_navigation.class));
+            startActivity(new Intent(UserProfileSetup.this, MainNavigation.class));
         }
         else {
             Toast.makeText(this,"Please Fill In Required Fields",Toast.LENGTH_SHORT).show();

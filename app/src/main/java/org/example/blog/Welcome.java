@@ -5,18 +5,12 @@ package org.example.blog;
  */
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 public class Welcome extends AppCompatActivity {
 
@@ -26,7 +20,7 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(Welcome.this, Main_navigation.class));
+            startActivity(new Intent(Welcome.this, MainNavigation.class));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);

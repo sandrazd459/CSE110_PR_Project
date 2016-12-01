@@ -64,18 +64,17 @@ public class Post implements Parcelable{
     }
     public void setDestination(String destination) { this.destination = destination; }
 
-    public String getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
     public void setPrice(String price) {
-        this.price = price;
+        if (price.equals("$")) this.price = "$0";
+        else this.price = price;
     }
 
     public String getStringDate() {
         int year = date / 10000;
         int month = (date % 10000) / 100;
         int day = date % 100;
-        return stringMonth(month)+" "+ day + ", " + year;
+        return stringMonth(month) + " " + day + ", " + year;
     }
 
 

@@ -9,7 +9,7 @@ import android.widget.TextView;
  * Created by Alan Beas on 11/12/2016.
  */
 
-public class List_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         View mView;
@@ -18,11 +18,11 @@ public class List_Holder extends RecyclerView.ViewHolder implements View.OnClick
         TextView mDate;
         TextView mPric;
 
-        List_ClickListener list_clickListener;
+        ListClickListener list_clickListener;
 
         Context cs;
 
-        public List_Holder(View itemView) {
+        public ListHolder(View itemView) {
             super(itemView);
             mView = itemView;
             this.cs = itemView.getContext();
@@ -54,17 +54,12 @@ public class List_Holder extends RecyclerView.ViewHolder implements View.OnClick
             post_price.setText(priceText);
         }
 
-        public Context getCont(){
-            return cs;
-        }
-
-
     @Override
     public void onClick(View v) {
         this.list_clickListener.OnItemClick(v, getLayoutPosition());
     }
 
-    public void setList_clickListener(List_ClickListener ls){
+    public void setList_clickListener(ListClickListener ls){
         this.list_clickListener=ls;
     }
 }

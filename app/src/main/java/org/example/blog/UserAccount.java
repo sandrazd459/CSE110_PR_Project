@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Created by Sandra on 11/10/2016.
  */
 
-public class User_Account extends AppCompatActivity{
+public class UserAccount extends AppCompatActivity{
     private static final String TAG = "Email and Password";
     //for login function
     private FirebaseAuth mAuth;
@@ -78,7 +78,7 @@ public class User_Account extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Intent intent = new Intent();
-                intent.setClass(User_Account.this, UserProfileSetupController.class);
+                intent.setClass(UserAccount.this, UserProfileSetup.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//这段代码意思，如果这个activity已经启动了，就不产生新的activity，而只是把这个activity实例加到栈顶来就可以了。
                 intent.putExtra("account","update");
                 startActivity(intent);
@@ -92,7 +92,7 @@ public class User_Account extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Bundle rBundle = new Bundle();
-                Intent intentReq = new Intent(User_Account.this, User_Posts.class);
+                Intent intentReq = new Intent(UserAccount.this, UserPosts.class);
                 rBundle.putParcelableArrayList("sellArr", sell);
                 rBundle.putParcelableArrayList("reqArr", req);
                 rBundle.putString("option","sell");
@@ -109,7 +109,7 @@ public class User_Account extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Bundle rBundle = new Bundle();
-                Intent intentReq = new Intent(User_Account.this, User_Posts.class);
+                Intent intentReq = new Intent(UserAccount.this, UserPosts.class);
                 rBundle.putParcelableArrayList("sellArr", sell);
                 rBundle.putParcelableArrayList("reqArr", req);
                 rBundle.putString("option","req");
@@ -137,7 +137,7 @@ public class User_Account extends AppCompatActivity{
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(User_Account.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(UserAccount.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -147,7 +147,7 @@ public class User_Account extends AppCompatActivity{
                                 case R.id.submenuSell:
                                     //mDataBase = mDataBase.child("Sell Posts");
                                     Bundle sBundle = new Bundle();
-                                    Intent intentSell = new Intent(User_Account.this, List_of_Sells.class);
+                                    Intent intentSell = new Intent(UserAccount.this, ListOfSells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
                                     sBundle.putParcelableArrayList("reqArr", req);
 
@@ -156,7 +156,7 @@ public class User_Account extends AppCompatActivity{
                                     return true;
                                 case R.id.submenuReq:
                                     Bundle rBundle = new Bundle();
-                                    Intent intentReq = new Intent(User_Account.this, List_of_Requests.class);
+                                    Intent intentReq = new Intent(UserAccount.this, ListOfRequests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
 
@@ -170,7 +170,7 @@ public class User_Account extends AppCompatActivity{
                 }
 
                 if(menuItemId == R.id.home){
-                    startActivity(new Intent(User_Account.this, Main_navigation.class));
+                    startActivity(new Intent(UserAccount.this, MainNavigation.class));
                 }
             }
 
@@ -178,7 +178,7 @@ public class User_Account extends AppCompatActivity{
             public void onMenuTabReSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(User_Account.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(UserAccount.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -188,7 +188,7 @@ public class User_Account extends AppCompatActivity{
                                 case R.id.submenuSell:
                                     //mDataBase = mDataBase.child("Sell Posts");
                                     Bundle sBundle = new Bundle();
-                                    Intent intentSell = new Intent(User_Account.this, List_of_Sells.class);
+                                    Intent intentSell = new Intent(UserAccount.this, ListOfSells.class);
                                     sBundle.putParcelableArrayList("sellArr", sell);
                                     sBundle.putParcelableArrayList("reqArr", req);
 
@@ -197,7 +197,7 @@ public class User_Account extends AppCompatActivity{
                                     return true;
                                 case R.id.submenuReq:
                                     Bundle rBundle = new Bundle();
-                                    Intent intentReq = new Intent(User_Account.this, List_of_Requests.class);
+                                    Intent intentReq = new Intent(UserAccount.this, ListOfRequests.class);
                                     rBundle.putParcelableArrayList("reqArr", req);
                                     rBundle.putParcelableArrayList("sellArr", sell);
 
@@ -210,7 +210,7 @@ public class User_Account extends AppCompatActivity{
                     });
                 }
                 if(menuItemId == R.id.home){
-                    startActivity(new Intent(User_Account.this, Main_navigation.class));
+                    startActivity(new Intent(UserAccount.this, MainNavigation.class));
                 }
             }
         });//end of bottom bar
@@ -237,7 +237,7 @@ public class User_Account extends AppCompatActivity{
 
     private void logout() {
         mAuth.signOut();
-        startActivity(new Intent(User_Account.this, Welcome.class));
+        startActivity(new Intent(UserAccount.this, Welcome.class));
     }
 
     //add listener
@@ -268,10 +268,6 @@ public class User_Account extends AppCompatActivity{
 
 
     }
-   /* @Override
-    public void onResume(){
-
-    }*/
 
     //remove listener
     @Override

@@ -5,7 +5,7 @@
     android:id="@+id/activity_setttings_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.example.blog.Selling_Form">
+    tools:context="org.example.blog.SellingForm">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

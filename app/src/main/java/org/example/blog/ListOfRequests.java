@@ -24,21 +24,14 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 import java.util.ArrayList;
 
 
-public class List_of_Requests extends AppCompatActivity {
+public class ListOfRequests extends AppCompatActivity {
 
     private RecyclerView mBlogList;
 
-    //private DatabaseReference mDatabase;
 
     BottomBar mBottomBar;
 
     SearchView sv;
-
-    /*Bundle b = this.getIntent().getExtras();
-    ArrayList<Post> transferReqList = b.getParcelableArrayList("reqArr");
-    ArrayList<Post> transferSelList = b.getParcelableArrayList("sellArr");*/
-
-
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -61,11 +54,11 @@ public class List_of_Requests extends AppCompatActivity {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.home) {
-                    startActivity(new Intent(List_of_Requests.this, Main_navigation.class));
+                    startActivity(new Intent(ListOfRequests.this, MainNavigation.class));
                 }
                 if (menuItemId == R.id.account) {
                     Bundle bundle = new Bundle();
-                    Intent intentAccount = new Intent(List_of_Requests.this, User_Account.class);
+                    Intent intentAccount = new Intent(ListOfRequests.this, UserAccount.class);
                     bundle.putParcelableArrayList("sellArr", sList);
                     bundle.putParcelableArrayList("reqArr", rList);
                     intentAccount.putExtras(bundle);
@@ -77,7 +70,7 @@ public class List_of_Requests extends AppCompatActivity {
             public void onMenuTabReSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(List_of_Requests.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(ListOfRequests.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -86,7 +79,7 @@ public class List_of_Requests extends AppCompatActivity {
                             switch (item.getItemId()) {
                                 case R.id.submenuSell:
                                     Bundle bundle = new Bundle();
-                                    Intent intentSell = new Intent(List_of_Requests.this, List_of_Sells.class);
+                                    Intent intentSell = new Intent(ListOfRequests.this, ListOfSells.class);
                                     bundle.putParcelableArrayList("sellArr", sList);
                                     bundle.putParcelableArrayList("reqArr", rList);
                                     intentSell.putExtras(bundle);
@@ -105,7 +98,7 @@ public class List_of_Requests extends AppCompatActivity {
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(this));
         mBlogList.setItemAnimator(new DefaultItemAnimator());
-        final List_Adapter myAdapter = new List_Adapter(this, rList);
+        final ListAdapter myAdapter = new ListAdapter(this, rList);
         mBlogList.setAdapter(myAdapter);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -143,7 +136,7 @@ public class List_of_Requests extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("List_of_Requests Page") // TODO: Define a title for the content shown.
+                .setName("ListOfRequests Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
@@ -175,12 +168,7 @@ public class List_of_Requests extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_add) {
-            //Bundle tBundle = new Bundle();
-            Intent intentSell = new Intent(List_of_Requests.this, Request_Form.class);
-            /*tBundle.putParcelableArrayList("sellArr", transferSelList);
-            tBundle.putParcelableArrayList("reqArr", transferReqList);
-            intentSell.putExtras(tBundle);*/
-            startActivity(intentSell);
+            startActivity(new Intent(ListOfRequests.this, RequestForm.class));
         }
         return super.onOptionsItemSelected(item);
     }

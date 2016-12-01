@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 
 
-public class Loading_Sell_Posts extends Activity {
+public class LoadingReqPosts extends Activity {
 
     ArrayList<Post> sortedReq = new ArrayList<>();
     ArrayList<Post> sortedSell = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Loading_Sell_Posts extends Activity {
     }
 
     public void launchProgressDialog(final DatabaseReference dbSell,final DatabaseReference dbReq) {
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(Loading_Sell_Posts.this, "Loading List ...", "Please wait ...", true);
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(LoadingReqPosts.this, "Loading List ...", "Please wait ...", true);
         ringProgressDialog.setCancelable(false);
         final PostsLoader postsLoader = new PostsLoader(dbSell,dbReq);
         new Thread(new Runnable() {
@@ -43,7 +44,7 @@ public class Loading_Sell_Posts extends Activity {
                     sortedSell = postsLoader.getSortedSellPosts();
                     Thread.sleep(500);
                     Bundle sBundle = new Bundle();
-                    Intent intent = new Intent(Loading_Sell_Posts.this, List_of_Sells.class);
+                    Intent intent = new Intent(LoadingReqPosts.this, ListOfRequests.class);
                     sBundle.putParcelableArrayList("sellArr", sortedSell);
                     sBundle.putParcelableArrayList("reqArr", sortedReq);
 

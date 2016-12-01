@@ -14,7 +14,6 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.roughike.bottombar.BottomBar;
@@ -22,13 +21,10 @@ import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
 
-public class Main_navigation extends AppCompatActivity {
+public class MainNavigation extends AppCompatActivity {
 
     private Button offerBtn;
     private Button requestBtn;
-    private Button profileSettingBtn;
-    private Button logoutBtn;
-
 
     BottomBar mBottomBar;
 
@@ -68,7 +64,7 @@ public class Main_navigation extends AppCompatActivity {
                     //sort the list by date
 
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(MainNavigation.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -79,7 +75,7 @@ public class Main_navigation extends AppCompatActivity {
                                     //sort the list by date
 
                                     Bundle sBundle = new Bundle();
-                                    Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
+                                    Intent intentSell = new Intent(MainNavigation.this, ListOfSells.class);
                                     sBundle.putParcelableArrayList("sellArr", sortedSell);
                                     sBundle.putParcelableArrayList("reqArr", sortedReq);
 
@@ -89,7 +85,7 @@ public class Main_navigation extends AppCompatActivity {
                                 case R.id.submenuReq:
 
                                     Bundle rBundle = new Bundle();
-                                    Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
+                                    Intent intentReq = new Intent(MainNavigation.this, ListOfRequests.class);
                                     rBundle.putParcelableArrayList("reqArr", sortedReq);
                                     rBundle.putParcelableArrayList("sellArr", sortedSell);
 
@@ -103,7 +99,7 @@ public class Main_navigation extends AppCompatActivity {
                 }
                 if (menuItemId == R.id.account) {
                     Bundle bundle = new Bundle();
-                    Intent intentAccount = new Intent(Main_navigation.this, User_Account.class);
+                    Intent intentAccount = new Intent(MainNavigation.this, UserAccount.class);
                     bundle.putParcelableArrayList("sellArr", sortedSell);
                     bundle.putParcelableArrayList("reqArr", sortedReq);
                     intentAccount.putExtras(bundle);
@@ -118,7 +114,7 @@ public class Main_navigation extends AppCompatActivity {
                 sortedSell = postsLoader.getSortedSellPosts();
                 if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(Main_navigation.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(MainNavigation.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -127,7 +123,7 @@ public class Main_navigation extends AppCompatActivity {
                             switch (item.getItemId()) {
                                 case R.id.submenuSell:
                                     Bundle sBundle = new Bundle();
-                                    Intent intentSell = new Intent(Main_navigation.this, List_of_Sells.class);
+                                    Intent intentSell = new Intent(MainNavigation.this, ListOfSells.class);
                                     sBundle.putParcelableArrayList("sellArr", sortedSell);
                                     sBundle.putParcelableArrayList("reqArr", sortedReq);
                                     intentSell.putExtras(sBundle);
@@ -135,7 +131,7 @@ public class Main_navigation extends AppCompatActivity {
                                     return true;
                                 case R.id.submenuReq:
                                     Bundle rBundle = new Bundle();
-                                    Intent intentReq = new Intent(Main_navigation.this, List_of_Requests.class);
+                                    Intent intentReq = new Intent(MainNavigation.this, ListOfRequests.class);
                                     rBundle.putParcelableArrayList("reqArr", sortedReq);
                                     rBundle.putParcelableArrayList("sellArr", sortedSell);
                                     intentReq.putExtras(rBundle);
@@ -154,7 +150,7 @@ public class Main_navigation extends AppCompatActivity {
         offerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main_navigation.this, Selling_Form.class));
+                startActivity(new Intent(MainNavigation.this, SellingForm.class));
             }
         });
 
@@ -163,30 +159,9 @@ public class Main_navigation extends AppCompatActivity {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main_navigation.this, Request_Form.class));
+                startActivity(new Intent(MainNavigation.this, RequestForm.class));
             }
         });
-
-        /*
-        profileSettingBtn = (Button) findViewById(R.id.account_setting);
-
-        profileSettingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Main_navigation.this, UserProfileSetupController.class));
-            }
-        });
-
-        logoutBtn = (Button) findViewById(R.id.logout_button);
-
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Main_navigation.this, Welcome.class));
-            }
-        });*/
-
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -200,7 +175,7 @@ public class Main_navigation extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Main_navigation Page") // TODO: Define a title for the content shown.
+                .setName("MainNavigation Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();

@@ -10,12 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.support.annotation.NonNull;
 
 
-import com.firebase.client.Firebase;
-import com.google.firebase.database.DatabaseReference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -79,11 +76,11 @@ public class Login extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     if(value.equals("in")) {
-                        Intent gotoMain = new Intent(Login.this, Main_navigation.class);
+                        Intent gotoMain = new Intent(Login.this, MainNavigation.class);
                         startActivity(gotoMain);
                     }
                     if(value.equals("up")){
-                        Intent gotoSetupProfile = new Intent(Login.this, UserProfileSetupController.class);
+                        Intent gotoSetupProfile = new Intent(Login.this, UserProfileSetup.class);
                         gotoSetupProfile.putExtra("account","create");
                         startActivity(gotoSetupProfile);
                     }

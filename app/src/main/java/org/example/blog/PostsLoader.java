@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 
 public class PostsLoader {
-    DatabaseReference ref;
     ArrayList<Post> sellPosts = new ArrayList<>();
     ArrayList<Post> reqPosts = new ArrayList<>();
 
