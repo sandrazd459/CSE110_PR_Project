@@ -4,8 +4,8 @@ package org.example.blog;
  * Created by Aman Singh on 11/26/2016.
  */
 
+import org.example.blog.model.User;
 import org.junit.Test;
-import org.junit.Before;
 
 import static org.junit.Assert.assertEquals;
 

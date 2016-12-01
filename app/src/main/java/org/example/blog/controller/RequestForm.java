@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
 
 import java.util.Calendar;
 

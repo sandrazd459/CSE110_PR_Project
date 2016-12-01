@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 /**
  * Created by Sandra on 11/3/2016.
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.example.blog.R;
 
 public class Welcome extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class Welcome extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                Intent goToLogin = new Intent(Welcome.this,LoginPage.class);
                 goToLogin.putExtra("Sign", "in");
                 startActivity(goToLogin);
             }
@@ -40,7 +42,7 @@ public class Welcome extends AppCompatActivity {
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                Intent goToLogin = new Intent(Welcome.this,LoginPage.class);
                 goToLogin.putExtra("Sign", "up");
                 startActivity(goToLogin);
             }

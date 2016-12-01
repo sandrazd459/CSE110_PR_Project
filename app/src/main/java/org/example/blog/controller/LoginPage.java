@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,11 +19,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.example.blog.R;
+
 
 //password has to be at least 6 bytes long
 //check valid email address
 
-public class Login extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
     private static final String TAG = "Email and Password";
     //for login function
     private FirebaseAuth mAuth;
@@ -37,7 +39,7 @@ public class Login extends AppCompatActivity {
     //determine which layout after welcome pg
     private String value;
 
-    /**current page of Login*/
+    /**current page of LoginPage*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         value = getIntent().getExtras().getString("Sign");
@@ -76,11 +78,11 @@ public class Login extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     if(value.equals("in")) {
-                        Intent gotoMain = new Intent(Login.this, MainNavigation.class);
+                        Intent gotoMain = new Intent(LoginPage.this, MainNavigation.class);
                         startActivity(gotoMain);
                     }
                     if(value.equals("up")){
-                        Intent gotoSetupProfile = new Intent(Login.this, UserProfileSetup.class);
+                        Intent gotoSetupProfile = new Intent(LoginPage.this, UserProfileSetup.class);
                         gotoSetupProfile.putExtra("account","create");
                         startActivity(gotoSetupProfile);
                     }
@@ -115,7 +117,7 @@ public class Login extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            new AlertDialog.Builder(Login.this)
+                            new AlertDialog.Builder(LoginPage.this)
                                     //  .setIcon(R.drawable.gong1)
                                     .setTitle("This email is already registered.")
                                     .setPositiveButton("OK",
@@ -161,7 +163,7 @@ public class Login extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            new AlertDialog.Builder(Login.this)
+                            new AlertDialog.Builder(LoginPage.this)
                                     //  .setIcon(R.drawable.gong1)
                                     .setTitle("Invalid email/password combination.")
                                     .setPositiveButton("Get it!",

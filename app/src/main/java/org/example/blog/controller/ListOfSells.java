@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.support.annotation.IdRes;
@@ -15,6 +15,9 @@ import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
 
 import java.util.ArrayList;
 

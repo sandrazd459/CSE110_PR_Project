@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
+import org.example.blog.model.PostsLoader;
+import org.example.blog.model.User;
 
 import java.util.ArrayList;
 

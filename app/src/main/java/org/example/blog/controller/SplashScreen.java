@@ -1,9 +1,11 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import org.example.blog.R;
 
 public class SplashScreen extends AppCompatActivity {
 

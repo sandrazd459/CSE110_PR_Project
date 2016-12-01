@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.example.blog.model.Post;
+import org.example.blog.model.PostsLoader;
 
 import java.util.ArrayList;
 

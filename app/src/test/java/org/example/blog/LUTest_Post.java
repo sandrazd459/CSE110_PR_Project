@@ -1,12 +1,8 @@
 package org.example.blog;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-
+import org.example.blog.model.Post;
 import org.junit.Test;
-import org.junit.Before;
 /**
  * Created by Aman Singh on 11/26/2016.
  */

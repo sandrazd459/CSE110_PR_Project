@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,10 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
+import org.example.blog.model.User;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,11 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import org.example.blog.R;
 
 /**
  * Created by Alan Beas on 11/12/2016.

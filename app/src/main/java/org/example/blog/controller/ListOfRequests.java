@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +20,9 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
 
 import java.util.ArrayList;
 

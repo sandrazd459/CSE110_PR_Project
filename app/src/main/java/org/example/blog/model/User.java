@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

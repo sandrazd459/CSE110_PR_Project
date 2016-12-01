@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.model;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

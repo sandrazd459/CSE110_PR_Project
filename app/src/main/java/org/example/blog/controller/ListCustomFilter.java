@@ -1,6 +1,8 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.widget.Filter;
+
+import org.example.blog.model.Post;
 
 import java.util.ArrayList;
 

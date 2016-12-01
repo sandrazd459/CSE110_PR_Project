@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
 
 import java.util.ArrayList;
 
