@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.view.View;
 
@@ -6,7 +6,7 @@ import android.view.View;
  * Created by Alan Beas on 11/13/2016.
  */
 
-public interface List_ClickListener {
+public interface ListClickListener {
 
     void OnItemClick(View v, int pos);
 }

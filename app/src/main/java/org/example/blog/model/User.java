@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -56,15 +56,6 @@ public class User {
 
     public String getStringPhoneNumber() {
         return "(" + frontPhoneNumber + ")-" + midPhoneNumber + "-" + lastPhoneNumber;
-    }
-
-    public void updateUser(String username, String additional,
-                String frontPhoneNumber, String midPhoneNumber, String lastPhoneNumber) {
-        this.username = username;
-        this.additional = additional;
-        this.frontPhoneNumber = frontPhoneNumber;
-        this.midPhoneNumber = midPhoneNumber;
-        this.lastPhoneNumber = lastPhoneNumber;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

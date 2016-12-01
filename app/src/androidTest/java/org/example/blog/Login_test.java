@@ -5,10 +5,8 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.view.View;
 
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.ClassRule;
+import org.example.blog.controller.Welcome;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +23,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-import java.io.IOException;
 /**
  * Created by julianlin on 11/25/16.
  */
@@ -81,7 +78,7 @@ public class Login_test {
         appCompatEditText2.perform(scrollTo(), replaceText("c20070124"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.sign_button), withText("Login")));
+                allOf(withId(R.id.sign_button), withText("LoginPage")));
         appCompatButton2.perform(scrollTo(), click());
 
         try {

@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import org.example.blog.controller.Welcome;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +58,7 @@ public class offer_new_ride_Test {
             appCompatEditText2.perform(scrollTo(), replaceText("c20070124"), closeSoftKeyboard());
 
             ViewInteraction appCompatButton2 = onView(
-                    allOf(withId(R.id.sign_button), withText("Login")));
+                    allOf(withId(R.id.sign_button), withText("LoginPage")));
             appCompatButton2.perform(scrollTo(), click());
         }
         catch (Exception e){}

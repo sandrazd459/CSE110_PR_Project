@@ -1,22 +1,18 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 /**
  * Created by Sandra on 11/3/2016.
  */
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
+
+import org.example.blog.R;
 
 public class Welcome extends AppCompatActivity {
 
@@ -26,7 +22,7 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(Welcome.this, Main_navigation.class));
+            startActivity(new Intent(Welcome.this, MainNavigation.class));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
@@ -37,7 +33,7 @@ public class Welcome extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                Intent goToLogin = new Intent(Welcome.this,LoginPage.class);
                 goToLogin.putExtra("Sign", "in");
                 startActivity(goToLogin);
             }
@@ -46,7 +42,7 @@ public class Welcome extends AppCompatActivity {
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToLogin = new Intent(Welcome.this,Login.class);
+                Intent goToLogin = new Intent(Welcome.this,LoginPage.class);
                 goToLogin.putExtra("Sign", "up");
                 startActivity(goToLogin);
             }

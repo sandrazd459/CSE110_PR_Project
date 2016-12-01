@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.controller;
 
 import android.content.Intent;
 import android.support.annotation.IdRes;
@@ -12,15 +12,17 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
+import org.example.blog.R;
+import org.example.blog.model.Post;
+
 import java.util.ArrayList;
 
 
-public class List_of_Sells extends AppCompatActivity {
+public class ListOfSells extends AppCompatActivity {
 
     private RecyclerView mBlogList;
 
@@ -44,11 +46,11 @@ public class List_of_Sells extends AppCompatActivity {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.home) {
-                    startActivity(new Intent(List_of_Sells.this, Main_navigation.class));
+                    startActivity(new Intent(ListOfSells.this, MainNavigation.class));
                 }
                 if (menuItemId == R.id.account) {
                     Bundle bundle = new Bundle();
-                    Intent intentAccount = new Intent(List_of_Sells.this, User_Account.class);
+                    Intent intentAccount = new Intent(ListOfSells.this, UserAccount.class);
                     bundle.putParcelableArrayList("sellArr", sList);
                     bundle.putParcelableArrayList("reqArr", rList);
                     intentAccount.putExtras(bundle);
@@ -60,7 +62,7 @@ public class List_of_Sells extends AppCompatActivity {
             public void onMenuTabReSelected(@IdRes int menuItemId) {
                 if (menuItemId == R.id.lists) {
                     View listView = findViewById(R.id.lists);
-                    PopupMenu popupMenu = new PopupMenu(List_of_Sells.this, listView);
+                    PopupMenu popupMenu = new PopupMenu(ListOfSells.this, listView);
                     popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.show();
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -70,7 +72,7 @@ public class List_of_Sells extends AppCompatActivity {
                                 //TODO: BUG HERE solution send list around all activities
                                 case R.id.submenuReq:
                                     Bundle bundle = new Bundle();
-                                    Intent intentSell = new Intent(List_of_Sells.this, List_of_Requests.class);
+                                    Intent intentSell = new Intent(ListOfSells.this, ListOfRequests.class);
                                     bundle.putParcelableArrayList("sellArr", sList);
                                     bundle.putParcelableArrayList("reqArr", rList);
                                     intentSell.putExtras(bundle);
@@ -89,7 +91,7 @@ public class List_of_Sells extends AppCompatActivity {
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(this));
         mBlogList.setItemAnimator(new DefaultItemAnimator());
-        final List_Adapter myAdapter = new List_Adapter(this, sList);
+        final ListAdapter myAdapter = new ListAdapter(this, sList);
         mBlogList.setAdapter(myAdapter);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -125,7 +127,7 @@ public class List_of_Sells extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId() == R.id.action_add){
-            startActivity(new Intent(List_of_Sells.this, Selling_Form.class));
+            startActivity(new Intent(ListOfSells.this, SellingForm.class));
         }
         return super.onOptionsItemSelected(item);
     }

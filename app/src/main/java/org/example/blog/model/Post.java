@@ -1,12 +1,9 @@
-package org.example.blog;
+package org.example.blog.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.google.firebase.database.IgnoreExtraProperties;
-
-import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by Alan Beas on 10/18/2016.
@@ -31,7 +28,6 @@ public class Post implements Parcelable{
     }
 
     public Post(Parcel source){
-        Log.v(TAG, "ParcelData(Parcel source): time to put back parcel data");
         uid = source.readString();
         start = source.readString();
         destination = source.readString();
@@ -64,18 +60,17 @@ public class Post implements Parcelable{
     }
     public void setDestination(String destination) { this.destination = destination; }
 
-    public String getPrice() {
-        return price;
-    }
+    public String getPrice() { return price; }
     public void setPrice(String price) {
-        this.price = price;
+        if (price.equals("$")) this.price = "$0";
+        else this.price = price;
     }
 
     public String getStringDate() {
         int year = date / 10000;
         int month = (date % 10000) / 100;
         int day = date % 100;
-        return stringMonth(month)+" "+ day + ", " + year;
+        return stringMonth(month) + " " + day + ", " + year;
     }
 
 
@@ -87,7 +82,6 @@ public class Post implements Parcelable{
     @Override
     public void writeToParcel(Parcel desti, int flags) {
 
-        Log.v(TAG, "writeToParcel..."+ flags);
         desti.writeString(uid);
         desti.writeString(start);
         desti.writeString(destination);

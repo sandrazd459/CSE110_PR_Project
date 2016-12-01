@@ -1,4 +1,4 @@
-package org.example.blog;
+package org.example.blog.model;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 
 public class PostsLoader {
-    DatabaseReference ref;
     ArrayList<Post> sellPosts = new ArrayList<>();
     ArrayList<Post> reqPosts = new ArrayList<>();
 

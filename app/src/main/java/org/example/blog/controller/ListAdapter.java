@@ -1,17 +1,17 @@
-package org.example.blog;
+package org.example.blog.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
+
+import org.example.blog.R;
+import org.example.blog.model.Post;
 
 import java.util.ArrayList;
 
@@ -19,13 +19,13 @@ import java.util.ArrayList;
  * Created by Alan Beas on 11/6/2016.
  */
 
-public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements Filterable{
+public class ListAdapter extends RecyclerView.Adapter<ListHolder> implements Filterable{
 
     Context c;
     ArrayList<Post> mList,mFilterList;
-    List_CustomFilter filtr;
+    ListCustomFilter filter;
 
-    public List_Adapter(Context ctx, ArrayList<Post> mList){
+    public ListAdapter(Context ctx, ArrayList<Post> mList){
         this.c = ctx;
         this.mList = mList;
         this.mFilterList = mList;
@@ -33,16 +33,16 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
     }
 
     @Override
-    public List_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_list, parent ,false);
 
-        List_Holder newHolder = new List_Holder(v);
+        ListHolder newHolder = new ListHolder(v);
 
         return newHolder;
     }
 
     @Override
-    public void onBindViewHolder(List_Holder holder, final int pos) {
+    public void onBindViewHolder(ListHolder holder, final int pos) {
 
         //binding data
         holder.setFrom(mList.get(pos).getStart());
@@ -55,7 +55,7 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                Intent pop = new Intent(c, Pop_window.class);
+                Intent pop = new Intent(c, DetailedPost.class);
                 bundle.putString("uid", mList.get(pos).getUid());
                 bundle.putString("start",mList.get(pos).getStart());
                 bundle.putString("dest",mList.get(pos).getDestination());
@@ -78,39 +78,9 @@ public class List_Adapter extends RecyclerView.Adapter<List_Holder> implements F
 
     @Override
     public Filter getFilter() {
-        if(filtr==null){
-            filtr = new List_CustomFilter(this, mFilterList);
+        if(filter == null){
+            filter = new ListCustomFilter(this, mFilterList);
         }
-        return filtr;
-    }
-
-    public String stringMonth(int m){
-        switch (m){
-            case 1:
-                return "Jan";
-            case 2:
-                return "Feb";
-            case 3:
-                return "Mar";
-            case 4:
-                return "Apr";
-            case 5:
-                return "May";
-            case 6:
-                return "Jun";
-            case 7:
-                return "Jul";
-            case 8:
-                return "Oct";
-            case 9:
-                return "Aug";
-            case 10:
-                return "Sep";
-            case 11:
-                return "Nov";
-            case 12:
-                return "Dec";
-        }
-        return "";
+        return filter;
     }
 }
